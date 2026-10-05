@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Show Drama Admin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f0f12;
+      color: #ffffff;
+      min-height: 100vh;
+    }
+
+    /* =========================
+       LOGIN
+    ========================== */
+
+    #loginPage {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at top, #3a1118 0%, #0f0f12 45%);
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: #18181d;
+      border: 1px solid #33333a;
+      border-radius: 18px;
+      padding: 32px 25px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 30px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .logo span {
+      color: #d8a84e;
+    }
+
+    .login-subtitle {
+      text-align: center;
+      color: #a9a9b2;
+      margin-bottom: 28px;
+      font-size: 14px;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: #d8d8df;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #3b3b43;
+      background: #101014;
+      color: white;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .input-group input:focus {
+      border-color: #d8a84e;
+    }
+
+    .login-button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #b71935;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-button:hover {
+      background: #d02040;
+    }
+
+    .login-message {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #e4a5ad;
+      min-height: 20px;
+    }
+
+    /* =========================
+       DASHBOARD
+    ========================== */
+
+    #dashboardPage {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 70px;
+      background: #18181d;
+      border-bottom: 1px solid #303038;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 22px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar-title {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .topbar-title span {
+      color: #d8a84e;
+    }
+
+    .logout-button {
+      border: 1px solid #44444c;
+      background: transparent;
+      color: #ffffff;
+      padding: 9px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .dashboard-container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 25px;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .welcome h1 {
+      font-size: 28px;
+      margin-bottom: 7px;
+    }
+
+    .welcome p {
+      color: #a9a9b2;
+    }
+
+    /* Revenue */
+
+    .section-title {
+      font-size: 19px;
+      margin-bottom: 15px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: #18181d;
+      border: 1px solid #303038;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .card-label {
+      color: #a9a9b2;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .card-value {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .card-note {
+      margin-top: 8px;
+      color: #777780;
+      font-size: 12px;
+    }
+
+    /* Content cards */
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 32px;
+    }
+
+    .content-card {
+      background: #18181d;
+      border: 1px solid #303038;
+      border-radius: 14px;
+      padding: 20px;
+      min-height: 125px;
+    }
+
+    .content-card h3 {
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+
+    .content-number {
+      font-size: 28px;
+      font-weight: bold;
+      color: #d8a84e;
+    }
+
+    /* Main sections */
+
+    .management-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .management-box {
+      background: #18181d;
+      border: 1px solid #303038;
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    .management-box h3 {
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+
+    .management-box p {
+      color: #a9a9b2;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .management-button {
+      border: none;
+      background: #b71935;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .management-button:hover {
+      background: #d02040;
+    }
+
+    /* Mobile */
+
+    @media (max-width: 900px) {
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .content-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        padding: 0 15px;
+      }
+
+      .dashboard-container {
+        padding: 18px;
+      }
+
+      .welcome h1 {
+        font-size: 23px;
+      }
+
+      .cards,
+      .content-grid,
+      .management-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar-title {
+        font-size: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       ADMIN LOGIN
+  ========================== -->
+
+  <section id="loginPage">
+
+    <div class="login-box">
+
+      <div class="logo">
+        SHOW <span>DRAMA</span>
+      </div>
+
+      <div class="login-subtitle">
+        Private Admin Dashboard
+      </div>
+
+      <div class="input-group">
+        <label for="adminEmail">Admin Email</label>
+        <input
+          type="email"
+          id="adminEmail"
+          placeholder="Enter admin email"
+        >
+      </div>
+
+      <div class="input-group">
+        <label for="adminPassword">Password</label>
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Enter password"
+        >
+      </div>
+
+      <button class="login-button" onclick="demoLogin()">
+        Sign In
+      </button>
+
+      <div id="loginMessage" class="login-message"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       DASHBOARD HOME
+  ========================== -->
+
+  <section id="dashboardPage">
+
+    <header class="topbar">
+
+      <div class="topbar-title">
+        SHOW <span>DRAMA</span> ADMIN
+      </div>
+
+      <button class="logout-button" onclick="logout()">
+        Logout
+      </button>
+
+    </header>
+
+
+    <main class="dashboard-container">
+
+      <div class="welcome">
+        <h1>Dashboard Overview</h1>
+        <p>
+          Manage your movies, episodes, novels, chapters,
+          subscriptions and revenue.
+        </p>
+      </div>
+
+
+      <!-- =========================
+           REVENUE
+      ========================== -->
+
+      <h2 class="section-title">Revenue Overview</h2>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-label">Gross Revenue</div>
+          <div class="card-value">$0.00</div>
+          <div class="card-note">
+            Total revenue before deductions
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Net Revenue</div>
+          <div class="card-value">$0.00</div>
+          <div class="card-note">
+            Revenue after refunds and deductions
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">VIP Revenue</div>
+          <div class="card-value">$0.00</div>
+          <div class="card-note">
+            Weekly, monthly and yearly VIP
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-label">Ad Revenue</div>
+          <div class="card-value">$0.00</div>
+          <div class="card-note">
+            Rewarded and other ads
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           CONTENT OVERVIEW
+      ========================== -->
+
+      <h2 class="section-title">Content Overview</h2>
+
+      <div class="content-grid">
+
+        <div class="content-card">
+          <h3>Movies</h3>
+          <div class="content-number">0</div>
+        </div>
+
+        <div class="content-card">
+          <h3>Episodes</h3>
+          <div class="content-number">0</div>
+        </div>
+
+        <div class="content-card">
+          <h3>Novels</h3>
+          <div class="content-number">0</div>
+        </div>
+
+        <div class="content-card">
+          <h3>Chapters</h3>
+          <div class="content-number">0</div>
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           MANAGEMENT
+      ========================== -->
+
+      <h2 class="section-title">Content Management</h2>
+
+      <div class="management-grid">
+
+        <div class="management-box">
+          <h3>🎬 Movies & Episodes</h3>
+          <p>
+            Add movies, manage episodes, upload media,
+            set free or locked access, manage genres,
+            publish content and control movie visibility.
+          </p>
+
+          <button class="management-button">
+            Manage Movies
+          </button>
+        </div>
+
+
+        <div class="management-box">
+          <h3>📚 Novels & Chapters</h3>
+          <p>
+            Add novels, manage chapters, upload covers,
+            set free or locked chapters, manage genres
+            and publish novel content.
+          </p>
+
+          <button class="management-button">
+            Manage Novels
+          </button>
+        </div>
+
+
+        <div class="management-box">
+          <h3>👥 Users</h3>
+          <p>
+            View registered users and manage account-related
+            information.
+          </p>
+
+          <button class="management-button">
+            Manage Users
+          </button>
+        </div>
+
+
+        <div class="management-box">
+          <h3>💳 Subscriptions & Payments</h3>
+          <p>
+            View VIP subscriptions, purchases, refunds,
+            payment records and revenue information.
+          </p>
+
+          <button class="management-button">
+            View Payments
+          </button>
+        </div>
+
+
+        <div class="management-box">
+          <h3>📺 Rewarded Ads</h3>
+          <p>
+            Manage rewarded-ad unlock activity and the
+            three-unlocks-per-user-per-day system.
+          </p>
+
+          <button class="management-button">
+            Manage Ads
+          </button>
+        </div>
+
+
+        <div class="management-box">
+          <h3>⚙️ Settings</h3>
+          <p>
+            Manage app settings, categories, genres and
+            other administrative configuration.
+          </p>
+
+          <button class="management-button">
+            Settings
+          </button>
+        </div>
+
+      </div>
+
+    </main>
+
+  </section>
+
+
+  <!-- =========================
+       TEMPORARY DEMO LOGIN
+       This will be replaced with
+       Supabase authentication.
+  ========================== -->
+
+  <script>
+
+    function demoLogin() {
+
+      const email =
+        document.getElementById("adminEmail").value.trim();
+
+      const password =
+        document.getElementById("adminPassword").value.trim();
+
+      const message =
+        document.getElementById("loginMessage");
+
+      if (email === "" || password === "") {
+
+        message.textContent =
+          "Please enter your email and password.";
+
+        return;
+      }
+
+      /*
+        TEMPORARY TEST LOGIN.
+
+        This is only here so we can test
+        the dashboard design.
+
+        We will NOT use this as the real
+        admin authentication system.
+
+        Later this will be replaced with
+        Supabase Auth + admin_users verification.
+      */
+
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("dashboardPage").style.display = "block";
+    }
+
+
+    function logout() {
+
+      document.getElementById("dashboardPage").style.display = "none";
+      document.getElementById("loginPage").style.display = "flex";
+
+      document.getElementById("adminPassword").value = "";
+      document.getElementById("loginMessage").textContent = "";
+    }
+
+  </script>
+
+</body>
+</html>
