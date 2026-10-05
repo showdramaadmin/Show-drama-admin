@@ -352,8 +352,8 @@
         >
       </div>
 
-      <button class="login-button" onclick="demoLogin()">
-        Sign In
+      <button class="login-button" onclick="login()">
+  Sign In
       </button>
 
       <div id="loginMessage" class="login-message"></div>
@@ -561,61 +561,197 @@
   </section>
 
 
-  <!-- =========================
-       TEMPORARY DEMO LOGIN
-       This will be replaced with
-       Supabase authentication.
-  ========================== -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script>
+<script>
 
-    function demoLogin() {
+  // ==========================================
+  // SHOW DRAMA SUPABASE CONFIGURATION
+  // ==========================================
 
-      const email =
-        document.getElementById("adminEmail").value.trim();
+  const SUPABASE_URL =
+    "https://ieosmoceisayhdcrkriw.supabase.co";
 
-      const password =
-        document.getElementById("adminPassword").value.trim();
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_De9iEE1oxrl7tok1VeIlXQ_ip2swA3s";
 
-      const message =
-        document.getElementById("loginMessage");
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
 
-      if (email === "" || password === "") {
 
-        message.textContent =
-          "Please enter your email and password.";
+  // ==========================================
+  // LOGIN
+  // ==========================================
 
-        return;
-      }
+  async function login() {
 
-      /*
-        TEMPORARY TEST LOGIN.
+    const email =
+      document.getElementById("adminEmail").value.trim();
 
-        This is only here so we can test
-        the dashboard design.
+    const password =
+      document.getElementById("adminPassword").value;
 
-        We will NOT use this as the real
-        admin authentication system.
+    const message =
+      document.getElementById("loginMessage");
 
-        Later this will be replaced with
-        Supabase Auth + admin_users verification.
-      */
+    message.textContent = "";
 
-      document.getElementById("loginPage").style.display = "none";
-      document.getElementById("dashboardPage").style.display = "block";
+    if (email === "" || password === "") {
+
+      message.textContent =
+        "Please enter your email and password.";
+
+      return;
+    }
+
+    message.textContent =
+      "Signing in...";
+
+
+    // ------------------------------------------
+    // SIGN IN WITH SUPABASE AUTH
+    // ------------------------------------------
+
+    const { data, error } =
+      await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+
+    if (error) {
+
+      message.textContent =
+        "Invalid email or password.";
+
+      return;
     }
 
 
-    function logout() {
+    // ------------------------------------------
+    // CHECK ADMIN_USERS TABLE
+    // ------------------------------------------
 
-      document.getElementById("dashboardPage").style.display = "none";
-      document.getElementById("loginPage").style.display = "flex";
+    const user =
+      data.user;
 
-      document.getElementById("adminPassword").value = "";
-      document.getElementById("loginMessage").textContent = "";
+    const { data: adminRecord, error: adminError } =
+      await supabaseClient
+        .from("admin_users")
+        .select("user_id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+
+    if (adminError) {
+
+      await supabaseClient.auth.signOut();
+
+      message.textContent =
+        "Unable to verify admin access.";
+
+      return;
     }
 
-  </script>
 
-</body>
-</html>
+    if (!adminRecord) {
+
+      await supabaseClient.auth.signOut();
+
+      message.textContent =
+        "You do not have administrator access.";
+
+      return;
+    }
+
+
+    // ------------------------------------------
+    // ADMIN VERIFIED
+    // ------------------------------------------
+
+    message.textContent = "";
+
+    document.getElementById("loginPage").style.display =
+      "none";
+
+    document.getElementById("dashboardPage").style.display =
+      "block";
+
+  }
+
+
+  // ==========================================
+  // LOGOUT
+  // ==========================================
+
+  async function logout() {
+
+    await supabaseClient.auth.signOut();
+
+    document.getElementById("dashboardPage").style.display =
+      "none";
+
+    document.getElementById("loginPage").style.display =
+      "flex";
+
+    document.getElementById("adminPassword").value =
+      "";
+
+    document.getElementById("loginMessage").textContent =
+      "";
+
+  }
+
+
+  // ==========================================
+  // CHECK EXISTING SESSION
+  // ==========================================
+
+  async function checkSession() {
+
+    const { data } =
+      await supabaseClient.auth.getSession();
+
+    if (!data.session) {
+      return;
+    }
+
+    const user =
+      data.session.user;
+
+
+    const { data: adminRecord, error } =
+      await supabaseClient
+        .from("admin_users")
+        .select("user_id")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+
+    if (error || !adminRecord) {
+
+      await supabaseClient.auth.signOut();
+
+      return;
+    }
+
+
+    document.getElementById("loginPage").style.display =
+      "none";
+
+    document.getElementById("dashboardPage").style.display =
+      "block";
+
+  }
+
+
+  // ==========================================
+  // RUN WHEN PAGE LOADS
+  // ==========================================
+
+  checkSession();
+
+</script>
