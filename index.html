@@ -2105,30 +2105,20 @@ ${completed ? "Yes" : "No"}
 
   function manageEpisodes(movieId) {
 
-    currentEpisodeMovieId = movieId;
+  currentEpisodeMovieId = movieId;
 
-    document.getElementById("movieManagementPage").style.display =
-      "none";
+  document.getElementById("movieManagementPage").style.display =
+    "none";
 
-    document.getElementById("episodeManagementPage").style.display =
-      "block";
+  document.getElementById("episodeManagementPage").style.display =
+    "block";
 
+  document.getElementById("episodeMovieName").textContent =
+    "Loading episodes for Movie ID " + movieId;
 
-    document.getElementById("episodeMovieName").textContent =
-      "Manage episodes for Movie ID " + movieId;
+  loadEpisodes();
 
-
-    document.getElementById("episodeList").innerHTML = `
-      <div style="
-        padding:25px;
-        text-align:center;
-        color:#a9a9b2;
-      ">
-        Episode Management is ready.
-      </div>
-    `;
-
-  }
+    }
 
 
   // ==========================================
@@ -2204,26 +2194,501 @@ ${completed ? "Yes" : "No"}
 
   }
 
+// ==========================================
+// LOAD EPISODES FOR CURRENT MOVIE
+// ==========================================
 
+async function loadEpisodes() {
+
+  const episodeList =
+    document.getElementById("episodeList");
+
+  const message =
+    document.getElementById("episodeManagementMessage");
+
+  episodeList.innerHTML =
+    "Loading episodes...";
+
+  message.textContent = "";
+
+
+  if (!currentEpisodeMovieId) {
+
+    episodeList.innerHTML =
+      "No movie selected.";
+
+    return;
+  }
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("Episodes")
+      .select("*")
+      .eq("Movie_id", currentEpisodeMovieId)
+      .order("Episode_number", {
+        ascending: true
+      });
+
+
+  if (error) {
+
+    episodeList.innerHTML =
+      "Unable to load episodes.";
+
+    message.textContent =
+      error.message;
+
+    return;
+  }
+
+
+  document.getElementById("episodeMovieName").textContent =
+    "Manage episodes for Movie ID " +
+    currentEpisodeMovieId;
+
+
+  if (!data || data.length === 0) {
+
+    episodeList.innerHTML = `
+      <div style="
+        padding:25px;
+        text-align:center;
+        color:#a9a9b2;
+      ">
+        No episodes have been added yet.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  episodeList.innerHTML =
+    data.map((episode, index) => {
+
+      const locked =
+        episode.Is_locked === true;
+
+
+      return `
+
+        <div style="
+          background:#101014;
+          border:1px solid #33333a;
+          border-radius:12px;
+          padding:18px;
+          margin-bottom:15px;
+        ">
+
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            gap:15px;
+            flex-wrap:wrap;
+          ">
+
+            <div>
+
+              <h3 style="margin-bottom:8px;">
+                Episode ${episode.Episode_number}:
+                ${escapeHtml(episode.Title || "Untitled")}
+              </h3>
+
+              <div style="
+                color:#a9a9b2;
+                font-size:13px;
+                line-height:1.8;
+              ">
+
+                ID: ${episode.id}<br>
+
+                Status:
+                ${locked ? "🔒 Locked" : "🟢 Free"}<br>
+
+                Price:
+                ${episode.Price ?? "Free"}<br>
+
+                Private Video:
+                ${episode.Private_video_path
+                  ? "Configured"
+                  : "Not configured"}
+
+              </div>
+
+            </div>
+
+
+            <div style="
+              display:flex;
+              gap:8px;
+              flex-wrap:wrap;
+              align-items:flex-start;
+            ">
+
+              <button
+                class="management-button"
+                onclick="moveEpisodeUp(${episode.id}, ${episode.Episode_number})">
+                ↑
+              </button>
+
+              <button
+                class="management-button"
+                onclick="moveEpisodeDown(${episode.id}, ${episode.Episode_number})">
+                ↓
+              </button>
+
+              <button
+                class="management-button"
+                onclick="editEpisode(${episode.id})">
+                Edit
+              </button>
+
+              <button
+                class="management-button"
+                onclick="toggleEpisodeLock(${episode.id}, ${locked})">
+                ${locked ? "Unlock" : "Lock"}
+              </button>
+
+              <button
+                onclick="deleteEpisode(${episode.id})"
+                style="
+                  border:none;
+                  background:#6d1626;
+                  color:white;
+                  padding:10px 16px;
+                  border-radius:8px;
+                  cursor:pointer;
+                  font-weight:bold;
+                ">
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+    }
+
+  // ==========================================
+// EDIT EPISODE
+// ==========================================
+
+async function editEpisode(episodeId) {
+
+  const { data: episode, error } =
+    await supabaseClient
+      .from("Episodes")
+      .select("*")
+      .eq("id", episodeId)
+      .eq("Movie_id", currentEpisodeMovieId)
+      .maybeSingle();
+
+
+  if (error || !episode) {
+
+    alert("Unable to load this episode.");
+
+    return;
+  }
+
+
+  document.getElementById("episodeModalTitle").textContent =
+    "Edit Episode";
+
+  document.getElementById("episodeId").value =
+    episode.id;
+
+  document.getElementById("episodeMovieId").value =
+    episode.Movie_id;
+
+  document.getElementById("episodeNumber").value =
+    episode.Episode_number;
+
+  document.getElementById("episodeTitle").value =
+    episode.Title || "";
+
+  document.getElementById("episodeDescription").value =
+    episode.Description || "";
+
+  document.getElementById("episodeVideoUrl").value =
+    episode.Video_url || "";
+
+  document.getElementById("episodePrivateVideoPath").value =
+    episode.Private_video_path || "";
+
+  document.getElementById("episodeLocked").checked =
+    episode.Is_locked === true;
+
+  document.getElementById("episodePrice").value =
+    episode.Price ?? "";
+
+  document.getElementById("episodeFormMessage").textContent =
+    "";
+
+  document.getElementById("episodeModal").style.display =
+    "block";
+
+    }
+
+  // ==========================================
+// LOCK / UNLOCK ONE EPISODE
+// ==========================================
+
+async function toggleEpisodeLock(episodeId, currentStatus) {
+
+  const action =
+    currentStatus
+      ? "unlock"
+      : "lock";
+
+
+  const confirmed =
+    confirm(
+      `Are you sure you want to ${action} this episode?`
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  const { error } =
+    await supabaseClient
+      .from("Episodes")
+      .update({
+        Is_locked: !currentStatus
+      })
+      .eq("id", episodeId)
+      .eq("Movie_id", currentEpisodeMovieId);
+
+
+  if (error) {
+
+    alert(
+      "Unable to change episode lock status: " +
+      error.message
+    );
+
+    return;
+  }
+
+
+  await loadEpisodes();
+
+}
+  // ==========================================
+// DELETE EPISODE
+// ==========================================
+
+async function deleteEpisode(episodeId) {
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to permanently delete this episode?"
+    );
+
+
+  if (!confirmed) {
+    return;
+  }
+
+
+  const { error } =
+    await supabaseClient
+      .from("Episodes")
+      .delete()
+      .eq("id", episodeId)
+      .eq("Movie_id", currentEpisodeMovieId);
+
+
+  if (error) {
+
+    alert(
+      "Unable to delete episode: " +
+      error.message
+    );
+
+    return;
+  }
+
+
+  await loadEpisodes();
+
+  await loadContentCounts();
+
+      }
   // ==========================================
   // SAVE EPISODE
   // ==========================================
-  // DATABASE CONNECTION WILL BE ADDED
-  // AFTER EPISODE SECURITY IS SET UP.
-  // ==========================================
 
-  function saveEpisode() {
 
-    const message =
-      document.getElementById("episodeFormMessage");
+  async function saveEpisode() {
+
+  const message =
+    document.getElementById("episodeFormMessage");
+
+  const episodeId =
+    document.getElementById("episodeId").value;
+
+  const episodeNumber =
+    Number(
+      document.getElementById("episodeNumber").value
+    );
+
+  const title =
+    document.getElementById("episodeTitle").value.trim();
+
+  const description =
+    document.getElementById("episodeDescription").value.trim();
+
+  const videoUrl =
+    document.getElementById("episodeVideoUrl").value.trim();
+
+  const privateVideoPath =
+    document.getElementById("episodePrivateVideoPath").value.trim();
+
+  const isLocked =
+    document.getElementById("episodeLocked").checked;
+
+  const priceValue =
+    document.getElementById("episodePrice").value.trim();
+
+
+  message.textContent = "";
+
+
+  if (
+    !Number.isInteger(episodeNumber) ||
+    episodeNumber < 1
+  ) {
 
     message.textContent =
-      "Episode database connection will be added next.";
+      "Enter a valid episode number.";
+
+    return;
+  }
+
+
+  if (title === "") {
+
+    message.textContent =
+      "Episode title is required.";
+
+    return;
+  }
+
+
+  if (!currentEpisodeMovieId) {
+
+    message.textContent =
+      "No movie is selected.";
+
+    return;
+  }
+
+
+  const price =
+    priceValue === ""
+      ? null
+      : Number(priceValue);
+
+
+  if (
+    price !== null &&
+    (!Number.isFinite(price) || price < 0)
+  ) {
+
+    message.textContent =
+      "Enter a valid episode price.";
+
+    return;
+  }
+
+
+  const episodeData = {
+
+    Movie_id: currentEpisodeMovieId,
+
+    Episode_number: episodeNumber,
+
+    Title: title,
+
+    Description:
+      description || null,
+
+    Video_url:
+      videoUrl || null,
+
+    Is_locked:
+      isLocked,
+
+    Price:
+      price,
+
+    Private_video_path:
+      privateVideoPath || null
+  };
+
+
+  message.textContent =
+    "Saving episode...";
+
+
+  let result;
+
+
+  if (episodeId === "") {
+
+    result =
+      await supabaseClient
+        .from("Episodes")
+        .insert(episodeData);
+
+  } else {
+
+    result =
+      await supabaseClient
+        .from("Episodes")
+        .update(episodeData)
+        .eq("id", episodeId)
+        .eq("Movie_id", currentEpisodeMovieId);
+  }
+
+
+  if (result.error) {
+
+    message.textContent =
+      result.error.message;
+
+    return;
+  }
+
+
+  message.textContent =
+    "Episode saved successfully.";
+
+
+  await loadEpisodes();
+
+
+  setTimeout(() => {
+
+    closeEpisodeModal();
+
+  }, 600);
 
   }
 
   // ==========================================
-// LOCK EPISODES FROM A NUMBER
+// LOCK EPISODES FROM NUMBER
 // ==========================================
 
 async function lockEpisodesFrom() {
@@ -2272,16 +2737,35 @@ async function lockEpisodesFrom() {
   }
 
 
-  // Database update will be connected
-  // after Episode security is added.
+  const { error } =
+    await supabaseClient
+      .from("Episodes")
+      .update({
+        Is_locked: true
+      })
+      .eq("Movie_id", currentEpisodeMovieId)
+      .gte("Episode_number", startNumber);
+
+
+  if (error) {
+
+    message.textContent =
+      error.message;
+
+    return;
+  }
+
 
   message.textContent =
-    "Episode locking will be connected next.";
+    `Episodes ${startNumber} onward are now locked.`;
+
+  await loadEpisodes();
+
 }
 
 
 // ==========================================
-// UNLOCK EPISODES FROM A NUMBER
+// UNLOCK EPISODES FROM NUMBER
 // ==========================================
 
 async function unlockEpisodesFrom() {
@@ -2330,12 +2814,175 @@ async function unlockEpisodesFrom() {
   }
 
 
-  // Database update will be connected
-  // after Episode security is added.
+  const { error } =
+    await supabaseClient
+      .from("Episodes")
+      .update({
+        Is_locked: false
+      })
+      .eq("Movie_id", currentEpisodeMovieId)
+      .gte("Episode_number", startNumber);
+
+
+  if (error) {
+
+    message.textContent =
+      error.message;
+
+    return;
+  }
+
 
   message.textContent =
-    "Episode unlocking will be connected next.";
+    `Episodes ${startNumber} onward are now unlocked.`;
+
+  await loadEpisodes();
+
   }
+
+// ==========================================
+// MOVE EPISODE UP
+// ==========================================
+
+async function moveEpisodeUp(episodeId, currentNumber) {
+
+  if (currentNumber <= 1) {
+    return;
+  }
+
+
+  await swapEpisodeNumbers(
+    episodeId,
+    currentNumber,
+    currentNumber - 1
+  );
+
+}
+
+
+// ==========================================
+// MOVE EPISODE DOWN
+// ==========================================
+
+async function moveEpisodeDown(episodeId, currentNumber) {
+
+  const { data: nextEpisode } =
+    await supabaseClient
+      .from("Episodes")
+      .select("id")
+      .eq("Movie_id", currentEpisodeMovieId)
+      .eq("Episode_number", currentNumber + 1)
+      .maybeSingle();
+
+
+  if (!nextEpisode) {
+    return;
+  }
+
+
+  await swapEpisodeNumbers(
+    episodeId,
+    currentNumber,
+    currentNumber + 1
+  );
+
+}
+
+
+// ==========================================
+// SWAP EPISODE NUMBERS
+// ==========================================
+
+async function swapEpisodeNumbers(
+  episodeId,
+  currentNumber,
+  targetNumber
+) {
+
+  const { data: targetEpisode, error: findError } =
+    await supabaseClient
+      .from("Episodes")
+      .select("id")
+      .eq("Movie_id", currentEpisodeMovieId)
+      .eq("Episode_number", targetNumber)
+      .maybeSingle();
+
+
+  if (findError) {
+
+    alert(findError.message);
+
+    return;
+  }
+
+
+  if (!targetEpisode) {
+    return;
+  }
+
+
+  // Temporary number prevents a duplicate-number conflict.
+  const temporaryNumber = -999999;
+
+
+  let result =
+    await supabaseClient
+      .from("Episodes")
+      .update({
+        Episode_number: temporaryNumber
+      })
+      .eq("id", episodeId)
+      .eq("Movie_id", currentEpisodeMovieId);
+
+
+  if (result.error) {
+
+    alert(result.error.message);
+
+    return;
+  }
+
+
+  result =
+    await supabaseClient
+      .from("Episodes")
+      .update({
+        Episode_number: currentNumber
+      })
+      .eq("id", targetEpisode.id)
+      .eq("Movie_id", currentEpisodeMovieId);
+
+
+  if (result.error) {
+
+    alert(result.error.message);
+
+    return;
+  }
+
+
+  result =
+    await supabaseClient
+      .from("Episodes")
+      .update({
+        Episode_number: targetNumber
+      })
+      .eq("id", episodeId)
+      .eq("Movie_id", currentEpisodeMovieId);
+
+
+  if (result.error) {
+
+    alert(result.error.message);
+
+    return;
+  }
+
+
+  await loadEpisodes();
+
+  }
+
   // ==========================================
 // RUN WHEN PAGE LOADS
 // ==========================================
