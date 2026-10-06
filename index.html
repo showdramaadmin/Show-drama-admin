@@ -749,12 +749,6 @@
 
 
   // ==========================================
-  // RUN WHEN PAGE LOADS
-  // ==========================================
-
-  checkSession();
-loadContentCounts();
-// ==========================================
 // LOAD MOVIE AND EPISODE COUNTS
 // ==========================================
 
@@ -763,7 +757,10 @@ async function loadContentCounts() {
   const { count: movieCount, error: movieError } =
     await supabaseClient
       .from("Movie")
-      .select("id", { count: "exact", head: true });
+      .select("id", {
+        count: "exact",
+        head: true
+      });
 
   if (!movieError) {
     document.getElementById("movieCount").textContent =
@@ -773,13 +770,24 @@ async function loadContentCounts() {
   const { count: episodeCount, error: episodeError } =
     await supabaseClient
       .from("Episodes")
-      .select("id", { count: "exact", head: true });
+      .select("id", {
+        count: "exact",
+        head: true
+      });
 
   if (!episodeError) {
     document.getElementById("episodeCount").textContent =
       episodeCount ?? 0;
   }
-        }
+}
+
+// ==========================================
+// RUN WHEN PAGE LOADS
+// ==========================================
+
+checkSession();
+
 </script>
-  </body>
+</body>
 </html>
+
