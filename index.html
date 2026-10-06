@@ -483,8 +483,10 @@
             publish content and control movie visibility.
           </p>
 
-          <button class="management-button">
-            Manage Movies
+          <button
+  class="management-button"
+  onclick="showMovieManagement()">
+  Manage Movies
           </button>
         </div>
 
@@ -560,7 +562,307 @@
 
   </section>
 
+  <!-- =========================
+       MOVIE MANAGEMENT
+  ========================== -->
 
+  <section id="movieManagementPage" style="display:none;">
+
+    <div class="dashboard-container">
+
+      <div class="welcome">
+        <h1>🎬 Movie Management</h1>
+        <p>
+          Add, edit, publish and manage your movies.
+        </p>
+      </div>
+
+      <div style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap;">
+
+        <button
+          class="management-button"
+          onclick="showDashboardHome()">
+          ← Dashboard
+        </button>
+
+        <button
+          class="management-button"
+          onclick="openAddMovieModal()">
+          + Add Movie
+        </button>
+
+      </div>
+
+
+      <!-- MOVIE LIST -->
+
+      <div class="management-box">
+
+        <h3>🎬 Movies</h3>
+
+        <p>
+          All movies currently stored in your Show Drama database.
+        </p>
+
+        <div id="movieManagementMessage"
+             style="margin-bottom:15px; color:#d8a84e;">
+        </div>
+
+        <div id="movieList">
+          Loading movies...
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ADD / EDIT MOVIE MODAL
+  ========================== -->
+
+  <div
+    id="movieModal"
+    style="
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.75);
+      z-index:100;
+      padding:20px;
+      overflow-y:auto;
+    "
+  >
+
+    <div
+      style="
+        max-width:650px;
+        margin:40px auto;
+        background:#18181d;
+        border:1px solid #33333a;
+        border-radius:16px;
+        padding:25px;
+      "
+    >
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:20px;
+      ">
+
+        <h2 id="movieModalTitle">
+          Add Movie
+        </h2>
+
+        <button
+          onclick="closeMovieModal()"
+          style="
+            background:none;
+            border:none;
+            color:white;
+            font-size:25px;
+            cursor:pointer;
+          "
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <input type="hidden" id="movieId">
+
+
+      <div class="input-group">
+        <label>Movie Title</label>
+
+        <input
+          type="text"
+          id="movieTitle"
+          placeholder="Enter movie title"
+        >
+      </div>
+
+
+      <div class="input-group">
+        <label>Genre</label>
+
+        <input
+          type="text"
+          id="movieGenre"
+          placeholder="Romance, Werewolf, Horror..."
+        >
+      </div>
+
+
+      <div class="input-group">
+        <label>Synopsis</label>
+
+        <textarea
+          id="movieSynopsis"
+          placeholder="Enter movie synopsis"
+          style="
+            width:100%;
+            min-height:120px;
+            padding:14px;
+            border-radius:10px;
+            border:1px solid #3b3b43;
+            background:#101014;
+            color:white;
+            outline:none;
+            font-size:15px;
+            resize:vertical;
+          "
+        ></textarea>
+      </div>
+
+
+      <div class="input-group">
+        <label>Poster URL</label>
+
+        <input
+          type="url"
+          id="moviePosterUrl"
+          placeholder="https://..."
+        >
+      </div>
+
+
+      <div class="input-group">
+        <label>Trailer URL</label>
+
+        <input
+          type="url"
+          id="movieTrailerUrl"
+          placeholder="https://..."
+        >
+      </div>
+
+
+      <div style="
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:12px;
+        margin-bottom:20px;
+      ">
+
+        <label style="
+          background:#101014;
+          border:1px solid #33333a;
+          padding:15px;
+          border-radius:10px;
+          cursor:pointer;
+        ">
+          <input
+            type="checkbox"
+            id="movieFeatured"
+          >
+          Featured
+        </label>
+
+
+        <label style="
+          background:#101014;
+          border:1px solid #33333a;
+          padding:15px;
+          border-radius:10px;
+          cursor:pointer;
+        ">
+          <input
+            type="checkbox"
+            id="moviePopular"
+          >
+          Popular
+        </label>
+
+
+        <label style="
+          background:#101014;
+          border:1px solid #33333a;
+          padding:15px;
+          border-radius:10px;
+          cursor:pointer;
+        ">
+          <input
+            type="checkbox"
+            id="movieNewRelease"
+          >
+          New Release
+        </label>
+
+      </div>
+
+
+      <label style="
+        display:flex;
+        align-items:center;
+        gap:10px;
+        background:#101014;
+        border:1px solid #33333a;
+        padding:15px;
+        border-radius:10px;
+        cursor:pointer;
+        margin-bottom:20px;
+      ">
+
+        <input
+          type="checkbox"
+          id="moviePublished"
+        >
+
+        <span>
+          Published
+        </span>
+
+      </label>
+
+
+      <div
+        id="movieFormMessage"
+        style="
+          min-height:20px;
+          margin-bottom:15px;
+          color:#e4a5ad;
+        "
+      ></div>
+
+
+      <div style="
+        display:flex;
+        gap:10px;
+        justify-content:flex-end;
+      ">
+
+        <button
+          onclick="closeMovieModal()"
+          style="
+            border:1px solid #44444c;
+            background:transparent;
+            color:white;
+            padding:10px 16px;
+            border-radius:8px;
+            cursor:pointer;
+          "
+        >
+          Cancel
+        </button>
+
+        <button
+          class="management-button"
+          onclick="saveMovie()"
+        >
+          Save Movie
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -781,7 +1083,589 @@ async function loadContentCounts() {
   }
 }
 
-// ==========================================
+
+    // ==========================================
+  // MOVIE MANAGEMENT
+  // ==========================================
+
+  function showMovieManagement() {
+
+    document.getElementById("dashboardPage").style.display =
+      "none";
+
+    document.getElementById("movieManagementPage").style.display =
+      "block";
+
+    loadMovies();
+  }
+
+
+  // ==========================================
+  // RETURN TO DASHBOARD
+  // ==========================================
+
+  function showDashboardHome() {
+
+    document.getElementById("movieManagementPage").style.display =
+      "none";
+
+    document.getElementById("dashboardPage").style.display =
+      "block";
+
+    loadContentCounts();
+  }
+
+
+  // ==========================================
+  // LOAD MOVIES
+  // ==========================================
+
+  async function loadMovies() {
+
+    const movieList =
+      document.getElementById("movieList");
+
+    const message =
+      document.getElementById("movieManagementMessage");
+
+    movieList.innerHTML =
+      "Loading movies...";
+
+    message.textContent = "";
+
+
+    const { data, error } =
+      await supabaseClient
+        .from("Movie")
+        .select("*")
+        .order("Created_at", {
+          ascending: false
+        });
+
+
+    if (error) {
+
+      movieList.innerHTML =
+        "Unable to load movies.";
+
+      message.textContent =
+        error.message;
+
+      return;
+    }
+
+
+    if (!data || data.length === 0) {
+
+      movieList.innerHTML = `
+        <div style="
+          padding:25px;
+          text-align:center;
+          color:#a9a9b2;
+        ">
+          No movies have been added yet.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    movieList.innerHTML =
+      data.map(movie => {
+
+        const published =
+          movie.Published === true;
+
+        const featured =
+          movie.Featured === true;
+
+        const popular =
+          movie.Popular === true;
+
+        const newRelease =
+          movie.New_release === true;
+
+
+        return `
+
+          <div style="
+            background:#101014;
+            border:1px solid #33333a;
+            border-radius:12px;
+            padding:18px;
+            margin-bottom:15px;
+          ">
+
+            <div style="
+              display:flex;
+              justify-content:space-between;
+              gap:15px;
+              flex-wrap:wrap;
+            ">
+
+              <div>
+
+                <h3 style="
+                  margin-bottom:8px;
+                ">
+                  ${escapeHtml(movie.Title || "Untitled")}
+                </h3>
+
+                <div style="
+                  color:#a9a9b2;
+                  font-size:13px;
+                  line-height:1.7;
+                ">
+
+                  ID: ${movie.id}<br>
+
+                  Genre:
+                  ${escapeHtml(movie.Genre || "Not set")}<br>
+
+                  Status:
+                  ${published ? "Published" : "Unpublished"}<br>
+
+                  Featured:
+                  ${featured ? "Yes" : "No"} |
+                  Popular:
+                  ${popular ? "Yes" : "No"} |
+                  New Release:
+                  ${newRelease ? "Yes" : "No"}
+
+                </div>
+
+              </div>
+
+
+              <div style="
+                display:flex;
+                gap:8px;
+                flex-wrap:wrap;
+                align-items:flex-start;
+              ">
+
+                <button
+                  class="management-button"
+                  onclick="editMovie(${movie.id})">
+                  Edit
+                </button>
+
+                <button
+                  class="management-button"
+                  onclick="toggleMoviePublished(${movie.id}, ${published})">
+                  ${published ? "Unpublish" : "Publish"}
+                </button>
+
+                <button
+                  class="management-button"
+                  onclick="manageEpisodes(${movie.id})">
+                  Episodes
+                </button>
+
+                <button
+                  onclick="deleteMovie(${movie.id})"
+                  style="
+                    border:none;
+                    background:#6d1626;
+                    color:white;
+                    padding:10px 16px;
+                    border-radius:8px;
+                    cursor:pointer;
+                    font-weight:bold;
+                  ">
+                  Delete
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }).join("");
+  }
+
+
+  // ==========================================
+  // ESCAPE HTML
+  // ==========================================
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  // ==========================================
+  // OPEN ADD MOVIE
+  // ==========================================
+
+  function openAddMovieModal() {
+
+    document.getElementById("movieModalTitle").textContent =
+      "Add Movie";
+
+    document.getElementById("movieId").value = "";
+
+    document.getElementById("movieTitle").value = "";
+
+    document.getElementById("movieGenre").value = "";
+
+    document.getElementById("movieSynopsis").value = "";
+
+    document.getElementById("moviePosterUrl").value = "";
+
+    document.getElementById("movieTrailerUrl").value = "";
+
+    document.getElementById("movieFeatured").checked = false;
+
+    document.getElementById("moviePopular").checked = false;
+
+    document.getElementById("movieNewRelease").checked = false;
+
+    document.getElementById("moviePublished").checked = false;
+
+    document.getElementById("movieFormMessage").textContent = "";
+
+    document.getElementById("movieModal").style.display =
+      "block";
+  }
+
+
+  // ==========================================
+  // CLOSE MOVIE MODAL
+  // ==========================================
+
+  function closeMovieModal() {
+
+    document.getElementById("movieModal").style.display =
+      "none";
+  }
+
+
+  // ==========================================
+  // EDIT MOVIE
+  // ==========================================
+
+  async function editMovie(movieId) {
+
+    const { data: movie, error } =
+      await supabaseClient
+        .from("Movie")
+        .select("*")
+        .eq("id", movieId)
+        .maybeSingle();
+
+
+    if (error || !movie) {
+
+      alert("Unable to load this movie.");
+
+      return;
+    }
+
+
+    document.getElementById("movieModalTitle").textContent =
+      "Edit Movie";
+
+    document.getElementById("movieId").value =
+      movie.id;
+
+    document.getElementById("movieTitle").value =
+      movie.Title || "";
+
+    document.getElementById("movieGenre").value =
+      movie.Genre || "";
+
+    document.getElementById("movieSynopsis").value =
+      movie.Synopsis || "";
+
+    document.getElementById("moviePosterUrl").value =
+      movie.Poster_url || "";
+
+    document.getElementById("movieTrailerUrl").value =
+      movie.Trailer_url || "";
+
+    document.getElementById("movieFeatured").checked =
+      movie.Featured === true;
+
+    document.getElementById("moviePopular").checked =
+      movie.Popular === true;
+
+    document.getElementById("movieNewRelease").checked =
+      movie.New_release === true;
+
+    document.getElementById("moviePublished").checked =
+      movie.Published === true;
+
+    document.getElementById("movieFormMessage").textContent =
+      "";
+
+    document.getElementById("movieModal").style.display =
+      "block";
+  }
+
+
+  // ==========================================
+  // SAVE MOVIE
+  // ==========================================
+
+  async function saveMovie() {
+
+    const movieId =
+      document.getElementById("movieId").value;
+
+    const title =
+      document.getElementById("movieTitle").value.trim();
+
+    const genre =
+      document.getElementById("movieGenre").value.trim();
+
+    const synopsis =
+      document.getElementById("movieSynopsis").value.trim();
+
+    const posterUrl =
+      document.getElementById("moviePosterUrl").value.trim();
+
+    const trailerUrl =
+      document.getElementById("movieTrailerUrl").value.trim();
+
+    const featured =
+      document.getElementById("movieFeatured").checked;
+
+    const popular =
+      document.getElementById("moviePopular").checked;
+
+    const newRelease =
+      document.getElementById("movieNewRelease").checked;
+
+    const published =
+      document.getElementById("moviePublished").checked;
+
+    const message =
+      document.getElementById("movieFormMessage");
+
+
+    message.textContent = "";
+
+
+    if (title === "") {
+
+      message.textContent =
+        "Movie title is required.";
+
+      return;
+    }
+
+
+    const movieData = {
+
+      Title: title,
+
+      Genre: genre || null,
+
+      Synopsis: synopsis || null,
+
+      Poster_url: posterUrl || null,
+
+      Trailer_url: trailerUrl || null,
+
+      Featured: featured,
+
+      Popular: popular,
+
+      New_release: newRelease,
+
+      Published: published
+    };
+
+
+    message.textContent =
+      "Saving movie...";
+
+
+    let result;
+
+
+    if (movieId === "") {
+
+      result =
+        await supabaseClient
+          .from("Movie")
+          .insert(movieData);
+
+    } else {
+
+      result =
+        await supabaseClient
+          .from("Movie")
+          .update(movieData)
+          .eq("id", movieId);
+    }
+
+
+    if (result.error) {
+
+      message.textContent =
+        result.error.message;
+
+      return;
+    }
+
+
+    message.textContent =
+      "Movie saved successfully.";
+
+    await loadMovies();
+
+    await loadContentCounts();
+
+
+    setTimeout(() => {
+
+      closeMovieModal();
+
+    }, 600);
+  }
+
+
+  // ==========================================
+  // PUBLISH / UNPUBLISH MOVIE
+  // ==========================================
+
+  async function toggleMoviePublished(movieId, currentStatus) {
+
+    const action =
+      currentStatus
+        ? "unpublish"
+        : "publish";
+
+
+    const confirmed =
+      confirm(
+        `Are you sure you want to ${action} this movie?`
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    const { error } =
+      await supabaseClient
+        .from("Movie")
+        .update({
+          Published: !currentStatus
+        })
+        .eq("id", movieId);
+
+
+    if (error) {
+
+      alert(
+        "Unable to change movie publication status: " +
+        error.message
+      );
+
+      return;
+    }
+
+
+    await loadMovies();
+  }
+
+
+  // ==========================================
+  // DELETE MOVIE
+  // ==========================================
+
+  async function deleteMovie(movieId) {
+
+    const { count, error: episodeCheckError } =
+      await supabaseClient
+        .from("Episodes")
+        .select("id", {
+          count: "exact",
+          head: true
+        })
+        .eq("Movie_id", movieId);
+
+
+    if (episodeCheckError) {
+
+      alert(
+        "Unable to check this movie's episodes."
+      );
+
+      return;
+    }
+
+
+    if ((count ?? 0) > 0) {
+
+      alert(
+        "This movie has episodes. Delete its episodes first before deleting the movie."
+      );
+
+      return;
+    }
+
+
+    const confirmed =
+      confirm(
+        "Are you sure you want to permanently delete this movie?"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    const { error } =
+      await supabaseClient
+        .from("Movie")
+        .delete()
+        .eq("id", movieId);
+
+
+    if (error) {
+
+      alert(
+        "Unable to delete movie: " +
+        error.message
+      );
+
+      return;
+    }
+
+
+    await loadMovies();
+
+    await loadContentCounts();
+  }
+
+
+  // ==========================================
+  // EPISODES PLACEHOLDER
+  // ==========================================
+
+  function manageEpisodes(movieId) {
+
+    alert(
+      "Episode Management will be connected here next."
+    );
+  }
+  // ==========================================
 // RUN WHEN PAGE LOADS
 // ==========================================
 
