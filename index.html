@@ -445,13 +445,13 @@
       <div class="content-grid">
 
         <div class="content-card">
-          <h3>Movies</h3>
-          <div class="content-number">0</div>
+  <h3>Movies</h3>
+  <div class="content-number" id="movieCount">0</div>
         </div>
 
         <div class="content-card">
-          <h3>Episodes</h3>
-          <div class="content-number">0</div>
+  <h3>Episodes</h3>
+  <div class="content-number" id="episodeCount">0</div>
         </div>
 
         <div class="content-card">
@@ -753,7 +753,33 @@
   // ==========================================
 
   checkSession();
+loadContentCounts();
+// ==========================================
+// LOAD MOVIE AND EPISODE COUNTS
+// ==========================================
 
+async function loadContentCounts() {
+
+  const { count: movieCount, error: movieError } =
+    await supabaseClient
+      .from("Movie")
+      .select("id", { count: "exact", head: true });
+
+  if (!movieError) {
+    document.getElementById("movieCount").textContent =
+      movieCount ?? 0;
+  }
+
+  const { count: episodeCount, error: episodeError } =
+    await supabaseClient
+      .from("Episodes")
+      .select("id", { count: "exact", head: true });
+
+  if (!episodeError) {
+    document.getElementById("episodeCount").textContent =
+      episodeCount ?? 0;
+  }
+        }
 </script>
   </body>
 </html>
