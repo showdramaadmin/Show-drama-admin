@@ -618,7 +618,350 @@
 
   </section>
 
+  <!-- =========================
+       EPISODE MANAGEMENT
+  ========================== -->
 
+  <section id="episodeManagementPage" style="display:none;">
+
+    <div class="dashboard-container">
+
+      <div class="welcome">
+
+        <h1>🎬 Episode Management</h1>
+
+        <p id="episodeMovieName">
+          Manage episodes for this movie.
+        </p>
+
+      </div>
+
+
+      <!-- TOP CONTROLS -->
+
+      <div style="
+        margin-bottom:20px;
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+      ">
+
+        <button
+          class="management-button"
+          onclick="backToMovieManagement()">
+          ← Movies
+        </button>
+
+        <button
+          class="management-button"
+          onclick="openAddEpisodeModal()">
+          + Add Episode
+        </button>
+
+      </div>
+
+
+      <!-- EPISODE LIST -->
+
+      <div class="management-box">
+
+        <h3>📺 Episodes</h3>
+
+        <p>
+          Episodes belonging to this movie will appear here.
+        </p>
+
+
+        <div
+          id="episodeManagementMessage"
+          style="
+            margin-bottom:15px;
+            color:#d8a84e;
+          "
+        ></div>
+
+
+        <div id="episodeList">
+
+          <div style="
+            padding:25px;
+            text-align:center;
+            color:#a9a9b2;
+          ">
+            No episodes loaded yet.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ADD / EDIT EPISODE MODAL
+  ========================== -->
+
+  <div
+    id="episodeModal"
+    style="
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.75);
+      z-index:110;
+      padding:20px;
+      overflow-y:auto;
+    "
+  >
+
+    <div
+      style="
+        max-width:650px;
+        margin:40px auto;
+        background:#18181d;
+        border:1px solid #33333a;
+        border-radius:16px;
+        padding:25px;
+      "
+    >
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:20px;
+      ">
+
+        <h2 id="episodeModalTitle">
+          Add Episode
+        </h2>
+
+        <button
+          onclick="closeEpisodeModal()"
+          style="
+            background:none;
+            border:none;
+            color:white;
+            font-size:25px;
+            cursor:pointer;
+          "
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- HIDDEN VALUES -->
+
+      <input
+        type="hidden"
+        id="episodeId"
+      >
+
+      <input
+        type="hidden"
+        id="episodeMovieId"
+      >
+
+
+      <!-- EPISODE NUMBER -->
+
+      <div class="input-group">
+
+        <label>
+          Episode Number
+        </label>
+
+        <input
+          type="number"
+          id="episodeNumber"
+          min="1"
+          step="1"
+          placeholder="1"
+        >
+
+      </div>
+
+
+      <!-- TITLE -->
+
+      <div class="input-group">
+
+        <label>
+          Episode Title
+        </label>
+
+        <input
+          type="text"
+          id="episodeTitle"
+          placeholder="Enter episode title"
+        >
+
+      </div>
+
+
+      <!-- DESCRIPTION -->
+
+      <div class="input-group">
+
+        <label>
+          Episode Description
+        </label>
+
+        <textarea
+          id="episodeDescription"
+          placeholder="Enter episode description"
+          style="
+            width:100%;
+            min-height:120px;
+            padding:14px;
+            border-radius:10px;
+            border:1px solid #3b3b43;
+            background:#101014;
+            color:white;
+            outline:none;
+            font-size:15px;
+            resize:vertical;
+          "
+        ></textarea>
+
+      </div>
+
+
+      <!-- VIDEO URL -->
+
+      <div class="input-group">
+
+        <label>
+          Video URL
+        </label>
+
+        <input
+          type="url"
+          id="episodeVideoUrl"
+          placeholder="https://..."
+        >
+
+      </div>
+
+
+      <!-- PRIVATE VIDEO PATH -->
+
+      <div class="input-group">
+
+        <label>
+          Private Video Path
+        </label>
+
+        <input
+          type="text"
+          id="episodePrivateVideoPath"
+          placeholder="Private storage path"
+        >
+
+        <div style="
+          margin-top:7px;
+          color:#777780;
+          font-size:12px;
+        ">
+          Used by the secure video system. Do not enter a public
+          storage URL here.
+        </div>
+
+      </div>
+
+
+      <!-- LOCK -->
+
+      <label style="
+        display:flex;
+        align-items:center;
+        gap:10px;
+        background:#101014;
+        border:1px solid #33333a;
+        padding:15px;
+        border-radius:10px;
+        cursor:pointer;
+        margin-bottom:15px;
+      ">
+
+        <input
+          type="checkbox"
+          id="episodeLocked"
+        >
+
+        <span>
+          Locked Episode
+        </span>
+
+      </label>
+
+
+      <!-- PRICE -->
+
+      <div class="input-group">
+
+        <label>
+          Episode Price
+        </label>
+
+        <input
+          type="number"
+          id="episodePrice"
+          min="0"
+          step="0.01"
+          placeholder="0.00"
+        >
+
+      </div>
+
+
+      <div
+        id="episodeFormMessage"
+        style="
+          min-height:20px;
+          margin-bottom:15px;
+          color:#e4a5ad;
+        "
+      ></div>
+
+
+      <div style="
+        display:flex;
+        gap:10px;
+        justify-content:flex-end;
+      ">
+
+        <button
+          onclick="closeEpisodeModal()"
+          style="
+            border:1px solid #44444c;
+            background:transparent;
+            color:white;
+            padding:10px 16px;
+            border-radius:8px;
+            cursor:pointer;
+          "
+        >
+          Cancel
+        </button>
+
+        <button
+          class="management-button"
+          onclick="saveEpisode()"
+        >
+          Save Episode
+        </button>
+
+      </div>
+
+    </div>
+
+      </div>
   <!-- =========================
        ADD / EDIT MOVIE MODAL
   ========================== -->
@@ -1656,14 +1999,129 @@ async function loadContentCounts() {
 
 
   // ==========================================
-  // EPISODES PLACEHOLDER
+  // EPISODE MANAGEMENT NAVIGATION
   // ==========================================
+
+  let currentEpisodeMovieId = null;
+
 
   function manageEpisodes(movieId) {
 
-    alert(
-      "Episode Management will be connected here next."
-    );
+    currentEpisodeMovieId = movieId;
+
+    document.getElementById("movieManagementPage").style.display =
+      "none";
+
+    document.getElementById("episodeManagementPage").style.display =
+      "block";
+
+
+    document.getElementById("episodeMovieName").textContent =
+      "Manage episodes for Movie ID " + movieId;
+
+
+    document.getElementById("episodeList").innerHTML = `
+      <div style="
+        padding:25px;
+        text-align:center;
+        color:#a9a9b2;
+      ">
+        Episode Management is ready.
+      </div>
+    `;
+
+  }
+
+
+  // ==========================================
+  // BACK TO MOVIES
+  // ==========================================
+
+  function backToMovieManagement() {
+
+    document.getElementById("episodeManagementPage").style.display =
+      "none";
+
+    document.getElementById("movieManagementPage").style.display =
+      "block";
+
+    loadMovies();
+
+  }
+
+
+  // ==========================================
+  // OPEN ADD EPISODE
+  // ==========================================
+
+  function openAddEpisodeModal() {
+
+    document.getElementById("episodeModalTitle").textContent =
+      "Add Episode";
+
+    document.getElementById("episodeId").value =
+      "";
+
+    document.getElementById("episodeMovieId").value =
+      currentEpisodeMovieId || "";
+
+    document.getElementById("episodeNumber").value =
+      "";
+
+    document.getElementById("episodeTitle").value =
+      "";
+
+    document.getElementById("episodeDescription").value =
+      "";
+
+    document.getElementById("episodeVideoUrl").value =
+      "";
+
+    document.getElementById("episodePrivateVideoPath").value =
+      "";
+
+    document.getElementById("episodeLocked").checked =
+      false;
+
+    document.getElementById("episodePrice").value =
+      "";
+
+    document.getElementById("episodeFormMessage").textContent =
+      "";
+
+    document.getElementById("episodeModal").style.display =
+      "block";
+
+  }
+
+
+  // ==========================================
+  // CLOSE EPISODE MODAL
+  // ==========================================
+
+  function closeEpisodeModal() {
+
+    document.getElementById("episodeModal").style.display =
+      "none";
+
+  }
+
+
+  // ==========================================
+  // SAVE EPISODE
+  // ==========================================
+  // DATABASE CONNECTION WILL BE ADDED
+  // AFTER EPISODE SECURITY IS SET UP.
+  // ==========================================
+
+  function saveEpisode() {
+
+    const message =
+      document.getElementById("episodeFormMessage");
+
+    message.textContent =
+      "Episode database connection will be added next.";
+
   }
   // ==========================================
 // RUN WHEN PAGE LOADS
