@@ -616,7 +616,177 @@
   }
 
   }
-  
+
+    
+/* =========================
+   SETTINGS MANAGEMENT
+========================== */
+
+#settingsManagementPage {
+  display: none;
+  min-height: 100vh;
+}
+
+.settings-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.settings-nav,
+.settings-panel {
+  background: #18181d;
+  border: 1px solid #303038;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.settings-nav h3 {
+  margin-bottom: 15px;
+}
+
+.settings-nav button {
+  width: 100%;
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  padding: 12px;
+  color: #ddd;
+  background: #101014;
+  border: 1px solid #303038;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.settings-nav button.active,
+.settings-nav button:hover {
+  background: #b71935;
+  color: #fff;
+}
+
+.settings-panel h2 {
+  margin-bottom: 8px;
+}
+
+.settings-description {
+  color: #a9a9b2;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.settings-group {
+  display: none;
+}
+
+.settings-group.active {
+  display: block;
+}
+
+.setting-item {
+  background: #101014;
+  border: 1px solid #303038;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.setting-item label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.setting-item small {
+  display: block;
+  color: #9999a3;
+  line-height: 1.5;
+  margin-top: 7px;
+}
+
+.setting-item input:not([type="checkbox"]),
+.setting-item textarea,
+.setting-item select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #3b3b43;
+  border-radius: 8px;
+  background: #18181d;
+  color: #fff;
+  font: inherit;
+}
+
+.setting-item textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.setting-toggle {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.setting-toggle input {
+  width: 20px;
+  height: 20px;
+  accent-color: #b71935;
+}
+
+.settings-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.settings-status {
+  min-height: 24px;
+  margin-top: 15px;
+  color: #d8a84e;
+  overflow-wrap: anywhere;
+}
+
+.settings-search {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  border: 1px solid #3b3b43;
+  background: #101014;
+  color: white;
+}
+
+.settings-placeholder {
+  padding: 18px;
+  color: #a9a9b2;
+  line-height: 1.6;
+  background: #101014;
+  border: 1px dashed #44444c;
+  border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+  .settings-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .settings-nav h3 {
+    grid-column: 1 / -1;
+  }
+
+  .settings-nav button {
+    margin: 0;
+  }
+}
+
     /* =========================  
        MOBILE  
     ========================== */  
@@ -872,9 +1042,11 @@
         other administrative configuration.  
       </p>  
 
-      <button class="management-button">  
-        Settings  
-      </button>  
+      <button
+  class="management-button"
+  onclick="showSettingsManagement()">
+  Manage Settings
+      </button>
     </div>  
 
   </div>  
@@ -1223,7 +1395,202 @@
 
   </main>
 
-  </section>    <!-- =========================  
+  </section>   
+    
+    
+<!-- =========================
+     SETTINGS MANAGEMENT
+========================== -->
+
+<section id="settingsManagementPage">
+
+  <header class="topbar">
+    <div class="topbar-title">
+      SHOW <span>DRAMA</span> ADMIN
+    </div>
+
+    <button class="logout-button" onclick="logout()">
+      Logout
+    </button>
+  </header>
+
+  <main class="dashboard-container">
+
+    <div class="welcome">
+      <h1>⚙️ General Settings</h1>
+      <p>Manage application-wide configuration for Show Drama.</p>
+    </div>
+
+    <div class="settings-actions" style="margin-bottom:20px;">
+      <button class="management-button"
+        onclick="showDashboardHome()">
+        ← Dashboard
+      </button>
+
+      <button class="management-button"
+        onclick="loadSettings()">
+        ↻ Refresh
+      </button>
+    </div>
+
+    <input
+      id="settingsSearch"
+      class="settings-search"
+      type="search"
+      placeholder="Search settings..."
+      oninput="filterSettings()"
+    >
+
+    <div class="settings-layout">
+
+      <nav class="settings-nav">
+        <h3>Configuration</h3>
+
+        <button class="active"
+          onclick="showSettingsGroup('general', this)">
+          ⚙️ General
+        </button>
+
+        <button
+          onclick="showSettingsGroup('language', this)">
+          🌐 Language
+        </button>
+
+        <button
+          onclick="showSettingsGroup('movies', this)">
+          🎬 Movie Settings
+        </button>
+
+        <button
+          onclick="showSettingsGroup('novels', this)">
+          📚 Novel Settings
+        </button>
+
+        <button
+          onclick="showSettingsGroup('payments', this)">
+          💳 Payment Settings
+        </button>
+
+        <button
+          onclick="showSettingsGroup('ads', this)">
+          📺 Ads
+        </button>
+
+        <button
+          onclick="showSettingsGroup('notifications', this)">
+          🔔 Notifications
+        </button>
+
+        <button
+          onclick="showSettingsGroup('updates', this)">
+          🔄 Updates
+        </button>
+
+        <button
+          onclick="showSettingsGroup('about', this)">
+          ℹ️ About
+        </button>
+      </nav>
+
+      <div class="settings-panel">
+
+        <div id="settingsPageMessage" class="settings-status">
+          Loading settings...
+        </div>
+
+        <div class="settings-group active" data-group="general">
+          <h2>General</h2>
+          <p class="settings-description">
+            App identity, support contact and availability.
+          </p>
+          <div id="settingsGeneral"></div>
+        </div>
+
+        <div class="settings-group" data-group="language">
+          <h2>Language</h2>
+          <p class="settings-description">
+            Choose the default language and list supported languages.
+          </p>
+          <div id="settingsLanguage"></div>
+        </div>
+
+        <div class="settings-group" data-group="movies">
+          <h2>Movie Settings</h2>
+          <p class="settings-description">
+            Configure movie availability and defaults.
+            Episode-by-episode locking remains in Episode Management.
+          </p>
+          <div id="settingsMovies"></div>
+        </div>
+
+        <div class="settings-group" data-group="novels">
+          <h2>Novel Settings</h2>
+          <p class="settings-description">
+            Configure novel availability while the novel system is being built.
+          </p>
+          <div id="settingsNovels"></div>
+        </div>
+
+        <div class="settings-group" data-group="payments">
+          <h2>Payment Settings</h2>
+          <p class="settings-description">
+            General payment and subscription controls.
+          </p>
+          <div id="settingsPayments"></div>
+        </div>
+
+        <div class="settings-group" data-group="ads">
+          <h2>Rewarded Ads</h2>
+          <p class="settings-description">
+            Configure rewarded-ad availability and the daily limit.
+          </p>
+          <div id="settingsAds"></div>
+        </div>
+
+        <div class="settings-group" data-group="notifications">
+          <h2>Notifications</h2>
+          <p class="settings-description">
+            Manage notification preferences available to the app.
+          </p>
+          <div id="settingsNotifications"></div>
+        </div>
+
+        <div class="settings-group" data-group="updates">
+          <h2>App Updates</h2>
+          <p class="settings-description">
+            Manage version information and update requirements.
+          </p>
+          <div id="settingsUpdates"></div>
+        </div>
+
+        <div class="settings-group" data-group="about">
+          <h2>About Show Drama</h2>
+          <p class="settings-description">
+            Public app information, support email, privacy policy and terms.
+          </p>
+          <div id="settingsAbout"></div>
+        </div>
+
+        <div class="settings-actions">
+          <button class="management-button"
+            onclick="saveSettings()">
+            Save Settings
+          </button>
+
+          <button class="management-button"
+            onclick="loadSettings()">
+            Discard / Reload
+          </button>
+        </div>
+
+        <div id="settingsSaveMessage" class="settings-status"></div>
+
+      </div>
+    </div>
+  </main>
+</section>
+
+    <!-- =========================  
        SUBSCRIPTIONS & PAYMENTS  
   ========================== -->    <section id="paymentsManagementPage">  <header class="topbar">  
 
@@ -1531,7 +1898,353 @@
 
 </main>
 
-  </section>    <!-- =========================  
+  </section>    
+    
+/* ==========================================
+   SETTINGS MANAGEMENT
+========================================== */
+
+let allSettings = [];
+let settingsSearchTerm = "";
+
+const SETTINGS_GROUPS = {
+  general: {
+    target: "settingsGeneral",
+    keys: [
+      "app_name",
+      "app_description",
+      "support_email",
+      "contact_information",
+      "maintenance_mode",
+      "app_enabled"
+    ]
+  },
+  language: {
+    target: "settingsLanguage",
+    keys: [
+      "default_language",
+      "available_languages"
+    ]
+  },
+  movies: {
+    target: "settingsMovies",
+    keys: [
+      "movies_enabled",
+      "default_episode_behavior"
+    ]
+  },
+  novels: {
+    target: "settingsNovels",
+    keys: [
+      "novels_enabled",
+      "novel_payments_enabled"
+    ]
+  },
+  payments: {
+    target: "settingsPayments",
+    keys: [
+      "default_currency",
+      "payments_enabled",
+      "movie_vip_enabled",
+      "subscription_enabled"
+    ]
+  },
+  ads: {
+    target: "settingsAds",
+    keys: [
+      "rewarded_ads_enabled",
+      "daily_rewarded_ad_limit"
+    ]
+  },
+  notifications: {
+    target: "settingsNotifications",
+    keys: [
+      "notifications_enabled",
+      "new_episode_notifications",
+      "promotion_notifications"
+    ]
+  },
+  updates: {
+    target: "settingsUpdates",
+    keys: [
+      "current_app_version",
+      "minimum_app_version",
+      "force_update"
+    ]
+  },
+  about: {
+    target: "settingsAbout",
+    keys: [
+      "app_name",
+      "app_description",
+      "support_email",
+      "privacy_policy_url",
+      "terms_url"
+    ]
+  }
+};
+
+const SETTINGS_LABELS = {
+  app_name: "App Name",
+  app_description: "App Description",
+  support_email: "Support Email",
+  contact_information: "Contact Information",
+  maintenance_mode: "Maintenance Mode",
+  app_enabled: "App Enabled",
+  default_language: "Default Language",
+  available_languages: "Available Languages",
+  movies_enabled: "Movies Enabled",
+  default_episode_behavior: "Default Episode Behavior",
+  novels_enabled: "Novels Enabled",
+  novel_payments_enabled: "Novel Payments Enabled",
+  default_currency: "Default Currency",
+  payments_enabled: "Payments Enabled",
+  movie_vip_enabled: "Movie VIP Enabled",
+  subscription_enabled: "Subscriptions Enabled",
+  rewarded_ads_enabled: "Rewarded Ads Enabled",
+  daily_rewarded_ad_limit: "Daily Rewarded-Ad Limit",
+  notifications_enabled: "Notifications Enabled",
+  new_episode_notifications: "New Episode Notifications",
+  promotion_notifications: "Promotion Notifications",
+  current_app_version: "Current App Version",
+  minimum_app_version: "Minimum App Version",
+  force_update: "Force Update",
+  privacy_policy_url: "Privacy Policy URL",
+  terms_url: "Terms URL"
+};
+
+const SETTINGS_DESCRIPTIONS = {
+  support_email:
+    "Users can contact you through this email. Use an address you can access.",
+  available_languages:
+    "Enter language names separated by commas, for example English, French.",
+  default_episode_behavior:
+    "This is a default for future content, not a command to lock or unlock existing episodes.",
+  daily_rewarded_ad_limit:
+    "The intended daily limit is three unlocks per user. Enforcing it securely requires the backend to validate each unlock.",
+  force_update:
+    "Internal admin control. Users should only see the app's update message when applicable."
+};
+
+function showSettingsManagement() {
+  hideAdminPages();
+  document.getElementById("settingsManagementPage").style.display = "block";
+  loadSettings();
+}
+
+function hideAdminPages() {
+  [
+    "dashboardPage",
+    "movieManagementPage",
+    "episodeManagementPage",
+    "paymentsManagementPage",
+    "usersManagementPage",
+    "settingsManagementPage"
+  ].forEach(id => {
+    const page = document.getElementById(id);
+    if (page) page.style.display = "none";
+  });
+}
+
+function showSettingsGroup(group, button) {
+  document.querySelectorAll("#settingsManagementPage .settings-group")
+    .forEach(panel => {
+      panel.classList.toggle("active", panel.dataset.group === group);
+    });
+
+  document.querySelectorAll("#settingsManagementPage .settings-nav button")
+    .forEach(item => item.classList.remove("active"));
+
+  if (button) button.classList.add("active");
+}
+
+async function loadSettings() {
+  const message = document.getElementById("settingsPageMessage");
+  const saveMessage = document.getElementById("settingsSaveMessage");
+
+  message.textContent = "Loading settings...";
+  saveMessage.textContent = "";
+
+  const { data, error } = await supabaseClient
+    .from("Settings")
+    .select('id, Setting_key, Setting_value, Setting_type, Category, Description, Is_active')
+    .order("id", { ascending: true });
+
+  if (error) {
+    message.textContent = "Unable to load settings: " + error.message;
+    return;
+  }
+
+  allSettings = data || [];
+  renderSettings();
+  message.textContent = "Settings loaded.";
+}
+
+function renderSettings() {
+  Object.values(SETTINGS_GROUPS).forEach(group => {
+    document.getElementById(group.target).innerHTML = "";
+  });
+
+  const displayedKeys = new Set();
+
+  Object.entries(SETTINGS_GROUPS).forEach(([groupName, group]) => {
+    const target = document.getElementById(group.target);
+
+    group.keys.forEach(key => {
+      const setting = allSettings.find(row => row.Setting_key === key);
+      if (!setting) return;
+
+      const searchText = [
+        key,
+        SETTINGS_LABELS[key] || key,
+        setting.Description || "",
+        setting.Category || ""
+      ].join(" ").toLowerCase();
+
+      if (
+        settingsSearchTerm &&
+        !searchText.includes(settingsSearchTerm)
+      ) return;
+
+      displayedKeys.add(key);
+      target.insertAdjacentHTML(
+        "beforeend",
+        buildSettingControl(setting, groupName)
+      );
+    });
+
+    if (!target.children.length) {
+      target.innerHTML =
+        '<div class="settings-placeholder">No matching settings in this section.</div>';
+    }
+  });
+}
+
+function buildSettingControl(setting, groupName) {
+  const key = setting.Setting_key;
+  const value = setting.Setting_value ?? "";
+  const label = SETTINGS_LABELS[key] || key;
+  const description = setting.Description ||
+    SETTINGS_DESCRIPTIONS[key] || "";
+
+  const escapedKey = escapeHtml(key);
+  const escapedLabel = escapeHtml(label);
+  const escapedDescription = escapeHtml(description);
+
+  let control = "";
+
+  if (setting.Setting_type === "boolean") {
+    const checked = String(value).toLowerCase() === "true";
+
+    control = `
+      <label class="setting-toggle">
+        <input
+          type="checkbox"
+          data-setting-key="${escapedKey}"
+          ${checked ? "checked" : ""}
+        >
+        <span>${escapedLabel}</span>
+      </label>
+    `;
+  } else if (key === "default_episode_behavior") {
+    control = `
+      <select data-setting-key="${escapedKey}">
+        <option value="free" ${value === "free" ? "selected" : ""}>Free by default</option>
+        <option value="locked" ${value === "locked" ? "selected" : ""}>Locked by default</option>
+      </select>
+    `;
+  } else if (key === "app_description" || key === "contact_information") {
+    control = `
+      <label for="setting-${escapedKey}">${escapedLabel}</label>
+      <textarea id="setting-${escapedKey}" data-setting-key="${escapedKey}">${escapeHtml(value)}</textarea>
+    `;
+  } else {
+    const inputType = setting.Setting_type === "number"
+      ? "number"
+      : key.endsWith("_url")
+        ? "url"
+        : "text";
+
+    control = `
+      <label for="setting-${escapedKey}">${escapedLabel}</label>
+      <input
+        id="setting-${escapedKey}"
+        type="${inputType}"
+        data-setting-key="${escapedKey}"
+        value="${escapeHtml(value)}"
+        ${inputType === "number" ? 'min="0" step="1"' : ""}
+      >
+    `;
+  }
+
+  return `
+    <div class="setting-item" data-setting-card="${escapedKey}">
+      ${control}
+      ${description ? `<small>${escapedDescription}</small>` : ""}
+    </div>
+  `;
+}
+
+function filterSettings() {
+  settingsSearchTerm = document
+    .getElementById("settingsSearch")
+    .value.trim().toLowerCase();
+
+  renderSettings();
+}
+
+async function saveSettings() {
+  const message = document.getElementById("settingsSaveMessage");
+  message.textContent = "Saving settings...";
+
+  const controls = document.querySelectorAll(
+    "#settingsManagementPage [data-setting-key]"
+  );
+
+  const updates = [];
+
+  controls.forEach(control => {
+    const key = control.dataset.settingKey;
+    const original = allSettings.find(row => row.Setting_key === key);
+
+    if (!original) return;
+
+    const value = control.type === "checkbox"
+      ? String(control.checked)
+      : control.value.trim();
+
+    if (value !== String(original.Setting_value ?? "")) {
+      updates.push({ key, value });
+    }
+  });
+
+  if (!updates.length) {
+    message.textContent = "No changes to save.";
+    return;
+  }
+
+  for (const item of updates) {
+    const { error } = await supabaseClient
+      .from("Settings")
+      .update({
+        Setting_value: item.value,
+        Updated_at: new Date().toISOString()
+      })
+      .eq("Setting_key", item.key);
+
+    if (error) {
+      message.textContent =
+        "Could not save " + item.key + ": " + error.message;
+      return;
+    }
+  }
+
+  message.textContent = "Settings saved successfully.";
+  await loadSettings();
+}
+
+    
+    <!-- =========================  
        MOVIE MANAGEMENT  
   ========================== -->    <section id="movieManagementPage" style="display:none;">  <div class="dashboard-container">  
 
