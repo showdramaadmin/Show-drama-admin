@@ -447,65 +447,175 @@
       color: #d8a84e;  
     }  
   
-    /* =========================  
-       USERS  
-    ========================== */  
-  
-    #usersManagementPage {  
-      display: none;  
-      min-height: 100vh;  
-    }  
-  
-    .users-summary-card {  
-      background: #18181d;  
-      border: 1px solid #303038;  
-      border-radius: 14px;  
-      padding: 20px;  
-      margin-bottom: 20px;  
-    }  
-  
-    .users-summary-label {  
-      color: #a9a9b2;  
-      font-size: 13px;  
-      margin-bottom: 8px;  
-    }  
-  
-    .users-summary-value {  
-      font-size: 28px;  
-      font-weight: bold;  
-      color: #d8a84e;  
-    }  
-  
-    .users-section {  
-      background: #18181d;  
-      border: 1px solid #303038;  
-      border-radius: 14px;  
-      padding: 22px;  
-    }  
-  
-    .users-section h3 {  
-      margin-bottom: 8px;  
-      font-size: 19px;  
-    }  
-  
-    .users-section-description {  
-      color: #a9a9b2;  
-      font-size: 14px;  
-      margin-bottom: 18px;  
-      line-height: 1.5;  
-    }  
-  
-    .user-status-active {  
-      color: #63d391;  
-      font-weight: bold;  
-    }  
-  
-    .user-status-inactive,  
-    .user-status-suspended,  
-    .user-status-blocked {  
-      color: #e4a5ad;  
-      font-weight: bold;  
-    }  
+    /* =========================
+   USERS MANAGEMENT
+========================== */
+
+#usersManagementPage {
+  display: none;
+  min-height: 100vh;
+}
+
+.users-summary-card {
+  background: #18181d;
+  border: 1px solid #303038;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.users-summary-label {
+  color: #a9a9b2;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.users-summary-value {
+  font-size: 28px;
+  font-weight: bold;
+  color: #d8a84e;
+}
+
+.users-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.user-stat-card {
+  background: #18181d;
+  border: 1px solid #303038;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.user-stat-label {
+  color: #a9a9b2;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.user-stat-value {
+  font-size: 26px;
+  font-weight: bold;
+  color: #d8a84e;
+}
+
+.users-section {
+  background: #18181d;
+  border: 1px solid #303038;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.users-section h3 {
+  margin-bottom: 8px;
+  font-size: 19px;
+}
+
+.users-section-description {
+  color: #a9a9b2;
+  font-size: 14px;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.user-search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.user-search-bar input {
+  flex: 1;
+  min-width: 220px;
+  padding: 13px;
+  border-radius: 9px;
+  border: 1px solid #3b3b43;
+  background: #101014;
+  color: white;
+  outline: none;
+}
+
+.user-search-bar input:focus {
+  border-color: #d8a84e;
+}
+
+.user-row {
+  cursor: pointer;
+}
+
+.user-row:hover {
+  background: #202026;
+}
+
+.user-status-active {
+  color: #63d391;
+  font-weight: bold;
+}
+
+.user-status-inactive {
+  color: #e4a5ad;
+  font-weight: bold;
+}
+
+.user-details-panel {
+  display: none;
+  margin-top: 20px;
+}
+
+.user-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.user-detail-card {
+  background: #101014;
+  border: 1px solid #33333a;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.user-detail-card h4 {
+  color: #d8a84e;
+  margin-bottom: 12px;
+  font-size: 17px;
+}
+
+.user-detail-item {
+  padding: 8px 0;
+  border-bottom: 1px solid #27272d;
+  font-size: 13px;
+}
+
+.user-detail-item:last-child {
+  border-bottom: none;
+}
+
+.user-detail-label {
+  color: #777780;
+}
+
+.user-detail-value {
+  color: #ffffff;
+  word-break: break-word;
+}
+
+@media (max-width: 900px) {
+
+  .users-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .user-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  }
   
     /* =========================  
        MOBILE  
@@ -771,106 +881,349 @@
 
 </main>
 
-  </section>    <!-- =========================  
-       USERS MANAGEMENT  
-  ========================== -->    <section id="usersManagementPage">  <header class="topbar">  
+  </section>        <!-- =========================
+     USERS MANAGEMENT
+========================== -->
 
-  <div class="topbar-title">  
-    SHOW <span>DRAMA</span> ADMIN  
-  </div>  
+<section id="usersManagementPage">
 
-  <button class="logout-button" onclick="logout()">  
-    Logout  
-  </button>  
+  <header class="topbar">
 
-</header>  
+    <div class="topbar-title">
+      SHOW <span>DRAMA</span> ADMIN
+    </div>
 
-<main class="dashboard-container">  
+    <button
+      class="logout-button"
+      onclick="logout()">
+      Logout
+    </button>
 
-  <div class="welcome">  
-
-    <h1>👥 User Management</h1>  
-
-    <p>  
-      View registered Show Drama users and their  
-      account information.  
-    </p>  
-
-  </div>  
+  </header>
 
 
-  <!-- TOP CONTROLS -->  
+  <main class="dashboard-container">
 
-  <div style="  
-    margin-bottom:20px;  
-    display:flex;  
-    gap:10px;  
-    flex-wrap:wrap;  
-  ">  
+    <div class="welcome">
 
-    <button  
-      class="management-button"  
-      onclick="showDashboardHome()">  
-      ← Dashboard  
-    </button>  
+      <h1>👥 User Management</h1>
 
-    <button  
-      class="management-button"  
-      onclick="loadUsers()">  
-      ↻ Refresh  
-    </button>  
+      <p>
+        Manage registered Show Drama users and view
+        their movie and novel account activity.
+      </p>
 
-  </div>  
+    </div>
 
 
-  <!-- USER COUNT -->  
+    <!-- CONTROLS -->
 
-  <div class="users-summary-card">  
+    <div style="
+      margin-bottom:20px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    ">
 
-    <div class="users-summary-label">  
-      Registered Users  
-    </div>  
+      <button
+        class="management-button"
+        onclick="showDashboardHome()">
+        ← Dashboard
+      </button>
 
-    <div  
-      class="users-summary-value"  
-      id="userCount">  
-      0  
-    </div>  
+      <button
+        class="management-button"
+        onclick="loadUsers()">
+        ↻ Refresh
+      </button>
 
-  </div>  
+    </div>
 
 
-  <!-- USERS TABLE -->  
+    <!-- USER STATISTICS -->
 
-  <div class="users-section">  
+    <div class="users-stat-grid">
 
-    <h3>👥 Registered Users</h3>  
+      <div class="user-stat-card">
 
-    <div class="users-section-description">  
-      User information is loaded directly from the  
-      <strong>Profiles</strong> table.  
-    </div>  
+        <div class="user-stat-label">
+          Registered Users
+        </div>
 
-    <div  
-      id="usersMessage"  
-      style="  
-        min-height:22px;  
-        margin-bottom:15px;  
-        color:#d8a84e;  
-      "  
-    ></div>  
+        <div
+          class="user-stat-value"
+          id="userCount">
+          0
+        </div>
 
-    <div  
-      id="usersList"  
-      class="payment-table-wrapper">  
+      </div>
 
-      Loading users...  
 
-    </div>  
+      <div class="user-stat-card">
 
-  </div>  
+        <div class="user-stat-label">
+          Active Accounts
+        </div>
 
-</main>
+        <div
+          class="user-stat-value"
+          id="activeUserCount">
+          0
+        </div>
+
+      </div>
+
+
+      <div class="user-stat-card">
+
+        <div class="user-stat-label">
+          Inactive / Blocked
+        </div>
+
+        <div
+          class="user-stat-value"
+          id="inactiveUserCount">
+          0
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="users-section">
+
+      <h3>🔎 Search Users</h3>
+
+      <div class="users-section-description">
+
+        Search by User ID, username, display name
+        or email address.
+
+      </div>
+
+
+      <div class="user-search-bar">
+
+        <input
+          type="search"
+          id="userSearchInput"
+          placeholder="Search users..."
+          oninput="filterUsers()"
+        >
+
+        <button
+          class="management-button"
+          onclick="clearUserSearch()">
+          Clear
+        </button>
+
+      </div>
+
+
+      <div
+        id="usersMessage"
+        style="
+          min-height:22px;
+          margin-bottom:15px;
+          color:#d8a84e;
+        "
+      ></div>
+
+
+      <!-- USER LIST -->
+
+      <div
+        id="usersList"
+        class="payment-table-wrapper">
+
+        Loading users...
+
+      </div>
+
+    </div>
+
+
+    <!-- SELECTED USER DETAILS -->
+
+    <div
+      id="userDetailsPanel"
+      class="user-details-panel">
+
+      <div class="users-section">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:10px;
+          flex-wrap:wrap;
+          margin-bottom:15px;
+        ">
+
+          <h3>
+            👤 User Details
+          </h3>
+
+          <button
+            class="management-button"
+            onclick="closeUserDetails()">
+            Close
+          </button>
+
+        </div>
+
+
+        <div
+          id="selectedUserHeader"
+          class="users-section-description">
+        </div>
+
+
+        <div class="user-detail-grid">
+
+
+          <!-- BASIC INFORMATION -->
+
+          <div class="user-detail-card">
+
+            <h4>
+              Basic Information
+            </h4>
+
+            <div id="basicUserDetails">
+              Loading...
+            </div>
+
+          </div>
+
+
+          <!-- MOVIE VIP -->
+
+          <div class="user-detail-card">
+
+            <h4>
+              🎬 Movies — VIP Status
+            </h4>
+
+            <div id="movieVipDetails">
+              Loading...
+            </div>
+
+          </div>
+
+
+          <!-- MOVIE PURCHASES -->
+
+          <div class="user-detail-card">
+
+            <h4>
+              🛒 Movie Purchases
+            </h4>
+
+            <div id="userMoviePurchases">
+              Loading...
+            </div>
+
+          </div>
+
+
+          <!-- REWARDED ADS -->
+
+          <div class="user-detail-card">
+
+            <h4>
+              📺 Rewarded Ad Unlocks
+            </h4>
+
+            <div id="userAdUnlocks">
+              Loading...
+            </div>
+
+          </div>
+
+
+          <!-- NOVELS -->
+
+          <div class="user-detail-card">
+
+            <h4>
+              📚 Novels
+            </h4>
+
+            <div id="novelUserDetails">
+
+              <div class="user-detail-item">
+                <span class="user-detail-label">
+                  Novel Subscription:
+                </span>
+
+                <span class="user-detail-value">
+                  Not connected yet
+                </span>
+              </div>
+
+              <div class="user-detail-item">
+                <span class="user-detail-label">
+                  Purchased Chapters:
+                </span>
+
+                <span class="user-detail-value">
+                  Not connected yet
+                </span>
+              </div>
+
+              <div class="user-detail-item">
+                <span class="user-detail-label">
+                  Novel Payments:
+                </span>
+
+                <span class="user-detail-value">
+                  Not connected yet
+                </span>
+              </div>
+
+              <div class="user-detail-item">
+                <span class="user-detail-label">
+                  Novel Refunds:
+                </span>
+
+                <span class="user-detail-value">
+                  Not connected yet
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- PAYMENT SUMMARY -->
+
+          <div class="user-detail-card">
+
+            <h4>
+              💳 Movie Payment Activity
+            </h4>
+
+            <div id="userPaymentSummary">
+              Loading...
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  </section>
 
   </section>    <!-- =========================  
        SUBSCRIPTIONS & PAYMENTS  
@@ -2049,224 +2402,1080 @@
     }  
   
   
-    // ==========================================  
-    // USERS MANAGEMENT  
-    // ==========================================  
+      
   
-    function showUsersManagement() {  
-  
-      document.getElementById("dashboardPage").style.display =  
-        "none";  
-  
-      document.getElementById("movieManagementPage").style.display =  
-        "none";  
-  
-      document.getElementById("episodeManagementPage").style.display =  
-        "none";  
-  
-      document.getElementById("paymentsManagementPage").style.display =  
-        "none";  
-  
-      document.getElementById("usersManagementPage").style.display =  
-        "block";  
-  
-      loadUsers();  
-  
-    }  
-  
-  
-    // ==========================================  
-    // LOAD USERS  
-    // ==========================================  
-  
-    async function loadUsers() {  
-  
-      const container =  
-        document.getElementById("usersList");  
-  
-      const message =  
-        document.getElementById("usersMessage");  
-  
-      const countElement =  
-        document.getElementById("userCount");  
-  
-      container.innerHTML =  
-        "Loading users...";  
-  
-      message.textContent =  
-        "";  
-  
-      countElement.textContent =  
-        "0";  
-  
-      const { data, error } =  
-        await supabaseClient  
-          .from("Profiles")  
-          .select(`  
-            id,  
-            Username,  
-            Display_name,  
-            Email,  
-            Account_Status,  
-            Created_at  
-          `)  
-          .order("Created_at", {  
-            ascending: false  
-          });  
-  
-      if (error) {  
-  
-        container.innerHTML = `  
-          <div style="  
-            padding:25px;  
-            text-align:center;  
-            color:#e4a5ad;  
-          ">  
-            Unable to load users.  
-          </div>  
-        `;  
-  
-        message.textContent =  
-          error.message;  
-  
-        return;  
-      }  
-  
-      countElement.textContent =  
-        data ? data.length : 0;  
-  
-      if (!data || data.length === 0) {  
-  
-        container.innerHTML = `  
-          <div style="  
-            padding:40px 20px;  
-            text-align:center;  
-            color:#a9a9b2;  
-          ">  
-            No registered users found.  
-          </div>  
-        `;  
-  
-        return;  
-      }  
-  
-      container.innerHTML = `  
-  
-        <table class="payment-table">  
-  
-          <thead>  
-  
-            <tr>  
-  
-              <th>  
-                ID  
-              </th>  
-  
-              <th>  
-                Username  
-              </th>  
-  
-              <th>  
-                Display Name  
-              </th>  
-  
-              <th>  
-                Email  
-              </th>  
-  
-              <th>  
-                Account Status  
-              </th>  
-  
-              <th>  
-                Created At  
-              </th>  
-  
-            </tr>  
-  
-          </thead>  
-  
-          <tbody>  
-  
-            ${data.map(user => {  
-  
-              const accountStatus =  
-                String(  
-                  user.Account_Status || ""  
-                ).trim();  
-  
-              const normalizedStatus =  
-                accountStatus.toLowerCase();  
-  
-              let statusClass =  
-                "user-status-active";  
-  
-              if (  
-                normalizedStatus === "inactive" ||  
-                normalizedStatus === "suspended" ||  
-                normalizedStatus === "blocked" ||  
-                normalizedStatus === "disabled"  
-              ) {  
-  
-                statusClass =  
-                  "user-status-inactive";  
-  
-              }  
-  
-              return `  
-  
-                <tr>  
-  
-                  <td>  
-                    ${escapeHtml(  
-                      user.id || "—"  
-                    )}  
-                  </td>  
-  
-                  <td>  
-                    ${escapeHtml(  
-                      user.Username || "—"  
-                    )}  
-                  </td>  
-  
-                  <td>  
-                    ${escapeHtml(  
-                      user.Display_name || "—"  
-                    )}  
-                  </td>  
-  
-                  <td>  
-                    ${escapeHtml(  
-                      user.Email || "—"  
-                    )}  
-                  </td>  
-  
-                  <td class="${statusClass}">  
-                    ${escapeHtml(  
-                      accountStatus || "—"  
-                    )}  
-                  </td>  
-  
-                  <td>  
-                    ${formatDate(  
-                      user.Created_at  
-                    )}  
-                  </td>  
-  
-                </tr>  
-  
-              `;  
-  
-            }).join("")}  
-  
-          </tbody>  
-  
-        </table>  
-  
-      `;  
-  
-    }  
-  
+              // ==========================================
+// USERS MANAGEMENT
+// ==========================================
+
+let allUsers = [];
+let currentSelectedUser = null;
+
+
+function showUsersManagement() {
+
+  document.getElementById("dashboardPage").style.display =
+    "none";
+
+  document.getElementById("movieManagementPage").style.display =
+    "none";
+
+  document.getElementById("episodeManagementPage").style.display =
+    "none";
+
+  document.getElementById("paymentsManagementPage").style.display =
+    "none";
+
+  document.getElementById("usersManagementPage").style.display =
+    "block";
+
+  loadUsers();
+
+}
+
+
+// ==========================================
+// LOAD USERS
+// ==========================================
+
+async function loadUsers() {
+
+  const container =
+    document.getElementById("usersList");
+
+  const message =
+    document.getElementById("usersMessage");
+
+  const countElement =
+    document.getElementById("userCount");
+
+  const activeElement =
+    document.getElementById("activeUserCount");
+
+  const inactiveElement =
+    document.getElementById("inactiveUserCount");
+
+
+  container.innerHTML =
+    "Loading users...";
+
+  message.textContent =
+    "";
+
+  countElement.textContent =
+    "0";
+
+  activeElement.textContent =
+    "0";
+
+  inactiveElement.textContent =
+    "0";
+
+
+  document.getElementById(
+    "userDetailsPanel"
+  ).style.display = "none";
+
+
+  /*
+    IMPORTANT:
+
+    Your real database column is:
+
+    Account_status
+
+    NOT:
+
+    Account_Status
+  */
+
+  const { data, error } =
+    await supabaseClient
+      .from("Profiles")
+      .select(`
+        id,
+        Username,
+        Display_name,
+        Email,
+        Account_status,
+        Created_at
+      `)
+      .order("Created_at", {
+        ascending: false
+      });
+
+
+  if (error) {
+
+    container.innerHTML = `
+      <div style="
+        padding:25px;
+        text-align:center;
+        color:#e4a5ad;
+      ">
+        Unable to load users.
+      </div>
+    `;
+
+    message.textContent =
+      error.message;
+
+    return;
+  }
+
+
+  allUsers =
+    data || [];
+
+
+  updateUserStatistics(
+    allUsers
+  );
+
+
+  renderUsers(
+    allUsers
+  );
+
+}
+
+
+// ==========================================
+// USER STATISTICS
+// ==========================================
+
+function updateUserStatistics(
+  users
+) {
+
+  const total =
+    users.length;
+
+
+  const active =
+    users.filter(user =>
+      String(
+        user.Account_status || ""
+      ).toLowerCase() === "active"
+    ).length;
+
+
+  const inactive =
+    total - active;
+
+
+  document.getElementById(
+    "userCount"
+  ).textContent =
+    total;
+
+
+  document.getElementById(
+    "activeUserCount"
+  ).textContent =
+    active;
+
+
+  document.getElementById(
+    "inactiveUserCount"
+  ).textContent =
+    inactive;
+
+}
+
+
+// ==========================================
+// RENDER USERS
+// ==========================================
+
+function renderUsers(
+  users
+) {
+
+  const container =
+    document.getElementById(
+      "usersList"
+    );
+
+
+  if (!users || users.length === 0) {
+
+    container.innerHTML = `
+      <div style="
+        padding:40px 20px;
+        text-align:center;
+        color:#a9a9b2;
+      ">
+
+        No registered users found.
+
+      </div>
+    `;
+
+    return;
+  }
+
+
+  container.innerHTML = `
+
+    <table class="payment-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            User ID
+          </th>
+
+          <th>
+            Username
+          </th>
+
+          <th>
+            Display Name
+          </th>
+
+          <th>
+            Email
+          </th>
+
+          <th>
+            Account Status
+          </th>
+
+          <th>
+            Created
+          </th>
+
+          <th>
+            Action
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        ${
+          users.map(user => {
+
+            const status =
+              String(
+                user.Account_status || ""
+              ).trim();
+
+
+            const normalized =
+              status.toLowerCase();
+
+
+            const statusClass =
+              [
+                "inactive",
+                "suspended",
+                "blocked",
+                "disabled"
+              ].includes(normalized)
+                ? "user-status-inactive"
+                : "user-status-active";
+
+
+            return `
+
+              <tr class="user-row">
+
+                <td>
+                  ${escapeHtml(
+                    user.id || "—"
+                  )}
+                </td>
+
+                <td>
+                  ${escapeHtml(
+                    user.Username || "—"
+                  )}
+                </td>
+
+                <td>
+                  ${escapeHtml(
+                    user.Display_name || "—"
+                  )}
+                </td>
+
+                <td>
+                  ${escapeHtml(
+                    user.Email || "—"
+                  )}
+                </td>
+
+                <td class="${statusClass}">
+                  ${escapeHtml(
+                    status || "—"
+                  )}
+                </td>
+
+                <td>
+                  ${formatDate(
+                    user.Created_at
+                  )}
+                </td>
+
+                <td>
+
+                  <button
+                    class="management-button"
+                    onclick="openUserDetails('${escapeJs(
+                      String(user.id)
+                    )}')">
+
+                    View
+
+                  </button>
+
+                </td>
+
+              </tr>
+
+            `;
+
+          }).join("")
+        }
+
+      </tbody>
+
+    </table>
+
+  `;
+
+}
+
+
+// ==========================================
+// SEARCH USERS
+// ==========================================
+
+function filterUsers() {
+
+  const search =
+    document
+      .getElementById(
+        "userSearchInput"
+      )
+      .value
+      .trim()
+      .toLowerCase();
+
+
+  if (search === "") {
+
+    renderUsers(
+      allUsers
+    );
+
+    return;
+  }
+
+
+  const filtered =
+    allUsers.filter(user => {
+
+      return [
+
+        user.id,
+
+        user.Username,
+
+        user.Display_name,
+
+        user.Email,
+
+        user.Account_status
+
+      ].some(value =>
+        String(
+          value || ""
+        )
+        .toLowerCase()
+        .includes(search)
+      );
+
+    });
+
+
+  renderUsers(
+    filtered
+  );
+
+}
+
+
+// ==========================================
+// CLEAR SEARCH
+// ==========================================
+
+function clearUserSearch() {
+
+  document.getElementById(
+    "userSearchInput"
+  ).value = "";
+
+
+  renderUsers(
+    allUsers
+  );
+
+}
+
+
+// ==========================================
+// OPEN USER DETAILS
+// ==========================================
+
+async function openUserDetails(
+  userId
+) {
+
+  const user =
+    allUsers.find(
+      item =>
+        String(item.id) ===
+        String(userId)
+    );
+
+
+  if (!user) {
+
+    return;
+
+  }
+
+
+  currentSelectedUser =
+    user;
+
+
+  document.getElementById(
+    "userDetailsPanel"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "selectedUserHeader"
+  ).textContent =
+    "Viewing account: " +
+    (user.Email || user.id);
+
+
+  document.getElementById(
+    "basicUserDetails"
+  ).innerHTML =
+
+    userDetail(
+      "User ID",
+      user.id
+    ) +
+
+    userDetail(
+      "Email",
+      user.Email
+    ) +
+
+    userDetail(
+      "Username",
+      user.Username
+    ) +
+
+    userDetail(
+      "Display Name",
+      user.Display_name
+    ) +
+
+    userDetail(
+      "Account Status",
+      user.Account_status
+    ) +
+
+    userDetail(
+      "Created",
+      formatDate(
+        user.Created_at
+      )
+    );
+
+
+  document.getElementById(
+    "movieVipDetails"
+  ).innerHTML =
+    "Loading...";
+
+
+  document.getElementById(
+    "userMoviePurchases"
+  ).innerHTML =
+    "Loading...";
+
+
+  document.getElementById(
+    "userAdUnlocks"
+  ).innerHTML =
+    "Loading...";
+
+
+  document.getElementById(
+    "userPaymentSummary"
+  ).innerHTML =
+    "Loading...";
+
+
+  await Promise.all([
+
+    loadUserSubscriptions(
+      user
+    ),
+
+    loadUserPurchases(
+      user
+    ),
+
+    loadUserAdUnlocks(
+      user
+    )
+
+  ]);
+
+
+  document.getElementById(
+    "userDetailsPanel"
+  ).scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+
+}
+
+
+// ==========================================
+// BASIC USER DETAIL
+// ==========================================
+
+function userDetail(
+  label,
+  value
+) {
+
+  return `
+
+    <div class="user-detail-item">
+
+      <span class="user-detail-label">
+        ${escapeHtml(label)}:
+      </span>
+
+      <span class="user-detail-value">
+        ${escapeHtml(
+          value ?? "—"
+        )}
+      </span>
+
+    </div>
+
+  `;
+
+}
+
+
+// ==========================================
+// CLOSE USER DETAILS
+// ==========================================
+
+function closeUserDetails() {
+
+  document.getElementById(
+    "userDetailsPanel"
+  ).style.display =
+    "none";
+
+
+  currentSelectedUser =
+    null;
+
+}
+
+
+// ==========================================
+// USER MOVIE VIP
+// ==========================================
+
+async function loadUserSubscriptions(
+  user
+) {
+
+  const container =
+    document.getElementById(
+      "movieVipDetails"
+    );
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("Subscriptions")
+      .select("*")
+      .eq(
+        "user_id",
+        user.id
+      )
+      .order(
+        "Created_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (error) {
+
+    container.innerHTML = `
+      <div style="
+        color:#e4a5ad;
+      ">
+        ${escapeHtml(
+          error.message
+        )}
+      </div>
+    `;
+
+    return;
+  }
+
+
+  if (!data || data.length === 0) {
+
+    container.innerHTML =
+      userDetail(
+        "VIP Status",
+        "Not subscribed"
+      );
+
+    return;
+  }
+
+
+  const active =
+    data.find(subscription => {
+
+      return (
+
+        String(
+          subscription.Status || ""
+        ).toLowerCase() ===
+        "active"
+
+        &&
+
+        subscription.Expires_at
+
+        &&
+
+        new Date(
+          subscription.Expires_at
+        ) > new Date()
+
+      );
+
+    }) || data[0];
+
+
+  container.innerHTML =
+
+    userDetail(
+      "VIP Status",
+      String(
+        active.Status || "—"
+      ).toUpperCase()
+    ) +
+
+    userDetail(
+      "Product ID",
+      active.Product_id
+    ) +
+
+    userDetail(
+      "Transaction ID",
+      active.Transaction_id
+    ) +
+
+    userDetail(
+      "Started",
+      formatDate(
+        active.Started_at
+      )
+    ) +
+
+    userDetail(
+      "Expires",
+      formatDate(
+        active.Expires_at
+      )
+    );
+
+}
+
+
+// ==========================================
+// USER MOVIE PURCHASES
+// ==========================================
+
+async function loadUserPurchases(
+  user
+) {
+
+  const purchasesBox =
+    document.getElementById(
+      "userMoviePurchases"
+    );
+
+
+  const paymentBox =
+    document.getElementById(
+      "userPaymentSummary"
+    );
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("Purchases")
+      .select("*")
+      .eq(
+        "user_id",
+        user.id
+      )
+      .order(
+        "Purchased_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (error) {
+
+    purchasesBox.innerHTML = `
+      <div style="
+        color:#e4a5ad;
+      ">
+        ${escapeHtml(
+          error.message
+        )}
+      </div>
+    `;
+
+    paymentBox.innerHTML =
+      "Unable to load payment activity.";
+
+    return;
+  }
+
+
+  const purchases =
+    data || [];
+
+
+  const completed =
+    purchases.filter(
+      purchase =>
+        String(
+          purchase.Payment_status || ""
+        ).toLowerCase() ===
+        "completed"
+    );
+
+
+  const total =
+    completed.reduce(
+      (
+        amount,
+        purchase
+      ) =>
+        amount +
+        Number(
+          purchase.Amount || 0
+        ),
+      0
+    );
+
+
+  paymentBox.innerHTML =
+
+    userDetail(
+      "Purchase Records",
+      purchases.length
+    ) +
+
+    userDetail(
+      "Completed Payments",
+      completed.length
+    ) +
+
+    userDetail(
+      "Completed Revenue",
+      (
+        purchases[0]?.Currency ||
+        "USD"
+      ) +
+      " " +
+      total.toFixed(2)
+    );
+
+
+  if (
+    purchases.length ===
+    0
+  ) {
+
+    purchasesBox.innerHTML = `
+
+      <div style="
+        color:#a9a9b2;
+      ">
+
+        No movie purchases found.
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  purchasesBox.innerHTML =
+
+    purchases
+      .slice(0, 30)
+      .map(
+        purchase => `
+
+          <div
+            class="user-detail-item">
+
+            <strong>
+              ${escapeHtml(
+                purchase.Purchase_type ||
+                "Movie Purchase"
+              )}
+            </strong>
+
+            <br>
+
+            <span class="user-detail-label">
+              Movie:
+            </span>
+
+            ${escapeHtml(
+              purchase.Movie_id ??
+              "—"
+            )}
+
+            &nbsp;
+
+            <span class="user-detail-label">
+              Episode:
+            </span>
+
+            ${escapeHtml(
+              purchase.Episode_id ??
+              "—"
+            )}
+
+            <br>
+
+            <span class="user-detail-label">
+              Amount:
+            </span>
+
+            ${escapeHtml(
+              purchase.Currency ||
+              "USD"
+            )}
+
+            ${Number(
+              purchase.Amount ||
+              0
+            ).toFixed(2)}
+
+            <br>
+
+            <span class="user-detail-label">
+              Status:
+            </span>
+
+            ${escapeHtml(
+              purchase.Payment_status ||
+              "—"
+            )}
+
+            <br>
+
+            <span class="user-detail-label">
+              Transaction:
+            </span>
+
+            ${escapeHtml(
+              purchase.Transaction_id ||
+              "—"
+            )}
+
+            <br>
+
+            <span class="user-detail-label">
+              Date:
+            </span>
+
+            ${formatDate(
+              purchase.Purchased_at
+            )}
+
+          </div>
+
+        `
+      )
+      .join("");
+
+}
+
+
+// ==========================================
+// USER REWARDED AD UNLOCKS
+// ==========================================
+
+async function loadUserAdUnlocks(
+  user
+) {
+
+  const container =
+    document.getElementById(
+      "userAdUnlocks"
+    );
+
+
+  const { data, error } =
+    await supabaseClient
+      .from("Ad_unlocks")
+      .select("*")
+      .eq(
+        "user_id",
+        user.id
+      )
+      .order(
+        "Expires_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (error) {
+
+    container.innerHTML = `
+      <div style="
+        color:#e4a5ad;
+      ">
+        ${escapeHtml(
+          error.message
+        )}
+      </div>
+    `;
+
+    return;
+  }
+
+
+  if (!data || data.length === 0) {
+
+    container.innerHTML = `
+
+      <div style="
+        color:#a9a9b2;
+      ">
+
+        No rewarded-ad unlock
+        records found.
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  container.innerHTML =
+
+    data
+      .slice(0, 30)
+      .map(
+        unlock => `
+
+          <div
+            class="user-detail-item">
+
+            <span class="user-detail-label">
+              Episode:
+            </span>
+
+            ${escapeHtml(
+              unlock.Episode_id ??
+              "—"
+            )}
+
+            <br>
+
+            <span class="user-detail-label">
+              Chapter:
+            </span>
+
+            ${escapeHtml(
+              unlock.Chapter_id ??
+              "—"
+            )}
+
+            <br>
+
+            <span class="user-detail-label">
+              Expires:
+            </span>
+
+            ${formatDate(
+              unlock.Expires_at
+            )}
+
+            ${
+              unlock.Created_at
+                ? `
+                  <br>
+
+                  <span class="user-detail-label">
+                    Created:
+                  </span>
+
+                  ${formatDate(
+                    unlock.Created_at
+                  )}
+                `
+                : ""
+            }
+
+          </div>
+
+        `
+      )
+      .join("");
+
+  }
   
     // ==========================================  
     // MOVIE MANAGEMENT  
