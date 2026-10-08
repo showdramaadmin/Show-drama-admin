@@ -1223,8 +1223,6 @@
 
   </main>
 
-  </section>
-
   </section>    <!-- =========================  
        SUBSCRIPTIONS & PAYMENTS  
   ========================== -->    <section id="paymentsManagementPage">  <header class="topbar">  
@@ -2427,7 +2425,7 @@ function showUsersManagement() {
     "none";
 
   document.getElementById("usersManagementPage").style.display =
-    "block";
+    "block";<strong>Products</strong>
 
   loadUsers();
 
@@ -3712,7 +3710,19 @@ async function loadUserAdUnlocks(
   
     }  
   
-  
+  // ==========================================
+// ESCAPE JAVASCRIPT STRING
+// ==========================================
+
+function escapeJs(value) {
+
+  return String(value)
+    .replace(/\\/g, "\\\\")
+    .replace(/'/g, "\\'")
+    .replace(/\r/g, "\\r")
+    .replace(/\n/g, "\\n");
+
+    }
     // ==========================================  
     // OPEN ADD MOVIE  
     // ==========================================  
