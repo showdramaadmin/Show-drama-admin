@@ -3523,45 +3523,47 @@
 
           return `
 
-            <div class="product-card">
+  <div class="product-card">
 
-              <h4>
-                ${escapeHtml(product.Product || "Unnamed Product")}
-              </h4>
+    <h4>
+      ${escapeHtml(
+        product["Product_name"] || "Unnamed Product"
+      )}
+    </h4>
 
-              <div class="product-price">
-                ${escapeHtml(product.Currency || "USD")}
-                ${price.toFixed(2)}
-              </div>
+    <div class="product-price">
+      ${escapeHtml(product.Currency || "USD")}
+      ${price.toFixed(2)}
+    </div>
 
-              <div class="product-detail">
+    <div class="product-detail">
 
-                Product ID:
-                ${product.id}<br>
+      Product ID:
+      ${product.id}<br>
 
-                Product Type:
-                ${escapeHtml(product.Product_type || "Not set")}<br>
+      Product Type:
+      ${escapeHtml(product.Product_type || "Not set")}<br>
 
-                Duration:
-                ${duration} days<br>
+      Duration:
+      ${duration} days<br>
 
-                Status:
-                <span class="${
-                  active
-                    ? "status-active"
-                    : "status-expired"
-                }">
-                  ${active ? "Active" : "Inactive"}
-                </span><br>
+      Status:
+      <span class="${
+        active
+          ? "status-active"
+          : "status-expired"
+      }">
+        ${active ? "Active" : "Inactive"}
+      </span><br>
 
-                Created:
-                ${formatDate(product.Created_at)}
+      Created:
+      ${formatDate(product.Created_at)}
 
-              </div>
+    </div>
 
-            </div>
+  </div>
 
-          `;
+`;
 
         }).join("");
 
