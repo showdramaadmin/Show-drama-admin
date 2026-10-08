@@ -3010,6 +3010,8 @@ async function saveSettings() {
   
       document.getElementById("dashboardPage").style.display =  
         "none";  
+      document.getElementById("settingsManagementPage").style.display =
+  "none";
   
       document.getElementById("movieManagementPage").style.display =  
         "none";  
@@ -3123,6 +3125,8 @@ let allUsers = [];
 let currentSelectedUser = null;
 
 function showUsersManagement() {
+  document.getElementById("settingsManagementPage").style.display =
+  "none";
 
   document.getElementById("dashboardPage").style.display =
     "none";
@@ -4218,6 +4222,8 @@ async function loadUserAdUnlocks(
   
       document.getElementById("movieManagementPage").style.display =  
         "none";  
+      document.getElementById("settingsManagementPage").style.display =
+  "none";
   
       document.getElementById("episodeManagementPage").style.display =  
         "none";  
@@ -5627,6 +5633,8 @@ function escapeJs(value) {
   
       document.getElementById("dashboardPage").style.display =  
         "none";  
+      document.getElementById("settingsManagementPage").style.display =
+  "none";
   
       document.getElementById("movieManagementPage").style.display =  
         "none";  
