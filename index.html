@@ -171,8 +171,6 @@
       color: #a9a9b2;
     }
 
-    /* Revenue */
-
     .section-title {
       font-size: 19px;
       margin-bottom: 15px;
@@ -209,8 +207,6 @@
       font-size: 12px;
     }
 
-    /* Content cards */
-
     .content-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -236,8 +232,6 @@
       font-weight: bold;
       color: #d8a84e;
     }
-
-    /* Main sections */
 
     .management-grid {
       display: grid;
@@ -278,15 +272,202 @@
       background: #d02040;
     }
 
-    /* Mobile */
+    /* =========================
+       PAYMENTS
+    ========================== */
+
+    #paymentsManagementPage {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .payments-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .payments-tab {
+      border: 1px solid #44444c;
+      background: #18181d;
+      color: white;
+      padding: 11px 22px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .payments-tab.active {
+      background: #b71935;
+      border-color: #b71935;
+    }
+
+    .payment-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .payment-summary-card {
+      background: #18181d;
+      border: 1px solid #303038;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .payment-summary-label {
+      color: #a9a9b2;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .payment-summary-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d8a84e;
+    }
+
+    .payment-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .payment-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 750px;
+    }
+
+    .payment-table th,
+    .payment-table td {
+      padding: 13px 12px;
+      border-bottom: 1px solid #303038;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .payment-table th {
+      color: #d8a84e;
+      background: #101014;
+    }
+
+    .payment-table td {
+      color: #dddddf;
+    }
+
+    .status-active {
+      color: #63d391;
+      font-weight: bold;
+    }
+
+    .status-expired {
+      color: #e4a5ad;
+      font-weight: bold;
+    }
+
+    .status-completed {
+      color: #63d391;
+      font-weight: bold;
+    }
+
+    .status-pending {
+      color: #d8a84e;
+      font-weight: bold;
+    }
+
+    .status-failed {
+      color: #e06c75;
+      font-weight: bold;
+    }
+
+    .payment-section {
+      background: #18181d;
+      border: 1px solid #303038;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 20px;
+    }
+
+    .payment-section h3 {
+      margin-bottom: 8px;
+      font-size: 19px;
+    }
+
+    .payment-section-description {
+      color: #a9a9b2;
+      font-size: 14px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .product-card {
+      background: #101014;
+      border: 1px solid #33333a;
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .product-card h4 {
+      font-size: 17px;
+      margin-bottom: 10px;
+    }
+
+    .product-price {
+      font-size: 26px;
+      font-weight: bold;
+      color: #d8a84e;
+      margin-bottom: 8px;
+    }
+
+    .product-detail {
+      color: #a9a9b2;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .coming-soon {
+      padding: 40px 20px;
+      text-align: center;
+      color: #a9a9b2;
+    }
+
+    .coming-soon strong {
+      display: block;
+      color: #d8a84e;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .payment-message {
+      min-height: 22px;
+      margin-bottom: 15px;
+      color: #d8a84e;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
 
     @media (max-width: 900px) {
-      .cards {
+      .cards,
+      .payment-summary-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
       .content-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -305,7 +486,8 @@
 
       .cards,
       .content-grid,
-      .management-grid {
+      .management-grid,
+      .payment-summary-grid {
         grid-template-columns: 1fr;
       }
 
@@ -353,7 +535,7 @@
       </div>
 
       <button class="login-button" onclick="login()">
-  Sign In
+        Sign In
       </button>
 
       <div id="loginMessage" class="login-message"></div>
@@ -381,7 +563,6 @@
 
     </header>
 
-
     <main class="dashboard-container">
 
       <div class="welcome">
@@ -391,11 +572,6 @@
           subscriptions and revenue.
         </p>
       </div>
-
-
-      <!-- =========================
-           REVENUE
-      ========================== -->
 
       <h2 class="section-title">Revenue Overview</h2>
 
@@ -436,22 +612,18 @@
       </div>
 
 
-      <!-- =========================
-           CONTENT OVERVIEW
-      ========================== -->
-
       <h2 class="section-title">Content Overview</h2>
 
       <div class="content-grid">
 
         <div class="content-card">
-  <h3>Movies</h3>
-  <div class="content-number" id="movieCount">0</div>
+          <h3>Movies</h3>
+          <div class="content-number" id="movieCount">0</div>
         </div>
 
         <div class="content-card">
-  <h3>Episodes</h3>
-  <div class="content-number" id="episodeCount">0</div>
+          <h3>Episodes</h3>
+          <div class="content-number" id="episodeCount">0</div>
         </div>
 
         <div class="content-card">
@@ -467,10 +639,6 @@
       </div>
 
 
-      <!-- =========================
-           MANAGEMENT
-      ========================== -->
-
       <h2 class="section-title">Content Management</h2>
 
       <div class="management-grid">
@@ -484,9 +652,9 @@
           </p>
 
           <button
-  class="management-button"
-  onclick="showMovieManagement()">
-  Manage Movies
+            class="management-button"
+            onclick="showMovieManagement()">
+            Manage Movies
           </button>
         </div>
 
@@ -525,7 +693,9 @@
             payment records and revenue information.
           </p>
 
-          <button class="management-button">
+          <button
+            class="management-button"
+            onclick="showPaymentsManagement()">
             View Payments
           </button>
         </div>
@@ -562,6 +732,322 @@
 
   </section>
 
+
+  <!-- =========================
+       SUBSCRIPTIONS & PAYMENTS
+  ========================== -->
+
+  <section id="paymentsManagementPage">
+
+    <header class="topbar">
+
+      <div class="topbar-title">
+        SHOW <span>DRAMA</span> ADMIN
+      </div>
+
+      <button class="logout-button" onclick="logout()">
+        Logout
+      </button>
+
+    </header>
+
+    <main class="dashboard-container">
+
+      <div class="welcome">
+
+        <h1>💳 Subscriptions & Payments</h1>
+
+        <p>
+          Manage movie subscriptions, purchases,
+          payment records and revenue.
+        </p>
+
+      </div>
+
+
+      <!-- TOP CONTROLS -->
+
+      <div style="
+        margin-bottom:20px;
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+      ">
+
+        <button
+          class="management-button"
+          onclick="showDashboardHome()">
+          ← Dashboard
+        </button>
+
+        <button
+          class="management-button"
+          onclick="loadPaymentsDashboard()">
+          ↻ Refresh
+        </button>
+
+      </div>
+
+
+      <!-- MOVIES / NOVELS TABS -->
+
+      <div class="payments-tabs">
+
+        <button
+          id="moviesPaymentsTab"
+          class="payments-tab active"
+          onclick="showPaymentTab('movies')">
+          🎬 Movies
+        </button>
+
+        <button
+          id="novelsPaymentsTab"
+          class="payments-tab"
+          onclick="showPaymentTab('novels')">
+          📚 Novels
+        </button>
+
+      </div>
+
+
+      <div id="paymentMessage" class="payment-message"></div>
+
+
+      <!-- =========================
+           MOVIES PAYMENTS
+      ========================== -->
+
+      <div id="moviesPaymentsContent">
+
+
+        <!-- SUMMARY -->
+
+        <div class="payment-summary-grid">
+
+          <div class="payment-summary-card">
+
+            <div class="payment-summary-label">
+              Total Purchases
+            </div>
+
+            <div
+              class="payment-summary-value"
+              id="paymentPurchaseCount">
+              0
+            </div>
+
+          </div>
+
+
+          <div class="payment-summary-card">
+
+            <div class="payment-summary-label">
+              VIP Subscriptions
+            </div>
+
+            <div
+              class="payment-summary-value"
+              id="paymentSubscriptionCount">
+              0
+            </div>
+
+          </div>
+
+
+          <div class="payment-summary-card">
+
+            <div class="payment-summary-label">
+              Gross Movie Revenue
+            </div>
+
+            <div
+              class="payment-summary-value"
+              id="paymentGrossRevenue">
+              $0.00
+            </div>
+
+          </div>
+
+
+          <div class="payment-summary-card">
+
+            <div class="payment-summary-label">
+              Completed Payments
+            </div>
+
+            <div
+              class="payment-summary-value"
+              id="paymentCompletedCount">
+              0
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- VIP PRODUCTS -->
+
+        <div class="payment-section">
+
+          <h3>👑 Movie VIP Subscriptions</h3>
+
+          <div class="payment-section-description">
+            These products are loaded directly from your
+            <strong>Product</strong> table.
+          </div>
+
+          <div
+            id="movieProducts"
+            class="product-grid">
+
+            Loading products...
+
+          </div>
+
+        </div>
+
+
+        <!-- VIP SUBSCRIPTIONS -->
+
+        <div class="payment-section">
+
+          <h3>👑 VIP Subscription Records</h3>
+
+          <div class="payment-section-description">
+            Current and previous movie VIP subscription records.
+          </div>
+
+          <div
+            id="subscriptionRecords">
+
+            Loading subscriptions...
+
+          </div>
+
+        </div>
+
+
+        <!-- PURCHASES -->
+
+        <div class="payment-section">
+
+          <h3>🛒 Purchases</h3>
+
+          <div class="payment-section-description">
+            Movie and episode purchase transactions recorded
+            in the Purchases table.
+          </div>
+
+          <div
+            id="purchaseRecords">
+
+            Loading purchases...
+
+          </div>
+
+        </div>
+
+
+        <!-- PAYMENT RECORDS -->
+
+        <div class="payment-section">
+
+          <h3>💰 Payment Records</h3>
+
+          <div class="payment-section-description">
+            Payment transactions and their current status.
+          </div>
+
+          <div
+            id="paymentRecords">
+
+            Loading payment records...
+
+          </div>
+
+        </div>
+
+
+        <!-- REFUNDS -->
+
+        <div class="payment-section">
+
+          <h3>↩️ Refunds</h3>
+
+          <div class="payment-section-description">
+            Refunds will be tracked here when the refund-record
+            system is connected. Actual Google Play refunds are
+            handled through the appropriate Google Play process.
+          </div>
+
+          <div class="coming-soon">
+
+            <strong>Refund Tracking</strong>
+
+            No refund records are connected yet.
+
+          </div>
+
+        </div>
+
+
+        <!-- REVENUE -->
+
+        <div class="payment-section">
+
+          <h3>📊 Movie Revenue</h3>
+
+          <div class="payment-section-description">
+            Revenue currently calculated from completed movie
+            purchases recorded in Supabase.
+          </div>
+
+          <div
+            id="movieRevenueDetails">
+
+            Loading revenue...
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           NOVELS PAYMENTS
+      ========================== -->
+
+      <div
+        id="novelsPaymentsContent"
+        style="display:none;">
+
+        <div class="payment-section">
+
+          <div class="coming-soon">
+
+            <strong>📚 Novels Coming Soon</strong>
+
+            The novel subscription and chapter-payment
+            system will be added separately.
+
+            <br><br>
+
+            Movie VIP subscriptions will not give users
+            automatic access to paid novel chapters.
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </section>
+
+
   <!-- =========================
        MOVIE MANAGEMENT
   ========================== -->
@@ -577,7 +1063,12 @@
         </p>
       </div>
 
-      <div style="margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap;">
+      <div style="
+        margin-bottom:20px;
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+      ">
 
         <button
           class="management-button"
@@ -593,9 +1084,6 @@
 
       </div>
 
-
-      <!-- MOVIE LIST -->
-
       <div class="management-box">
 
         <h3>🎬 Movies</h3>
@@ -604,8 +1092,9 @@
           All movies currently stored in your Show Drama database.
         </p>
 
-        <div id="movieManagementMessage"
-             style="margin-bottom:15px; color:#d8a84e;">
+        <div
+          id="movieManagementMessage"
+          style="margin-bottom:15px; color:#d8a84e;">
         </div>
 
         <div id="movieList">
@@ -617,6 +1106,7 @@
     </div>
 
   </section>
+
 
   <!-- =========================
        EPISODE MANAGEMENT
@@ -636,98 +1126,85 @@
 
       </div>
 
-
-      <!-- TOP CONTROLS -->
-
       <div style="
-  margin-bottom:20px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-">
+        margin-bottom:20px;
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+      ">
 
-  <button
-    class="management-button"
-    onclick="backToMovieManagement()">
-    ← Movies
-  </button>
+        <button
+          class="management-button"
+          onclick="backToMovieManagement()">
+          ← Movies
+        </button>
 
-  <button
-    class="management-button"
-    onclick="openAddEpisodeModal()">
-    + Add Episode
-  </button>
+        <button
+          class="management-button"
+          onclick="openAddEpisodeModal()">
+          + Add Episode
+        </button>
 
-</div>
-
-
-<!-- =========================
-     BULK EPISODE ACCESS CONTROL
-========================== -->
-
-<div class="management-box" style="margin-bottom:20px;">
-
-  <h3>🔐 Episode Access Control</h3>
-
-  <p>
-    Lock or unlock this episode and all episodes after it.
-  </p>
-
-  <div style="
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    align-items:end;
-  ">
-
-    <div class="input-group" style="margin-bottom:0;">
-
-      <label>
-        Start From Episode
-      </label>
-
-      <input
-        type="number"
-        id="bulkEpisodeNumber"
-        min="1"
-        step="1"
-        placeholder="6"
-        style="
-          width:160px;
-        "
-      >
-
-    </div>
+      </div>
 
 
-    <button
-      class="management-button"
-      onclick="lockEpisodesFrom()">
-      🔒 Lock From Episode
-    </button>
+      <div class="management-box" style="margin-bottom:20px;">
 
+        <h3>🔐 Episode Access Control</h3>
 
-    <button
-      class="management-button"
-      onclick="unlockEpisodesFrom()">
-      🔓 Unlock From Episode
-    </button>
+        <p>
+          Lock or unlock this episode and all episodes after it.
+        </p>
 
-  </div>
+        <div style="
+          display:flex;
+          gap:10px;
+          flex-wrap:wrap;
+          align-items:end;
+        ">
 
-  <div
-    id="bulkEpisodeMessage"
-    style="
-      margin-top:15px;
-      min-height:20px;
-      color:#d8a84e;
-    "
-  ></div>
+          <div class="input-group" style="margin-bottom:0;">
 
-</div>
+            <label>
+              Start From Episode
+            </label>
 
+            <input
+              type="number"
+              id="bulkEpisodeNumber"
+              min="1"
+              step="1"
+              placeholder="6"
+              style="width:160px;"
+            >
 
-      <!-- EPISODE LIST -->
+          </div>
+
+          <button
+            class="management-button"
+            onclick="lockEpisodesFrom()">
+            🔒 Lock From Episode
+          </button>
+
+          <button
+            class="management-button"
+            onclick="unlockEpisodesFrom()">
+            🔓 Unlock From Episode
+          </button>
+
+        </div>
+
+        <div
+          id="bulkEpisodeMessage"
+          style="
+            margin-top:15px;
+            min-height:20px;
+            color:#d8a84e;
+          "
+        ></div>
+
+      </div>
+
 
       <div class="management-box">
 
@@ -737,7 +1214,6 @@
           Episodes belonging to this movie will appear here.
         </p>
 
-
         <div
           id="episodeManagementMessage"
           style="
@@ -745,7 +1221,6 @@
             color:#d8a84e;
           "
         ></div>
-
 
         <div id="episodeList">
 
@@ -820,21 +1295,9 @@
 
       </div>
 
+      <input type="hidden" id="episodeId">
 
-      <!-- HIDDEN VALUES -->
-
-      <input
-        type="hidden"
-        id="episodeId"
-      >
-
-      <input
-        type="hidden"
-        id="episodeMovieId"
-      >
-
-
-      <!-- EPISODE NUMBER -->
+      <input type="hidden" id="episodeMovieId">
 
       <div class="input-group">
 
@@ -852,9 +1315,6 @@
 
       </div>
 
-
-      <!-- TITLE -->
-
       <div class="input-group">
 
         <label>
@@ -868,9 +1328,6 @@
         >
 
       </div>
-
-
-      <!-- DESCRIPTION -->
 
       <div class="input-group">
 
@@ -897,9 +1354,6 @@
 
       </div>
 
-
-      <!-- VIDEO URL -->
-
       <div class="input-group">
 
         <label>
@@ -913,9 +1367,6 @@
         >
 
       </div>
-
-
-      <!-- PRIVATE VIDEO PATH -->
 
       <div class="input-group">
 
@@ -940,9 +1391,6 @@
 
       </div>
 
-
-      <!-- LOCK -->
-
       <label style="
         display:flex;
         align-items:center;
@@ -966,9 +1414,6 @@
 
       </label>
 
-
-      <!-- PRICE -->
-
       <div class="input-group">
 
         <label>
@@ -985,7 +1430,6 @@
 
       </div>
 
-
       <div
         id="episodeFormMessage"
         style="
@@ -994,7 +1438,6 @@
           color:#e4a5ad;
         "
       ></div>
-
 
       <div style="
         display:flex;
@@ -1027,7 +1470,9 @@
 
     </div>
 
-      </div>
+  </div>
+
+
   <!-- =========================
        ADD / EDIT MOVIE MODAL
   ========================== -->
@@ -1082,9 +1527,7 @@
 
       </div>
 
-
       <input type="hidden" id="movieId">
-
 
       <div class="input-group">
         <label>Movie Title</label>
@@ -1096,7 +1539,6 @@
         >
       </div>
 
-
       <div class="input-group">
         <label>Genre</label>
 
@@ -1106,7 +1548,6 @@
           placeholder="Romance, Werewolf, Horror..."
         >
       </div>
-
 
       <div class="input-group">
         <label>Synopsis</label>
@@ -1129,7 +1570,6 @@
         ></textarea>
       </div>
 
-
       <div class="input-group">
         <label>Poster URL</label>
 
@@ -1140,7 +1580,6 @@
         >
       </div>
 
-
       <div class="input-group">
         <label>Trailer URL</label>
 
@@ -1150,7 +1589,6 @@
           placeholder="https://..."
         >
       </div>
-
 
       <div style="
         display:grid;
@@ -1173,7 +1611,6 @@
           Featured
         </label>
 
-
         <label style="
           background:#101014;
           border:1px solid #33333a;
@@ -1187,7 +1624,6 @@
           >
           Popular
         </label>
-
 
         <label style="
           background:#101014;
@@ -1204,7 +1640,6 @@
         </label>
 
       </div>
-
 
       <label style="
         display:flex;
@@ -1228,28 +1663,29 @@
         </span>
 
       </label>
-<label style="
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:#101014;
-  border:1px solid #33333a;
-  padding:15px;
-  border-radius:10px;
-  cursor:pointer;
-  margin-bottom:20px;
-">
 
-  <input
-    type="checkbox"
-    id="movieCompleted"
-  >
+      <label style="
+        display:flex;
+        align-items:center;
+        gap:10px;
+        background:#101014;
+        border:1px solid #33333a;
+        padding:15px;
+        border-radius:10px;
+        cursor:pointer;
+        margin-bottom:20px;
+      ">
 
-  <span>
-    Completed
-  </span>
+        <input
+          type="checkbox"
+          id="movieCompleted"
+        >
 
-</label>
+        <span>
+          Completed
+        </span>
+
+      </label>
 
       <div
         id="movieFormMessage"
@@ -1259,7 +1695,6 @@
           color:#e4a5ad;
         "
       ></div>
-
 
       <div style="
         display:flex;
@@ -1293,1704 +1728,2497 @@
     </div>
 
   </div>
+
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<script>
-
-  // ==========================================
-  // SHOW DRAMA SUPABASE CONFIGURATION
-  // ==========================================
-
-  const SUPABASE_URL =
-    "https://ieosmoceisayhdcrkriw.supabase.co";
-
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_De9iEE1oxrl7tok1VeIlXQ_ip2swA3s";
-
-  const supabaseClient =
-    window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
-    );
-
-
-  // ==========================================
-  // LOGIN
-  // ==========================================
-
-  async function login() {
-
-    const email =
-      document.getElementById("adminEmail").value.trim();
-
-    const password =
-      document.getElementById("adminPassword").value;
-
-    const message =
-      document.getElementById("loginMessage");
-
-    message.textContent = "";
-
-    if (email === "" || password === "") {
-
-      message.textContent =
-        "Please enter your email and password.";
-
-      return;
-    }
-
-    message.textContent =
-      "Signing in...";
-
-
-    // ------------------------------------------
-    // SIGN IN WITH SUPABASE AUTH
-    // ------------------------------------------
-
-    const { data, error } =
-      await supabaseClient.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
-
-
-    if (error) {
-
-      message.textContent =
-        "Invalid email or password.";
-
-      return;
-    }
-
-
-    // ------------------------------------------
-    // CHECK ADMIN_USERS TABLE
-    // ------------------------------------------
-
-    const user =
-      data.user;
-
-    const { data: adminRecord, error: adminError } =
-      await supabaseClient
-        .from("admin_users")
-        .select("user_id")
-        .eq("user_id", user.id)
-        .maybeSingle();
-
-
-    if (adminError) {
-
-      await supabaseClient.auth.signOut();
-
-      message.textContent =
-        "Unable to verify admin access.";
-
-      return;
-    }
-
-
-    if (!adminRecord) {
-
-      await supabaseClient.auth.signOut();
-
-      message.textContent =
-        "You do not have administrator access.";
-
-      return;
-    }
-
-
-    // ------------------------------------------
-    // ADMIN VERIFIED
-    // ------------------------------------------
-
-    message.textContent = "";
-
-    document.getElementById("loginPage").style.display =
-      "none";
-
-    document.getElementById("dashboardPage").style.display =
-      "block";
-
-  }
-
-
-  // ==========================================
-  // LOGOUT
-  // ==========================================
-
-  async function logout() {
-
-    await supabaseClient.auth.signOut();
-
-    document.getElementById("dashboardPage").style.display =
-      "none";
-
-    document.getElementById("loginPage").style.display =
-      "flex";
-
-    document.getElementById("adminPassword").value =
-      "";
-
-    document.getElementById("loginMessage").textContent =
-      "";
-
-  }
-
-
-  // ==========================================
-  // CHECK EXISTING SESSION
-  // ==========================================
-
-  async function checkSession() {
-
-    const { data } =
-      await supabaseClient.auth.getSession();
-
-    if (!data.session) {
-      return;
-    }
-
-    const user =
-      data.session.user;
-
-
-    const { data: adminRecord, error } =
-      await supabaseClient
-        .from("admin_users")
-        .select("user_id")
-        .eq("user_id", user.id)
-        .maybeSingle();
-
-
-    if (error || !adminRecord) {
-
-      await supabaseClient.auth.signOut();
-
-      return;
-    }
-
-
-    document.getElementById("loginPage").style.display =
-      "none";
-
-    document.getElementById("dashboardPage").style.display =
-      "block";
-
-  }
-
-
-  // ==========================================
-// LOAD MOVIE AND EPISODE COUNTS
-// ==========================================
-
-async function loadContentCounts() {
-
-  const { count: movieCount, error: movieError } =
-    await supabaseClient
-      .from("Movie")
-      .select("id", {
-        count: "exact",
-        head: true
-      });
-
-  if (!movieError) {
-    document.getElementById("movieCount").textContent =
-      movieCount ?? 0;
-  }
-
-  const { count: episodeCount, error: episodeError } =
-    await supabaseClient
-      .from("Episodes")
-      .select("id", {
-        count: "exact",
-        head: true
-      });
-
-  if (!episodeError) {
-    document.getElementById("episodeCount").textContent =
-      episodeCount ?? 0;
-  }
-}
+  <script>
+
+    // ==========================================
+    // SHOW DRAMA SUPABASE CONFIGURATION
+    // ==========================================
+
+    const SUPABASE_URL =
+      "https://ieosmoceisayhdcrkriw.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_De9iEE1oxrl7tok1VeIlXQ_ip2swA3s";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+      );
 
 
     // ==========================================
-  // MOVIE MANAGEMENT
-  // ==========================================
+    // LOGIN
+    // ==========================================
 
-  function showMovieManagement() {
+    async function login() {
 
-    document.getElementById("dashboardPage").style.display =
-      "none";
+      const email =
+        document.getElementById("adminEmail").value.trim();
 
-    document.getElementById("movieManagementPage").style.display =
-      "block";
+      const password =
+        document.getElementById("adminPassword").value;
 
-    loadMovies();
-  }
+      const message =
+        document.getElementById("loginMessage");
 
+      message.textContent = "";
 
-  // ==========================================
-  // RETURN TO DASHBOARD
-  // ==========================================
+      if (email === "" || password === "") {
 
-  function showDashboardHome() {
+        message.textContent =
+          "Please enter your email and password.";
 
-    document.getElementById("movieManagementPage").style.display =
-      "none";
-
-    document.getElementById("dashboardPage").style.display =
-      "block";
-
-    loadContentCounts();
-  }
-
-
-  // ==========================================
-  // LOAD MOVIES
-  // ==========================================
-
-  async function loadMovies() {
-
-    const movieList =
-      document.getElementById("movieList");
-
-    const message =
-      document.getElementById("movieManagementMessage");
-
-    movieList.innerHTML =
-      "Loading movies...";
-
-    message.textContent = "";
-
-
-    const { data, error } =
-      await supabaseClient
-        .from("Movie")
-        .select("*")
-        .order("Created_at", {
-          ascending: false
-        });
-
-
-    if (error) {
-
-      movieList.innerHTML =
-        "Unable to load movies.";
+        return;
+      }
 
       message.textContent =
-        error.message;
+        "Signing in...";
 
-      return;
+      const { data, error } =
+        await supabaseClient.auth.signInWithPassword({
+          email: email,
+          password: password
+        });
+
+      if (error) {
+
+        message.textContent =
+          "Invalid email or password.";
+
+        return;
+      }
+
+      const user =
+        data.user;
+
+      const { data: adminRecord, error: adminError } =
+        await supabaseClient
+          .from("admin_users")
+          .select("user_id")
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+      if (adminError) {
+
+        await supabaseClient.auth.signOut();
+
+        message.textContent =
+          "Unable to verify admin access.";
+
+        return;
+      }
+
+      if (!adminRecord) {
+
+        await supabaseClient.auth.signOut();
+
+        message.textContent =
+          "You do not have administrator access.";
+
+        return;
+      }
+
+      message.textContent = "";
+
+      document.getElementById("loginPage").style.display =
+        "none";
+
+      document.getElementById("dashboardPage").style.display =
+        "block";
+
     }
 
 
-    if (!data || data.length === 0) {
+    // ==========================================
+    // LOGOUT
+    // ==========================================
 
-      movieList.innerHTML = `
-        <div style="
-          padding:25px;
-          text-align:center;
-          color:#a9a9b2;
-        ">
-          No movies have been added yet.
-        </div>
-      `;
+    async function logout() {
 
-      return;
+      await supabaseClient.auth.signOut();
+
+      document.getElementById("dashboardPage").style.display =
+        "none";
+
+      document.getElementById("movieManagementPage").style.display =
+        "none";
+
+      document.getElementById("episodeManagementPage").style.display =
+        "none";
+
+      document.getElementById("paymentsManagementPage").style.display =
+        "none";
+
+      document.getElementById("loginPage").style.display =
+        "flex";
+
+      document.getElementById("adminPassword").value =
+        "";
+
+      document.getElementById("loginMessage").textContent =
+        "";
+
     }
 
 
-    movieList.innerHTML =
-      data.map(movie => {
+    // ==========================================
+    // CHECK EXISTING SESSION
+    // ==========================================
 
-        const published =
-          movie.Published === true;
+    async function checkSession() {
 
-        const featured =
-          movie.Featured === true;
+      const { data } =
+        await supabaseClient.auth.getSession();
 
-        const popular =
-          movie.Popular === true;
+      if (!data.session) {
+        return;
+      }
 
-        const newRelease =
-          movie.New_release === true;
+      const user =
+        data.session.user;
 
-        const completed =
-  movie.Completed === true;
+      const { data: adminRecord, error } =
+        await supabaseClient
+          .from("admin_users")
+          .select("user_id")
+          .eq("user_id", user.id)
+          .maybeSingle();
+
+      if (error || !adminRecord) {
+
+        await supabaseClient.auth.signOut();
+
+        return;
+      }
+
+      document.getElementById("loginPage").style.display =
+        "none";
+
+      document.getElementById("dashboardPage").style.display =
+        "block";
+
+    }
 
 
-        return `
+    // ==========================================
+    // LOAD MOVIE AND EPISODE COUNTS
+    // ==========================================
 
+    async function loadContentCounts() {
+
+      const { count: movieCount, error: movieError } =
+        await supabaseClient
+          .from("Movie")
+          .select("id", {
+            count: "exact",
+            head: true
+          });
+
+      if (!movieError) {
+
+        document.getElementById("movieCount").textContent =
+          movieCount ?? 0;
+
+      }
+
+      const { count: episodeCount, error: episodeError } =
+        await supabaseClient
+          .from("Episodes")
+          .select("id", {
+            count: "exact",
+            head: true
+          });
+
+      if (!episodeError) {
+
+        document.getElementById("episodeCount").textContent =
+          episodeCount ?? 0;
+
+      }
+
+    }
+
+
+    // ==========================================
+    // MOVIE MANAGEMENT
+    // ==========================================
+
+    function showMovieManagement() {
+
+      document.getElementById("dashboardPage").style.display =
+        "none";
+
+      document.getElementById("paymentsManagementPage").style.display =
+        "none";
+
+      document.getElementById("movieManagementPage").style.display =
+        "block";
+
+      loadMovies();
+
+    }
+
+
+    // ==========================================
+    // RETURN TO DASHBOARD
+    // ==========================================
+
+    function showDashboardHome() {
+
+      document.getElementById("movieManagementPage").style.display =
+        "none";
+
+      document.getElementById("episodeManagementPage").style.display =
+        "none";
+
+      document.getElementById("paymentsManagementPage").style.display =
+        "none";
+
+      document.getElementById("dashboardPage").style.display =
+        "block";
+
+      loadContentCounts();
+
+    }
+
+
+    // ==========================================
+    // LOAD MOVIES
+    // ==========================================
+
+    async function loadMovies() {
+
+      const movieList =
+        document.getElementById("movieList");
+
+      const message =
+        document.getElementById("movieManagementMessage");
+
+      movieList.innerHTML =
+        "Loading movies...";
+
+      message.textContent = "";
+
+      const { data, error } =
+        await supabaseClient
+          .from("Movie")
+          .select("*")
+          .order("Created_at", {
+            ascending: false
+          });
+
+      if (error) {
+
+        movieList.innerHTML =
+          "Unable to load movies.";
+
+        message.textContent =
+          error.message;
+
+        return;
+      }
+
+      if (!data || data.length === 0) {
+
+        movieList.innerHTML = `
           <div style="
-            background:#101014;
-            border:1px solid #33333a;
-            border-radius:12px;
-            padding:18px;
-            margin-bottom:15px;
+            padding:25px;
+            text-align:center;
+            color:#a9a9b2;
           ">
+            No movies have been added yet.
+          </div>
+        `;
+
+        return;
+      }
+
+      movieList.innerHTML =
+        data.map(movie => {
+
+          const published =
+            movie.Published === true;
+
+          const featured =
+            movie.Featured === true;
+
+          const popular =
+            movie.Popular === true;
+
+          const newRelease =
+            movie.New_release === true;
+
+          const completed =
+            movie.Completed === true;
+
+          return `
 
             <div style="
-              display:flex;
-              justify-content:space-between;
-              gap:15px;
-              flex-wrap:wrap;
+              background:#101014;
+              border:1px solid #33333a;
+              border-radius:12px;
+              padding:18px;
+              margin-bottom:15px;
             ">
 
-              <div>
+              <div style="
+                display:flex;
+                justify-content:space-between;
+                gap:15px;
+                flex-wrap:wrap;
+              ">
 
-                <h3 style="
-                  margin-bottom:8px;
-                ">
-                  ${escapeHtml(movie.Title || "Untitled")}
-                </h3>
+                <div>
+
+                  <h3 style="margin-bottom:8px;">
+                    ${escapeHtml(movie.Title || "Untitled")}
+                  </h3>
+
+                  <div style="
+                    color:#a9a9b2;
+                    font-size:13px;
+                    line-height:1.7;
+                  ">
+
+                    ID: ${movie.id}<br>
+
+                    Genre:
+                    ${escapeHtml(movie.Genre || "Not set")}<br>
+
+                    Status:
+                    ${published ? "Published" : "Unpublished"}<br>
+
+                    Featured:
+                    ${featured ? "Yes" : "No"} |
+                    Popular:
+                    ${popular ? "Yes" : "No"} |
+                    New Release:
+                    ${newRelease ? "Yes" : "No"} |
+                    Completed:
+                    ${completed ? "Yes" : "No"}
+
+                  </div>
+
+                </div>
 
                 <div style="
-                  color:#a9a9b2;
-                  font-size:13px;
-                  line-height:1.7;
+                  display:flex;
+                  gap:8px;
+                  flex-wrap:wrap;
+                  align-items:flex-start;
                 ">
 
-                  ID: ${movie.id}<br>
+                  <button
+                    class="management-button"
+                    onclick="editMovie(${movie.id})">
+                    Edit
+                  </button>
 
-                  Genre:
-                  ${escapeHtml(movie.Genre || "Not set")}<br>
+                  <button
+                    class="management-button"
+                    onclick="toggleMoviePublished(${movie.id}, ${published})">
+                    ${published ? "Unpublish" : "Publish"}
+                  </button>
 
-                  Status:
-                  ${published ? "Published" : "Unpublished"}<br>
+                  <button
+                    class="management-button"
+                    onclick="manageEpisodes(${movie.id})">
+                    Episodes
+                  </button>
 
-                  Featured:
-${featured ? "Yes" : "No"} |
-Popular:
-${popular ? "Yes" : "No"} |
-New Release:
-${newRelease ? "Yes" : "No"} |
-Completed:
-${completed ? "Yes" : "No"}
+                  <button
+                    onclick="deleteMovie(${movie.id})"
+                    style="
+                      border:none;
+                      background:#6d1626;
+                      color:white;
+                      padding:10px 16px;
+                      border-radius:8px;
+                      cursor:pointer;
+                      font-weight:bold;
+                    ">
+                    Delete
+                  </button>
 
                 </div>
 
               </div>
 
+            </div>
+
+          `;
+
+        }).join("");
+
+    }
+
+
+    // ==========================================
+    // ESCAPE HTML
+    // ==========================================
+
+    function escapeHtml(value) {
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    // ==========================================
+    // OPEN ADD MOVIE
+    // ==========================================
+
+    function openAddMovieModal() {
+
+      document.getElementById("movieModalTitle").textContent =
+        "Add Movie";
+
+      document.getElementById("movieId").value = "";
+
+      document.getElementById("movieTitle").value = "";
+
+      document.getElementById("movieGenre").value = "";
+
+      document.getElementById("movieSynopsis").value = "";
+
+      document.getElementById("moviePosterUrl").value = "";
+
+      document.getElementById("movieTrailerUrl").value = "";
+
+      document.getElementById("movieFeatured").checked = false;
+
+      document.getElementById("moviePopular").checked = false;
+
+      document.getElementById("movieNewRelease").checked = false;
+
+      document.getElementById("moviePublished").checked = false;
+
+      document.getElementById("movieCompleted").checked = false;
+
+      document.getElementById("movieFormMessage").textContent = "";
+
+      document.getElementById("movieModal").style.display =
+        "block";
+
+    }
+
+
+    // ==========================================
+    // CLOSE MOVIE MODAL
+    // ==========================================
+
+    function closeMovieModal() {
+
+      document.getElementById("movieModal").style.display =
+        "none";
+
+    }
+
+
+    // ==========================================
+    // EDIT MOVIE
+    // ==========================================
+
+    async function editMovie(movieId) {
+
+      const { data: movie, error } =
+        await supabaseClient
+          .from("Movie")
+          .select("*")
+          .eq("id", movieId)
+          .maybeSingle();
+
+      if (error || !movie) {
+
+        alert("Unable to load this movie.");
+
+        return;
+      }
+
+      document.getElementById("movieModalTitle").textContent =
+        "Edit Movie";
+
+      document.getElementById("movieId").value =
+        movie.id;
+
+      document.getElementById("movieTitle").value =
+        movie.Title || "";
+
+      document.getElementById("movieGenre").value =
+        movie.Genre || "";
+
+      document.getElementById("movieSynopsis").value =
+        movie.Synopsis || "";
+
+      document.getElementById("moviePosterUrl").value =
+        movie.Poster_url || "";
+
+      document.getElementById("movieTrailerUrl").value =
+        movie.Trailer_url || "";
+
+      document.getElementById("movieFeatured").checked =
+        movie.Featured === true;
+
+      document.getElementById("moviePopular").checked =
+        movie.Popular === true;
+
+      document.getElementById("movieNewRelease").checked =
+        movie.New_release === true;
+
+      document.getElementById("moviePublished").checked =
+        movie.Published === true;
+
+      document.getElementById("movieCompleted").checked =
+        movie.Completed === true;
+
+      document.getElementById("movieFormMessage").textContent =
+        "";
+
+      document.getElementById("movieModal").style.display =
+        "block";
+
+    }
+
+
+    // ==========================================
+    // SAVE MOVIE
+    // ==========================================
+
+    async function saveMovie() {
+
+      const movieId =
+        document.getElementById("movieId").value;
+
+      const title =
+        document.getElementById("movieTitle").value.trim();
+
+      const genre =
+        document.getElementById("movieGenre").value.trim();
+
+      const synopsis =
+        document.getElementById("movieSynopsis").value.trim();
+
+      const posterUrl =
+        document.getElementById("moviePosterUrl").value.trim();
+
+      const trailerUrl =
+        document.getElementById("movieTrailerUrl").value.trim();
+
+      const featured =
+        document.getElementById("movieFeatured").checked;
+
+      const popular =
+        document.getElementById("moviePopular").checked;
+
+      const newRelease =
+        document.getElementById("movieNewRelease").checked;
+
+      const published =
+        document.getElementById("moviePublished").checked;
+
+      const completed =
+        document.getElementById("movieCompleted").checked;
+
+      const message =
+        document.getElementById("movieFormMessage");
+
+      message.textContent = "";
+
+      if (title === "") {
+
+        message.textContent =
+          "Movie title is required.";
+
+        return;
+      }
+
+      const movieData = {
+
+        Title: title,
+
+        Genre: genre || null,
+
+        Synopsis: synopsis || null,
+
+        Poster_url: posterUrl || null,
+
+        Trailer_url: trailerUrl || null,
+
+        Featured: featured,
+
+        Popular: popular,
+
+        New_release: newRelease,
+
+        Published: published,
+
+        Completed: completed
+
+      };
+
+      message.textContent =
+        "Saving movie...";
+
+      let result;
+
+      if (movieId === "") {
+
+        result =
+          await supabaseClient
+            .from("Movie")
+            .insert(movieData);
+
+      } else {
+
+        result =
+          await supabaseClient
+            .from("Movie")
+            .update(movieData)
+            .eq("id", movieId);
+
+      }
+
+      if (result.error) {
+
+        message.textContent =
+          result.error.message;
+
+        return;
+      }
+
+      message.textContent =
+        "Movie saved successfully.";
+
+      await loadMovies();
+
+      await loadContentCounts();
+
+      setTimeout(() => {
+
+        closeMovieModal();
+
+      }, 600);
+
+    }
+
+
+    // ==========================================
+    // PUBLISH / UNPUBLISH MOVIE
+    // ==========================================
+
+    async function toggleMoviePublished(movieId, currentStatus) {
+
+      const action =
+        currentStatus
+          ? "unpublish"
+          : "publish";
+
+      const confirmed =
+        confirm(
+          `Are you sure you want to ${action} this movie?`
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const { error } =
+        await supabaseClient
+          .from("Movie")
+          .update({
+            Published: !currentStatus
+          })
+          .eq("id", movieId);
+
+      if (error) {
+
+        alert(
+          "Unable to change movie publication status: " +
+          error.message
+        );
+
+        return;
+      }
+
+      await loadMovies();
+
+    }
+
+
+    // ==========================================
+    // DELETE MOVIE
+    // ==========================================
+
+    async function deleteMovie(movieId) {
+
+      const { count, error: episodeCheckError } =
+        await supabaseClient
+          .from("Episodes")
+          .select("id", {
+            count: "exact",
+            head: true
+          })
+          .eq("Movie_id", movieId);
+
+      if (episodeCheckError) {
+
+        alert(
+          "Unable to check this movie's episodes."
+        );
+
+        return;
+      }
+
+      if ((count ?? 0) > 0) {
+
+        alert(
+          "This movie has episodes. Delete its episodes first before deleting the movie."
+        );
+
+        return;
+      }
+
+      const confirmed =
+        confirm(
+          "Are you sure you want to permanently delete this movie?"
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const { error } =
+        await supabaseClient
+          .from("Movie")
+          .delete()
+          .eq("id", movieId);
+
+      if (error) {
+
+        alert(
+          "Unable to delete movie: " +
+          error.message
+        );
+
+        return;
+      }
+
+      await loadMovies();
+
+      await loadContentCounts();
+
+    }
+
+
+    // ==========================================
+    // EPISODE MANAGEMENT NAVIGATION
+    // ==========================================
+
+    let currentEpisodeMovieId = null;
+
+
+    function manageEpisodes(movieId) {
+
+      currentEpisodeMovieId = movieId;
+
+      document.getElementById("movieManagementPage").style.display =
+        "none";
+
+      document.getElementById("episodeManagementPage").style.display =
+        "block";
+
+      document.getElementById("episodeMovieName").textContent =
+        "Loading episodes for Movie ID " + movieId;
+
+      loadEpisodes();
+
+    }
+
+
+    // ==========================================
+    // BACK TO MOVIES
+    // ==========================================
+
+    function backToMovieManagement() {
+
+      document.getElementById("episodeManagementPage").style.display =
+        "none";
+
+      document.getElementById("movieManagementPage").style.display =
+        "block";
+
+      loadMovies();
+
+    }
+
+
+    // ==========================================
+    // OPEN ADD EPISODE
+    // ==========================================
+
+    function openAddEpisodeModal() {
+
+      document.getElementById("episodeModalTitle").textContent =
+        "Add Episode";
+
+      document.getElementById("episodeId").value =
+        "";
+
+      document.getElementById("episodeMovieId").value =
+        currentEpisodeMovieId || "";
+
+      document.getElementById("episodeNumber").value =
+        "";
+
+      document.getElementById("episodeTitle").value =
+        "";
+
+      document.getElementById("episodeDescription").value =
+        "";
+
+      document.getElementById("episodeVideoUrl").value =
+        "";
+
+      document.getElementById("episodePrivateVideoPath").value =
+        "";
+
+      document.getElementById("episodeLocked").checked =
+        false;
+
+      document.getElementById("episodePrice").value =
+        "";
+
+      document.getElementById("episodeFormMessage").textContent =
+        "";
+
+      document.getElementById("episodeModal").style.display =
+        "block";
+
+    }
+
+
+    // ==========================================
+    // CLOSE EPISODE MODAL
+    // ==========================================
+
+    function closeEpisodeModal() {
+
+      document.getElementById("episodeModal").style.display =
+        "none";
+
+    }
+
+
+    // ==========================================
+    // LOAD EPISODES
+    // ==========================================
+
+    async function loadEpisodes() {
+
+      const episodeList =
+        document.getElementById("episodeList");
+
+      const message =
+        document.getElementById("episodeManagementMessage");
+
+      episodeList.innerHTML =
+        "Loading episodes...";
+
+      message.textContent = "";
+
+      if (!currentEpisodeMovieId) {
+
+        episodeList.innerHTML =
+          "No movie selected.";
+
+        return;
+      }
+
+      const { data, error } =
+        await supabaseClient
+          .from("Episodes")
+          .select("*")
+          .eq("Movie_id", currentEpisodeMovieId)
+          .order("Episode_number", {
+            ascending: true
+          });
+
+      if (error) {
+
+        episodeList.innerHTML =
+          "Unable to load episodes.";
+
+        message.textContent =
+          error.message;
+
+        return;
+      }
+
+      document.getElementById("episodeMovieName").textContent =
+        "Manage episodes for Movie ID " +
+        currentEpisodeMovieId;
+
+      if (!data || data.length === 0) {
+
+        episodeList.innerHTML = `
+          <div style="
+            padding:25px;
+            text-align:center;
+            color:#a9a9b2;
+          ">
+            No episodes have been added yet.
+          </div>
+        `;
+
+        return;
+      }
+
+      episodeList.innerHTML =
+        data.map((episode) => {
+
+          const locked =
+            episode.Is_locked === true;
+
+          return `
+
+            <div style="
+              background:#101014;
+              border:1px solid #33333a;
+              border-radius:12px;
+              padding:18px;
+              margin-bottom:15px;
+            ">
 
               <div style="
                 display:flex;
-                gap:8px;
+                justify-content:space-between;
+                gap:15px;
                 flex-wrap:wrap;
-                align-items:flex-start;
               ">
 
-                <button
-                  class="management-button"
-                  onclick="editMovie(${movie.id})">
-                  Edit
-                </button>
+                <div>
 
-                <button
-                  class="management-button"
-                  onclick="toggleMoviePublished(${movie.id}, ${published})">
-                  ${published ? "Unpublish" : "Publish"}
-                </button>
+                  <h3 style="margin-bottom:8px;">
+                    Episode ${episode.Episode_number}:
+                    ${escapeHtml(episode.Title || "Untitled")}
+                  </h3>
 
-                <button
-                  class="management-button"
-                  onclick="manageEpisodes(${movie.id})">
-                  Episodes
-                </button>
-
-                <button
-                  onclick="deleteMovie(${movie.id})"
-                  style="
-                    border:none;
-                    background:#6d1626;
-                    color:white;
-                    padding:10px 16px;
-                    border-radius:8px;
-                    cursor:pointer;
-                    font-weight:bold;
+                  <div style="
+                    color:#a9a9b2;
+                    font-size:13px;
+                    line-height:1.8;
                   ">
-                  Delete
-                </button>
+
+                    ID: ${episode.id}<br>
+
+                    Status:
+                    ${locked ? "🔒 Locked" : "🟢 Free"}<br>
+
+                    Price:
+                    ${episode.Price ?? "Free"}<br>
+
+                    Private Video:
+                    ${episode.Private_video_path
+                      ? "Configured"
+                      : "Not configured"}
+
+                  </div>
+
+                </div>
+
+                <div style="
+                  display:flex;
+                  gap:8px;
+                  flex-wrap:wrap;
+                  align-items:flex-start;
+                ">
+
+                  <button
+                    class="management-button"
+                    onclick="moveEpisodeUp(${episode.id}, ${episode.Episode_number})">
+                    ↑
+                  </button>
+
+                  <button
+                    class="management-button"
+                    onclick="moveEpisodeDown(${episode.id}, ${episode.Episode_number})">
+                    ↓
+                  </button>
+
+                  <button
+                    class="management-button"
+                    onclick="editEpisode(${episode.id})">
+                    Edit
+                  </button>
+
+                  <button
+                    class="management-button"
+                    onclick="toggleEpisodeLock(${episode.id}, ${locked})">
+                    ${locked ? "Unlock" : "Lock"}
+                  </button>
+
+                  <button
+                    onclick="deleteEpisode(${episode.id})"
+                    style="
+                      border:none;
+                      background:#6d1626;
+                      color:white;
+                      padding:10px 16px;
+                      border-radius:8px;
+                      cursor:pointer;
+                      font-weight:bold;
+                    ">
+                    Delete
+                  </button>
+
+                </div>
 
               </div>
 
+            </div>
+
+          `;
+
+        }).join("");
+
+    }
+
+
+    // ==========================================
+    // EDIT EPISODE
+    // ==========================================
+
+    async function editEpisode(episodeId) {
+
+      const { data: episode, error } =
+        await supabaseClient
+          .from("Episodes")
+          .select("*")
+          .eq("id", episodeId)
+          .eq("Movie_id", currentEpisodeMovieId)
+          .maybeSingle();
+
+      if (error || !episode) {
+
+        alert("Unable to load this episode.");
+
+        return;
+      }
+
+      document.getElementById("episodeModalTitle").textContent =
+        "Edit Episode";
+
+      document.getElementById("episodeId").value =
+        episode.id;
+
+      document.getElementById("episodeMovieId").value =
+        episode.Movie_id;
+
+      document.getElementById("episodeNumber").value =
+        episode.Episode_number;
+
+      document.getElementById("episodeTitle").value =
+        episode.Title || "";
+
+      document.getElementById("episodeDescription").value =
+        episode.Description || "";
+
+      document.getElementById("episodeVideoUrl").value =
+        episode.Video_url || "";
+
+      document.getElementById("episodePrivateVideoPath").value =
+        episode.Private_video_path || "";
+
+      document.getElementById("episodeLocked").checked =
+        episode.Is_locked === true;
+
+      document.getElementById("episodePrice").value =
+        episode.Price ?? "";
+
+      document.getElementById("episodeFormMessage").textContent =
+        "";
+
+      document.getElementById("episodeModal").style.display =
+        "block";
+
+    }
+
+
+    // ==========================================
+    // LOCK / UNLOCK ONE EPISODE
+    // ==========================================
+
+    async function toggleEpisodeLock(episodeId, currentStatus) {
+
+      const action =
+        currentStatus
+          ? "unlock"
+          : "lock";
+
+      const confirmed =
+        confirm(
+          `Are you sure you want to ${action} this episode?`
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const { error } =
+        await supabaseClient
+          .from("Episodes")
+          .update({
+            Is_locked: !currentStatus
+          })
+          .eq("id", episodeId)
+          .eq("Movie_id", currentEpisodeMovieId);
+
+      if (error) {
+
+        alert(
+          "Unable to change episode lock status: " +
+          error.message
+        );
+
+        return;
+      }
+
+      await loadEpisodes();
+
+    }
+
+
+    // ==========================================
+    // DELETE EPISODE
+    // ==========================================
+
+    async function deleteEpisode(episodeId) {
+
+      const confirmed =
+        confirm(
+          "Are you sure you want to permanently delete this episode?"
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const { error } =
+        await supabaseClient
+          .from("Episodes")
+          .delete()
+          .eq("id", episodeId)
+          .eq("Movie_id", currentEpisodeMovieId);
+
+      if (error) {
+
+        alert(
+          "Unable to delete episode: " +
+          error.message
+        );
+
+        return;
+      }
+
+      await loadEpisodes();
+
+      await loadContentCounts();
+
+    }
+
+
+    // ==========================================
+    // SAVE EPISODE
+    // ==========================================
+
+    async function saveEpisode() {
+
+      const message =
+        document.getElementById("episodeFormMessage");
+
+      const episodeId =
+        document.getElementById("episodeId").value;
+
+      const episodeNumber =
+        Number(
+          document.getElementById("episodeNumber").value
+        );
+
+      const title =
+        document.getElementById("episodeTitle").value.trim();
+
+      const description =
+        document.getElementById("episodeDescription").value.trim();
+
+      const videoUrl =
+        document.getElementById("episodeVideoUrl").value.trim();
+
+      const privateVideoPath =
+        document.getElementById("episodePrivateVideoPath").value.trim();
+
+      const isLocked =
+        document.getElementById("episodeLocked").checked;
+
+      const priceValue =
+        document.getElementById("episodePrice").value.trim();
+
+      message.textContent = "";
+
+      if (
+        !Number.isInteger(episodeNumber) ||
+        episodeNumber < 1
+      ) {
+
+        message.textContent =
+          "Enter a valid episode number.";
+
+        return;
+      }
+
+      if (title === "") {
+
+        message.textContent =
+          "Episode title is required.";
+
+        return;
+      }
+
+      if (!currentEpisodeMovieId) {
+
+        message.textContent =
+          "No movie is selected.";
+
+        return;
+      }
+
+      const price =
+        priceValue === ""
+          ? null
+          : Number(priceValue);
+
+      if (
+        price !== null &&
+        (!Number.isFinite(price) || price < 0)
+      ) {
+
+        message.textContent =
+          "Enter a valid episode price.";
+
+        return;
+      }
+
+      const episodeData = {
+
+        Movie_id:
+          currentEpisodeMovieId,
+
+        Episode_number:
+          episodeNumber,
+
+        Title:
+          title,
+
+        Description:
+          description || null,
+
+        Video_url:
+          videoUrl || null,
+
+        Is_locked:
+          isLocked,
+
+        Price:
+          price,
+
+        Private_video_path:
+          privateVideoPath || null
+
+      };
+
+      message.textContent =
+        "Saving episode...";
+
+      let result;
+
+      if (episodeId === "") {
+
+        result =
+          await supabaseClient
+            .from("Episodes")
+            .insert(episodeData);
+
+      } else {
+
+        result =
+          await supabaseClient
+            .from("Episodes")
+            .update(episodeData)
+            .eq("id", episodeId)
+            .eq("Movie_id", currentEpisodeMovieId);
+
+      }
+
+      if (result.error) {
+
+        message.textContent =
+          result.error.message;
+
+        return;
+      }
+
+      message.textContent =
+        "Episode saved successfully.";
+
+      await loadEpisodes();
+
+      setTimeout(() => {
+
+        closeEpisodeModal();
+
+      }, 600);
+
+    }
+
+
+    // ==========================================
+    // LOCK EPISODES FROM NUMBER
+    // ==========================================
+
+    async function lockEpisodesFrom() {
+
+      const startNumber =
+        Number(
+          document.getElementById("bulkEpisodeNumber").value
+        );
+
+      const message =
+        document.getElementById("bulkEpisodeMessage");
+
+      message.textContent = "";
+
+      if (
+        !Number.isInteger(startNumber) ||
+        startNumber < 1
+      ) {
+
+        message.textContent =
+          "Enter a valid episode number.";
+
+        return;
+      }
+
+      if (!currentEpisodeMovieId) {
+
+        message.textContent =
+          "No movie is currently selected.";
+
+        return;
+      }
+
+      const confirmed =
+        confirm(
+          `Lock Episode ${startNumber} and every episode after it?`
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const { error } =
+        await supabaseClient
+          .from("Episodes")
+          .update({
+            Is_locked: true
+          })
+          .eq("Movie_id", currentEpisodeMovieId)
+          .gte("Episode_number", startNumber);
+
+      if (error) {
+
+        message.textContent =
+          error.message;
+
+        return;
+      }
+
+      message.textContent =
+        `Episodes ${startNumber} onward are now locked.`;
+
+      await loadEpisodes();
+
+    }
+
+
+    // ==========================================
+    // UNLOCK EPISODES FROM NUMBER
+    // ==========================================
+
+    async function unlockEpisodesFrom() {
+
+      const startNumber =
+        Number(
+          document.getElementById("bulkEpisodeNumber").value
+        );
+
+      const message =
+        document.getElementById("bulkEpisodeMessage");
+
+      message.textContent = "";
+
+      if (
+        !Number.isInteger(startNumber) ||
+        startNumber < 1
+      ) {
+
+        message.textContent =
+          "Enter a valid episode number.";
+
+        return;
+      }
+
+      if (!currentEpisodeMovieId) {
+
+        message.textContent =
+          "No movie is currently selected.";
+
+        return;
+      }
+
+      const confirmed =
+        confirm(
+          `Unlock Episode ${startNumber} and every episode after it?`
+        );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const { error } =
+        await supabaseClient
+          .from("Episodes")
+          .update({
+            Is_locked: false
+          })
+          .eq("Movie_id", currentEpisodeMovieId)
+          .gte("Episode_number", startNumber);
+
+      if (error) {
+
+        message.textContent =
+          error.message;
+
+        return;
+      }
+
+      message.textContent =
+        `Episodes ${startNumber} onward are now unlocked.`;
+
+      await loadEpisodes();
+
+    }
+
+
+    // ==========================================
+    // MOVE EPISODE UP
+    // ==========================================
+
+    async function moveEpisodeUp(episodeId, currentNumber) {
+
+      if (currentNumber <= 1) {
+        return;
+      }
+
+      await swapEpisodeNumbers(
+        episodeId,
+        currentNumber,
+        currentNumber - 1
+      );
+
+    }
+
+
+    // ==========================================
+    // MOVE EPISODE DOWN
+    // ==========================================
+
+    async function moveEpisodeDown(episodeId, currentNumber) {
+
+      const { data: nextEpisode } =
+        await supabaseClient
+          .from("Episodes")
+          .select("id")
+          .eq("Movie_id", currentEpisodeMovieId)
+          .eq("Episode_number", currentNumber + 1)
+          .maybeSingle();
+
+      if (!nextEpisode) {
+        return;
+      }
+
+      await swapEpisodeNumbers(
+        episodeId,
+        currentNumber,
+        currentNumber + 1
+      );
+
+    }
+
+
+    // ==========================================
+    // SWAP EPISODE NUMBERS
+    // ==========================================
+
+    async function swapEpisodeNumbers(
+      episodeId,
+      currentNumber,
+      targetNumber
+    ) {
+
+      const { data: targetEpisode, error: findError } =
+        await supabaseClient
+          .from("Episodes")
+          .select("id")
+          .eq("Movie_id", currentEpisodeMovieId)
+          .eq("Episode_number", targetNumber)
+          .maybeSingle();
+
+      if (findError) {
+
+        alert(findError.message);
+
+        return;
+      }
+
+      if (!targetEpisode) {
+        return;
+      }
+
+      const temporaryNumber = -999999;
+
+      let result =
+        await supabaseClient
+          .from("Episodes")
+          .update({
+            Episode_number: temporaryNumber
+          })
+          .eq("id", episodeId)
+          .eq("Movie_id", currentEpisodeMovieId);
+
+      if (result.error) {
+
+        alert(result.error.message);
+
+        return;
+      }
+
+      result =
+        await supabaseClient
+          .from("Episodes")
+          .update({
+            Episode_number: currentNumber
+          })
+          .eq("id", targetEpisode.id)
+          .eq("Movie_id", currentEpisodeMovieId);
+
+      if (result.error) {
+
+        alert(result.error.message);
+
+        return;
+      }
+
+      result =
+        await supabaseClient
+          .from("Episodes")
+          .update({
+            Episode_number: targetNumber
+          })
+          .eq("id", episodeId)
+          .eq("Movie_id", currentEpisodeMovieId);
+
+      if (result.error) {
+
+        alert(result.error.message);
+
+        return;
+      }
+
+      await loadEpisodes();
+
+    }
+
+
+    // ==========================================
+    // PAYMENTS MANAGEMENT
+    // ==========================================
+
+    function showPaymentsManagement() {
+
+      document.getElementById("dashboardPage").style.display =
+        "none";
+
+      document.getElementById("movieManagementPage").style.display =
+        "none";
+
+      document.getElementById("episodeManagementPage").style.display =
+        "none";
+
+      document.getElementById("paymentsManagementPage").style.display =
+        "block";
+
+      showPaymentTab("movies");
+
+      loadPaymentsDashboard();
+
+    }
+
+
+    // ==========================================
+    // MOVIES / NOVELS PAYMENT TABS
+    // ==========================================
+
+    function showPaymentTab(tab) {
+
+      const moviesContent =
+        document.getElementById("moviesPaymentsContent");
+
+      const novelsContent =
+        document.getElementById("novelsPaymentsContent");
+
+      const moviesTab =
+        document.getElementById("moviesPaymentsTab");
+
+      const novelsTab =
+        document.getElementById("novelsPaymentsTab");
+
+      if (tab === "movies") {
+
+        moviesContent.style.display =
+          "block";
+
+        novelsContent.style.display =
+          "none";
+
+        moviesTab.classList.add("active");
+
+        novelsTab.classList.remove("active");
+
+        loadPaymentsDashboard();
+
+      } else {
+
+        moviesContent.style.display =
+          "none";
+
+        novelsContent.style.display =
+          "block";
+
+        moviesTab.classList.remove("active");
+
+        novelsTab.classList.add("active");
+
+      }
+
+    }
+
+
+    // ==========================================
+    // LOAD PAYMENT DASHBOARD
+    // ==========================================
+
+    async function loadPaymentsDashboard() {
+
+      const message =
+        document.getElementById("paymentMessage");
+
+      message.textContent =
+        "Loading payment information...";
+
+      await loadMovieProducts();
+
+      await loadSubscriptionRecords();
+
+      await loadPurchaseRecords();
+
+      await loadPaymentRecords();
+
+      await loadMovieRevenue();
+
+      message.textContent =
+        "Payment information updated.";
+
+      setTimeout(() => {
+
+        message.textContent = "";
+
+      }, 2000);
+
+    }
+
+
+    // ==========================================
+    // LOAD PRODUCTS
+    // ==========================================
+
+    async function loadMovieProducts() {
+
+      const container =
+        document.getElementById("movieProducts");
+
+      container.innerHTML =
+        "Loading products...";
+
+      const { data, error } =
+        await supabaseClient
+          .from("Product")
+          .select("*")
+          .order("id", {
+            ascending: true
+          });
+
+      if (error) {
+
+        container.innerHTML = `
+          <div style="color:#e4a5ad;">
+            Unable to load products: ${escapeHtml(error.message)}
+          </div>
+        `;
+
+        return;
+      }
+
+      if (!data || data.length === 0) {
+
+        container.innerHTML = `
+          <div class="coming-soon">
+            No products have been created yet.
+          </div>
+        `;
+
+        return;
+      }
+
+      container.innerHTML =
+        data.map(product => {
+
+          const price =
+            Number(product.Price || 0);
+
+          const active =
+            product.Is_active === true;
+
+          const duration =
+            product.Duration_days ??
+            "Not set";
+
+          return `
+
+            <div class="product-card">
+
+              <h4>
+                ${escapeHtml(product.Product || "Unnamed Product")}
+              </h4>
+
+              <div class="product-price">
+                ${escapeHtml(product.Currency || "USD")}
+                ${price.toFixed(2)}
+              </div>
+
+              <div class="product-detail">
+
+                Product ID:
+                ${product.id}<br>
+
+                Product Type:
+                ${escapeHtml(product.Product_type || "Not set")}<br>
+
+                Duration:
+                ${duration} days<br>
+
+                Status:
+                <span class="${
+                  active
+                    ? "status-active"
+                    : "status-expired"
+                }">
+                  ${active ? "Active" : "Inactive"}
+                </span><br>
+
+                Created:
+                ${formatDate(product.Created_at)}
+
+              </div>
+
+            </div>
+
+          `;
+
+        }).join("");
+
+    }
+
+
+    // ==========================================
+    // LOAD SUBSCRIPTIONS
+    // ==========================================
+
+    async function loadSubscriptionRecords() {
+
+      const container =
+        document.getElementById("subscriptionRecords");
+
+      container.innerHTML =
+        "Loading subscriptions...";
+
+      const { data, error } =
+        await supabaseClient
+          .from("Subscriptions")
+          .select(`
+            id,
+            user_id,
+            Product_id,
+            Status,
+            Transaction_id,
+            Started_at,
+            Expires_at,
+            Created_at
+          `)
+          .order("Created_at", {
+            ascending: false
+          })
+          .limit(100);
+
+      if (error) {
+
+        container.innerHTML = `
+          <div style="color:#e4a5ad;">
+            Unable to load subscriptions:
+            ${escapeHtml(error.message)}
+          </div>
+        `;
+
+        return;
+      }
+
+      document.getElementById("paymentSubscriptionCount").textContent =
+        data ? data.length : 0;
+
+      if (!data || data.length === 0) {
+
+        container.innerHTML = `
+          <div class="coming-soon">
+            No subscription records found.
+          </div>
+        `;
+
+        return;
+      }
+
+      container.innerHTML = `
+
+        <div class="payment-table-wrapper">
+
+          <table class="payment-table">
+
+            <thead>
+
+              <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Product ID</th>
+                <th>Status</th>
+                <th>Transaction ID</th>
+                <th>Started</th>
+                <th>Expires</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              ${data.map(subscription => {
+
+                const status =
+                  String(
+                    subscription.Status || ""
+                  ).toLowerCase();
+
+                let statusClass =
+                  "status-pending";
+
+                if (status === "active") {
+                  statusClass = "status-active";
+                }
+
+                if (status === "expired") {
+                  statusClass = "status-expired";
+                }
+
+                return `
+
+                  <tr>
+
+                    <td>
+                      ${subscription.id}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        subscription.user_id || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${subscription.Product_id ?? "—"}
+                    </td>
+
+                    <td class="${statusClass}">
+                      ${escapeHtml(
+                        subscription.Status || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        subscription.Transaction_id || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${formatDate(
+                        subscription.Started_at
+                      )}
+                    </td>
+
+                    <td>
+                      ${formatDate(
+                        subscription.Expires_at
+                      )}
+                    </td>
+
+                  </tr>
+
+                `;
+
+              }).join("")}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      `;
+
+    }
+
+
+    // ==========================================
+    // LOAD PURCHASES
+    // ==========================================
+
+    async function loadPurchaseRecords() {
+
+      const container =
+        document.getElementById("purchaseRecords");
+
+      container.innerHTML =
+        "Loading purchases...";
+
+      const { data, error } =
+        await supabaseClient
+          .from("Purchases")
+          .select(`
+            id,
+            user_id,
+            Movie_id,
+            Episode_id,
+            Novel_id,
+            Chapter_id,
+            Purchase_type,
+            Amount,
+            Currency,
+            Payment_provider,
+            Transaction_id,
+            Payment_status,
+            Purchased_at
+          `)
+          .order("Purchased_at", {
+            ascending: false
+          })
+          .limit(100);
+
+      if (error) {
+
+        container.innerHTML = `
+          <div style="color:#e4a5ad;">
+            Unable to load purchases:
+            ${escapeHtml(error.message)}
+          </div>
+        `;
+
+        return;
+      }
+
+      document.getElementById("paymentPurchaseCount").textContent =
+        data ? data.length : 0;
+
+      if (!data || data.length === 0) {
+
+        container.innerHTML = `
+          <div class="coming-soon">
+            No purchase records found.
+          </div>
+        `;
+
+        return;
+      }
+
+      container.innerHTML = `
+
+        <div class="payment-table-wrapper">
+
+          <table class="payment-table">
+
+            <thead>
+
+              <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Movie</th>
+                <th>Episode</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Provider</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              ${data.map(purchase => {
+
+                const status =
+                  String(
+                    purchase.Payment_status || ""
+                  ).toLowerCase();
+
+                let statusClass =
+                  "status-pending";
+
+                if (status === "completed") {
+                  statusClass = "status-completed";
+                }
+
+                if (status === "failed") {
+                  statusClass = "status-failed";
+                }
+
+                return `
+
+                  <tr>
+
+                    <td>
+                      ${purchase.id}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        purchase.user_id || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${purchase.Movie_id ?? "—"}
+                    </td>
+
+                    <td>
+                      ${purchase.Episode_id ?? "—"}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        purchase.Purchase_type || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        purchase.Currency || "USD"
+                      )}
+                      ${Number(
+                        purchase.Amount || 0
+                      ).toFixed(2)}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        purchase.Payment_provider || "—"
+                      )}
+                    </td>
+
+                    <td class="${statusClass}">
+                      ${escapeHtml(
+                        purchase.Payment_status || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${formatDate(
+                        purchase.Purchased_at
+                      )}
+                    </td>
+
+                  </tr>
+
+                `;
+
+              }).join("")}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      `;
+
+    }
+
+
+    // ==========================================
+    // PAYMENT RECORDS
+    // ==========================================
+
+    async function loadPaymentRecords() {
+
+      const container =
+        document.getElementById("paymentRecords");
+
+      container.innerHTML =
+        "Loading payment records...";
+
+      const { data, error } =
+        await supabaseClient
+          .from("Purchases")
+          .select(`
+            id,
+            user_id,
+            Purchase_type,
+            Amount,
+            Currency,
+            Payment_provider,
+            Transaction_id,
+            Payment_status,
+            Purchased_at
+          `)
+          .order("Purchased_at", {
+            ascending: false
+          })
+          .limit(100);
+
+      if (error) {
+
+        container.innerHTML = `
+          <div style="color:#e4a5ad;">
+            Unable to load payment records:
+            ${escapeHtml(error.message)}
+          </div>
+        `;
+
+        return;
+      }
+
+      if (!data || data.length === 0) {
+
+        container.innerHTML = `
+          <div class="coming-soon">
+            No payment records found.
+          </div>
+        `;
+
+        return;
+      }
+
+      container.innerHTML = `
+
+        <div class="payment-table-wrapper">
+
+          <table class="payment-table">
+
+            <thead>
+
+              <tr>
+                <th>Transaction ID</th>
+                <th>User ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Provider</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+
+              ${data.map(payment => {
+
+                const status =
+                  String(
+                    payment.Payment_status || ""
+                  ).toLowerCase();
+
+                let statusClass =
+                  "status-pending";
+
+                if (status === "completed") {
+                  statusClass = "status-completed";
+                }
+
+                if (status === "failed") {
+                  statusClass = "status-failed";
+                }
+
+                return `
+
+                  <tr>
+
+                    <td>
+                      ${escapeHtml(
+                        payment.Transaction_id || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        payment.user_id || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        payment.Purchase_type || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        payment.Currency || "USD"
+                      )}
+                      ${Number(
+                        payment.Amount || 0
+                      ).toFixed(2)}
+                    </td>
+
+                    <td>
+                      ${escapeHtml(
+                        payment.Payment_provider || "—"
+                      )}
+                    </td>
+
+                    <td class="${statusClass}">
+                      ${escapeHtml(
+                        payment.Payment_status || "—"
+                      )}
+                    </td>
+
+                    <td>
+                      ${formatDate(
+                        payment.Purchased_at
+                      )}
+                    </td>
+
+                  </tr>
+
+                `;
+
+              }).join("")}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      `;
+
+    }
+
+
+    // ==========================================
+    // MOVIE REVENUE
+    // ==========================================
+
+    async function loadMovieRevenue() {
+
+      const container =
+        document.getElementById("movieRevenueDetails");
+
+      container.innerHTML =
+        "Calculating revenue...";
+
+      const { data, error } =
+        await supabaseClient
+          .from("Purchases")
+          .select(`
+            Amount,
+            Currency,
+            Payment_status,
+            Movie_id,
+            Episode_id
+          `)
+          .not("Movie_id", "is", null);
+
+      if (error) {
+
+        container.innerHTML = `
+          <div style="color:#e4a5ad;">
+            Unable to calculate movie revenue:
+            ${escapeHtml(error.message)}
+          </div>
+        `;
+
+        return;
+      }
+
+      const completedPurchases =
+        (data || []).filter(purchase =>
+          String(
+            purchase.Payment_status || ""
+          ).toLowerCase() === "completed"
+        );
+
+      const grossRevenue =
+        completedPurchases.reduce(
+          (total, purchase) =>
+            total + Number(purchase.Amount || 0),
+          0
+        );
+
+      const completedCount =
+        completedPurchases.length;
+
+      document.getElementById("paymentGrossRevenue").textContent =
+        "$" + grossRevenue.toFixed(2);
+
+      document.getElementById("paymentCompletedCount").textContent =
+        completedCount;
+
+      container.innerHTML = `
+
+        <div class="payment-summary-grid">
+
+          <div class="payment-summary-card">
+
+            <div class="payment-summary-label">
+              Completed Movie Purchases
+            </div>
+
+            <div class="payment-summary-value">
+              ${completedCount}
             </div>
 
           </div>
 
-        `;
+          <div class="payment-summary-card">
 
-      }).join("");
-  }
-
-
-  // ==========================================
-  // ESCAPE HTML
-  // ==========================================
-
-  function escapeHtml(value) {
-
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-
-  // ==========================================
-  // OPEN ADD MOVIE
-  // ==========================================
-
-  function openAddMovieModal() {
-
-    document.getElementById("movieModalTitle").textContent =
-      "Add Movie";
-
-    document.getElementById("movieId").value = "";
-
-    document.getElementById("movieTitle").value = "";
-
-    document.getElementById("movieGenre").value = "";
-
-    document.getElementById("movieSynopsis").value = "";
-
-    document.getElementById("moviePosterUrl").value = "";
-
-    document.getElementById("movieTrailerUrl").value = "";
-
-    document.getElementById("movieFeatured").checked = false;
-
-    document.getElementById("moviePopular").checked = false;
-
-    document.getElementById("movieNewRelease").checked = false;
-
-    document.getElementById("moviePublished").checked = false;
-    document.getElementById("movieCompleted").checked = false;
-
-    document.getElementById("movieFormMessage").textContent = "";
-
-    document.getElementById("movieModal").style.display =
-      "block";
-  }
-
-
-  // ==========================================
-  // CLOSE MOVIE MODAL
-  // ==========================================
-
-  function closeMovieModal() {
-
-    document.getElementById("movieModal").style.display =
-      "none";
-  }
-
-
-  // ==========================================
-  // EDIT MOVIE
-  // ==========================================
-
-  async function editMovie(movieId) {
-
-    const { data: movie, error } =
-      await supabaseClient
-        .from("Movie")
-        .select("*")
-        .eq("id", movieId)
-        .maybeSingle();
-
-
-    if (error || !movie) {
-
-      alert("Unable to load this movie.");
-
-      return;
-    }
-
-
-    document.getElementById("movieModalTitle").textContent =
-      "Edit Movie";
-
-    document.getElementById("movieId").value =
-      movie.id;
-
-    document.getElementById("movieTitle").value =
-      movie.Title || "";
-
-    document.getElementById("movieGenre").value =
-      movie.Genre || "";
-
-    document.getElementById("movieSynopsis").value =
-      movie.Synopsis || "";
-
-    document.getElementById("moviePosterUrl").value =
-      movie.Poster_url || "";
-
-    document.getElementById("movieTrailerUrl").value =
-      movie.Trailer_url || "";
-
-    document.getElementById("movieFeatured").checked =
-      movie.Featured === true;
-
-    document.getElementById("moviePopular").checked =
-      movie.Popular === true;
-
-    document.getElementById("movieNewRelease").checked =
-      movie.New_release === true;
-
-    document.getElementById("moviePublished").checked =
-      movie.Published === true;
-    document.getElementById("movieCompleted").checked =
-  movie.Completed === true;
-
-    document.getElementById("movieFormMessage").textContent =
-      "";
-
-    document.getElementById("movieModal").style.display =
-      "block";
-  }
-
-
-  // ==========================================
-  // SAVE MOVIE
-  // ==========================================
-
-  async function saveMovie() {
-
-    const movieId =
-      document.getElementById("movieId").value;
-
-    const title =
-      document.getElementById("movieTitle").value.trim();
-
-    const genre =
-      document.getElementById("movieGenre").value.trim();
-
-    const synopsis =
-      document.getElementById("movieSynopsis").value.trim();
-
-    const posterUrl =
-      document.getElementById("moviePosterUrl").value.trim();
-
-    const trailerUrl =
-      document.getElementById("movieTrailerUrl").value.trim();
-
-    const featured =
-      document.getElementById("movieFeatured").checked;
-
-    const popular =
-      document.getElementById("moviePopular").checked;
-
-    const newRelease =
-      document.getElementById("movieNewRelease").checked;
-
-    const published =
-      document.getElementById("moviePublished").checked;
-    const completed =
-  document.getElementById("movieCompleted").checked;
-
-    const message =
-      document.getElementById("movieFormMessage");
-
-
-    message.textContent = "";
-
-
-    if (title === "") {
-
-      message.textContent =
-        "Movie title is required.";
-
-      return;
-    }
-
-
-    const movieData = {
-
-  Title: title,
-
-  Genre: genre || null,
-
-  Synopsis: synopsis || null,
-
-  Poster_url: posterUrl || null,
-
-  Trailer_url: trailerUrl || null,
-
-  Featured: featured,
-
-  Popular: popular,
-
-  New_release: newRelease,
-
-  Published: published,
-
-  Completed: completed
-};
-
-    message.textContent =
-      "Saving movie...";
-
-
-    let result;
-
-
-    if (movieId === "") {
-
-      result =
-        await supabaseClient
-          .from("Movie")
-          .insert(movieData);
-
-    } else {
-
-      result =
-        await supabaseClient
-          .from("Movie")
-          .update(movieData)
-          .eq("id", movieId);
-    }
-
-
-    if (result.error) {
-
-      message.textContent =
-        result.error.message;
-
-      return;
-    }
-
-
-    message.textContent =
-      "Movie saved successfully.";
-
-    await loadMovies();
-
-    await loadContentCounts();
-
-
-    setTimeout(() => {
-
-      closeMovieModal();
-
-    }, 600);
-  }
-
-
-  // ==========================================
-  // PUBLISH / UNPUBLISH MOVIE
-  // ==========================================
-
-  async function toggleMoviePublished(movieId, currentStatus) {
-
-    const action =
-      currentStatus
-        ? "unpublish"
-        : "publish";
-
-
-    const confirmed =
-      confirm(
-        `Are you sure you want to ${action} this movie?`
-      );
-
-
-    if (!confirmed) {
-      return;
-    }
-
-
-    const { error } =
-      await supabaseClient
-        .from("Movie")
-        .update({
-          Published: !currentStatus
-        })
-        .eq("id", movieId);
-
-
-    if (error) {
-
-      alert(
-        "Unable to change movie publication status: " +
-        error.message
-      );
-
-      return;
-    }
-
-
-    await loadMovies();
-  }
-
-
-  // ==========================================
-  // DELETE MOVIE
-  // ==========================================
-
-  async function deleteMovie(movieId) {
-
-    const { count, error: episodeCheckError } =
-      await supabaseClient
-        .from("Episodes")
-        .select("id", {
-          count: "exact",
-          head: true
-        })
-        .eq("Movie_id", movieId);
-
-
-    if (episodeCheckError) {
-
-      alert(
-        "Unable to check this movie's episodes."
-      );
-
-      return;
-    }
-
-
-    if ((count ?? 0) > 0) {
-
-      alert(
-        "This movie has episodes. Delete its episodes first before deleting the movie."
-      );
-
-      return;
-    }
-
-
-    const confirmed =
-      confirm(
-        "Are you sure you want to permanently delete this movie?"
-      );
-
-
-    if (!confirmed) {
-      return;
-    }
-
-
-    const { error } =
-      await supabaseClient
-        .from("Movie")
-        .delete()
-        .eq("id", movieId);
-
-
-    if (error) {
-
-      alert(
-        "Unable to delete movie: " +
-        error.message
-      );
-
-      return;
-    }
-
-
-    await loadMovies();
-
-    await loadContentCounts();
-  }
-
-
-  // ==========================================
-  // EPISODE MANAGEMENT NAVIGATION
-  // ==========================================
-
-  let currentEpisodeMovieId = null;
-
-
-  function manageEpisodes(movieId) {
-
-  currentEpisodeMovieId = movieId;
-
-  document.getElementById("movieManagementPage").style.display =
-    "none";
-
-  document.getElementById("episodeManagementPage").style.display =
-    "block";
-
-  document.getElementById("episodeMovieName").textContent =
-    "Loading episodes for Movie ID " + movieId;
-
-  loadEpisodes();
-
-    }
-
-
-  // ==========================================
-  // BACK TO MOVIES
-  // ==========================================
-
-  function backToMovieManagement() {
-
-    document.getElementById("episodeManagementPage").style.display =
-      "none";
-
-    document.getElementById("movieManagementPage").style.display =
-      "block";
-
-    loadMovies();
-
-  }
-
-
-  // ==========================================
-  // OPEN ADD EPISODE
-  // ==========================================
-
-  function openAddEpisodeModal() {
-
-    document.getElementById("episodeModalTitle").textContent =
-      "Add Episode";
-
-    document.getElementById("episodeId").value =
-      "";
-
-    document.getElementById("episodeMovieId").value =
-      currentEpisodeMovieId || "";
-
-    document.getElementById("episodeNumber").value =
-      "";
-
-    document.getElementById("episodeTitle").value =
-      "";
-
-    document.getElementById("episodeDescription").value =
-      "";
-
-    document.getElementById("episodeVideoUrl").value =
-      "";
-
-    document.getElementById("episodePrivateVideoPath").value =
-      "";
-
-    document.getElementById("episodeLocked").checked =
-      false;
-
-    document.getElementById("episodePrice").value =
-      "";
-
-    document.getElementById("episodeFormMessage").textContent =
-      "";
-
-    document.getElementById("episodeModal").style.display =
-      "block";
-
-  }
-
-
-  // ==========================================
-  // CLOSE EPISODE MODAL
-  // ==========================================
-
-  function closeEpisodeModal() {
-
-    document.getElementById("episodeModal").style.display =
-      "none";
-
-  }
-
-// ==========================================
-// LOAD EPISODES FOR CURRENT MOVIE
-// ==========================================
-
-async function loadEpisodes() {
-
-  const episodeList =
-    document.getElementById("episodeList");
-
-  const message =
-    document.getElementById("episodeManagementMessage");
-
-  episodeList.innerHTML =
-    "Loading episodes...";
-
-  message.textContent = "";
-
-
-  if (!currentEpisodeMovieId) {
-
-    episodeList.innerHTML =
-      "No movie selected.";
-
-    return;
-  }
-
-
-  const { data, error } =
-    await supabaseClient
-      .from("Episodes")
-      .select("*")
-      .eq("Movie_id", currentEpisodeMovieId)
-      .order("Episode_number", {
-        ascending: true
-      });
-
-
-  if (error) {
-
-    episodeList.innerHTML =
-      "Unable to load episodes.";
-
-    message.textContent =
-      error.message;
-
-    return;
-  }
-
-
-  document.getElementById("episodeMovieName").textContent =
-    "Manage episodes for Movie ID " +
-    currentEpisodeMovieId;
-
-
-  if (!data || data.length === 0) {
-
-    episodeList.innerHTML = `
-      <div style="
-        padding:25px;
-        text-align:center;
-        color:#a9a9b2;
-      ">
-        No episodes have been added yet.
-      </div>
-    `;
-
-    return;
-  }
-
-
-  episodeList.innerHTML =
-    data.map((episode, index) => {
-
-      const locked =
-        episode.Is_locked === true;
-
-
-      return `
-
-        <div style="
-          background:#101014;
-          border:1px solid #33333a;
-          border-radius:12px;
-          padding:18px;
-          margin-bottom:15px;
-        ">
-
-          <div style="
-            display:flex;
-            justify-content:space-between;
-            gap:15px;
-            flex-wrap:wrap;
-          ">
-
-            <div>
-
-              <h3 style="margin-bottom:8px;">
-                Episode ${episode.Episode_number}:
-                ${escapeHtml(episode.Title || "Untitled")}
-              </h3>
-
-              <div style="
-                color:#a9a9b2;
-                font-size:13px;
-                line-height:1.8;
-              ">
-
-                ID: ${episode.id}<br>
-
-                Status:
-                ${locked ? "🔒 Locked" : "🟢 Free"}<br>
-
-                Price:
-                ${episode.Price ?? "Free"}<br>
-
-                Private Video:
-                ${episode.Private_video_path
-                  ? "Configured"
-                  : "Not configured"}
-
-              </div>
-
+            <div class="payment-summary-label">
+              Gross Movie Purchase Revenue
             </div>
 
+            <div class="payment-summary-value">
+              $${grossRevenue.toFixed(2)}
+            </div>
 
-            <div style="
-              display:flex;
-              gap:8px;
-              flex-wrap:wrap;
-              align-items:flex-start;
-            ">
+          </div>
 
-              <button
-                class="management-button"
-                onclick="moveEpisodeUp(${episode.id}, ${episode.Episode_number})">
-                ↑
-              </button>
+          <div class="payment-summary-card">
 
-              <button
-                class="management-button"
-                onclick="moveEpisodeDown(${episode.id}, ${episode.Episode_number})">
-                ↓
-              </button>
+            <div class="payment-summary-label">
+              Refunds
+            </div>
 
-              <button
-                class="management-button"
-                onclick="editEpisode(${episode.id})">
-                Edit
-              </button>
+            <div class="payment-summary-value">
+              $0.00
+            </div>
 
-              <button
-                class="management-button"
-                onclick="toggleEpisodeLock(${episode.id}, ${locked})">
-                ${locked ? "Unlock" : "Lock"}
-              </button>
+          </div>
 
-              <button
-                onclick="deleteEpisode(${episode.id})"
-                style="
-                  border:none;
-                  background:#6d1626;
-                  color:white;
-                  padding:10px 16px;
-                  border-radius:8px;
-                  cursor:pointer;
-                  font-weight:bold;
-                ">
-                Delete
-              </button>
+          <div class="payment-summary-card">
 
+            <div class="payment-summary-label">
+              Current Tracked Net
+            </div>
+
+            <div class="payment-summary-value">
+              $${grossRevenue.toFixed(2)}
             </div>
 
           </div>
 
         </div>
 
+        <div style="
+          color:#777780;
+          font-size:12px;
+          margin-top:15px;
+        ">
+          Revenue shown here is based on completed movie
+          purchase records currently stored in Supabase.
+          Google Play fees, refunds and other deductions will
+          be incorporated when their corresponding records
+          are connected.
+        </div>
+
       `;
 
-    }).join("");
-
     }
 
-  // ==========================================
-// EDIT EPISODE
-// ==========================================
 
-async function editEpisode(episodeId) {
+    // ==========================================
+    // FORMAT DATE
+    // ==========================================
 
-  const { data: episode, error } =
-    await supabaseClient
-      .from("Episodes")
-      .select("*")
-      .eq("id", episodeId)
-      .eq("Movie_id", currentEpisodeMovieId)
-      .maybeSingle();
+    function formatDate(value) {
 
-
-  if (error || !episode) {
-
-    alert("Unable to load this episode.");
-
-    return;
-  }
-
-
-  document.getElementById("episodeModalTitle").textContent =
-    "Edit Episode";
-
-  document.getElementById("episodeId").value =
-    episode.id;
-
-  document.getElementById("episodeMovieId").value =
-    episode.Movie_id;
-
-  document.getElementById("episodeNumber").value =
-    episode.Episode_number;
-
-  document.getElementById("episodeTitle").value =
-    episode.Title || "";
-
-  document.getElementById("episodeDescription").value =
-    episode.Description || "";
-
-  document.getElementById("episodeVideoUrl").value =
-    episode.Video_url || "";
-
-  document.getElementById("episodePrivateVideoPath").value =
-    episode.Private_video_path || "";
-
-  document.getElementById("episodeLocked").checked =
-    episode.Is_locked === true;
-
-  document.getElementById("episodePrice").value =
-    episode.Price ?? "";
-
-  document.getElementById("episodeFormMessage").textContent =
-    "";
-
-  document.getElementById("episodeModal").style.display =
-    "block";
-
-    }
-
-  // ==========================================
-// LOCK / UNLOCK ONE EPISODE
-// ==========================================
-
-async function toggleEpisodeLock(episodeId, currentStatus) {
-
-  const action =
-    currentStatus
-      ? "unlock"
-      : "lock";
-
-
-  const confirmed =
-    confirm(
-      `Are you sure you want to ${action} this episode?`
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  const { error } =
-    await supabaseClient
-      .from("Episodes")
-      .update({
-        Is_locked: !currentStatus
-      })
-      .eq("id", episodeId)
-      .eq("Movie_id", currentEpisodeMovieId);
-
-
-  if (error) {
-
-    alert(
-      "Unable to change episode lock status: " +
-      error.message
-    );
-
-    return;
-  }
-
-
-  await loadEpisodes();
-
-}
-  // ==========================================
-// DELETE EPISODE
-// ==========================================
-
-async function deleteEpisode(episodeId) {
-
-  const confirmed =
-    confirm(
-      "Are you sure you want to permanently delete this episode?"
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  const { error } =
-    await supabaseClient
-      .from("Episodes")
-      .delete()
-      .eq("id", episodeId)
-      .eq("Movie_id", currentEpisodeMovieId);
-
-
-  if (error) {
-
-    alert(
-      "Unable to delete episode: " +
-      error.message
-    );
-
-    return;
-  }
-
-
-  await loadEpisodes();
-
-  await loadContentCounts();
-
+      if (!value) {
+        return "—";
       }
-  // ==========================================
-  // SAVE EPISODE
-  // ==========================================
 
+      const date =
+        new Date(value);
 
-  async function saveEpisode() {
+      if (Number.isNaN(date.getTime())) {
+        return "—";
+      }
 
-  const message =
-    document.getElementById("episodeFormMessage");
+      return date.toLocaleString();
 
-  const episodeId =
-    document.getElementById("episodeId").value;
+    }
 
-  const episodeNumber =
-    Number(
-      document.getElementById("episodeNumber").value
-    );
 
-  const title =
-    document.getElementById("episodeTitle").value.trim();
+    // ==========================================
+    // RUN WHEN PAGE LOADS
+    // ==========================================
 
-  const description =
-    document.getElementById("episodeDescription").value.trim();
+    checkSession();
 
-  const videoUrl =
-    document.getElementById("episodeVideoUrl").value.trim();
+    loadContentCounts();
 
-  const privateVideoPath =
-    document.getElementById("episodePrivateVideoPath").value.trim();
+  </script>
 
-  const isLocked =
-    document.getElementById("episodeLocked").checked;
-
-  const priceValue =
-    document.getElementById("episodePrice").value.trim();
-
-
-  message.textContent = "";
-
-
-  if (
-    !Number.isInteger(episodeNumber) ||
-    episodeNumber < 1
-  ) {
-
-    message.textContent =
-      "Enter a valid episode number.";
-
-    return;
-  }
-
-
-  if (title === "") {
-
-    message.textContent =
-      "Episode title is required.";
-
-    return;
-  }
-
-
-  if (!currentEpisodeMovieId) {
-
-    message.textContent =
-      "No movie is selected.";
-
-    return;
-  }
-
-
-  const price =
-    priceValue === ""
-      ? null
-      : Number(priceValue);
-
-
-  if (
-    price !== null &&
-    (!Number.isFinite(price) || price < 0)
-  ) {
-
-    message.textContent =
-      "Enter a valid episode price.";
-
-    return;
-  }
-
-
-  const episodeData = {
-
-    Movie_id: currentEpisodeMovieId,
-
-    Episode_number: episodeNumber,
-
-    Title: title,
-
-    Description:
-      description || null,
-
-    Video_url:
-      videoUrl || null,
-
-    Is_locked:
-      isLocked,
-
-    Price:
-      price,
-
-    Private_video_path:
-      privateVideoPath || null
-  };
-
-
-  message.textContent =
-    "Saving episode...";
-
-
-  let result;
-
-
-  if (episodeId === "") {
-
-    result =
-      await supabaseClient
-        .from("Episodes")
-        .insert(episodeData);
-
-  } else {
-
-    result =
-      await supabaseClient
-        .from("Episodes")
-        .update(episodeData)
-        .eq("id", episodeId)
-        .eq("Movie_id", currentEpisodeMovieId);
-  }
-
-
-  if (result.error) {
-
-    message.textContent =
-      result.error.message;
-
-    return;
-  }
-
-
-  message.textContent =
-    "Episode saved successfully.";
-
-
-  await loadEpisodes();
-
-
-  setTimeout(() => {
-
-    closeEpisodeModal();
-
-  }, 600);
-
-  }
-
-  // ==========================================
-// LOCK EPISODES FROM NUMBER
-// ==========================================
-
-async function lockEpisodesFrom() {
-
-  const startNumber =
-    Number(
-      document.getElementById("bulkEpisodeNumber").value
-    );
-
-  const message =
-    document.getElementById("bulkEpisodeMessage");
-
-
-  message.textContent = "";
-
-
-  if (
-    !Number.isInteger(startNumber) ||
-    startNumber < 1
-  ) {
-
-    message.textContent =
-      "Enter a valid episode number.";
-
-    return;
-  }
-
-
-  if (!currentEpisodeMovieId) {
-
-    message.textContent =
-      "No movie is currently selected.";
-
-    return;
-  }
-
-
-  const confirmed =
-    confirm(
-      `Lock Episode ${startNumber} and every episode after it?`
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  const { error } =
-    await supabaseClient
-      .from("Episodes")
-      .update({
-        Is_locked: true
-      })
-      .eq("Movie_id", currentEpisodeMovieId)
-      .gte("Episode_number", startNumber);
-
-
-  if (error) {
-
-    message.textContent =
-      error.message;
-
-    return;
-  }
-
-
-  message.textContent =
-    `Episodes ${startNumber} onward are now locked.`;
-
-  await loadEpisodes();
-
-}
-
-
-// ==========================================
-// UNLOCK EPISODES FROM NUMBER
-// ==========================================
-
-async function unlockEpisodesFrom() {
-
-  const startNumber =
-    Number(
-      document.getElementById("bulkEpisodeNumber").value
-    );
-
-  const message =
-    document.getElementById("bulkEpisodeMessage");
-
-
-  message.textContent = "";
-
-
-  if (
-    !Number.isInteger(startNumber) ||
-    startNumber < 1
-  ) {
-
-    message.textContent =
-      "Enter a valid episode number.";
-
-    return;
-  }
-
-
-  if (!currentEpisodeMovieId) {
-
-    message.textContent =
-      "No movie is currently selected.";
-
-    return;
-  }
-
-
-  const confirmed =
-    confirm(
-      `Unlock Episode ${startNumber} and every episode after it?`
-    );
-
-
-  if (!confirmed) {
-    return;
-  }
-
-
-  const { error } =
-    await supabaseClient
-      .from("Episodes")
-      .update({
-        Is_locked: false
-      })
-      .eq("Movie_id", currentEpisodeMovieId)
-      .gte("Episode_number", startNumber);
-
-
-  if (error) {
-
-    message.textContent =
-      error.message;
-
-    return;
-  }
-
-
-  message.textContent =
-    `Episodes ${startNumber} onward are now unlocked.`;
-
-  await loadEpisodes();
-
-  }
-
-// ==========================================
-// MOVE EPISODE UP
-// ==========================================
-
-async function moveEpisodeUp(episodeId, currentNumber) {
-
-  if (currentNumber <= 1) {
-    return;
-  }
-
-
-  await swapEpisodeNumbers(
-    episodeId,
-    currentNumber,
-    currentNumber - 1
-  );
-
-}
-
-
-// ==========================================
-// MOVE EPISODE DOWN
-// ==========================================
-
-async function moveEpisodeDown(episodeId, currentNumber) {
-
-  const { data: nextEpisode } =
-    await supabaseClient
-      .from("Episodes")
-      .select("id")
-      .eq("Movie_id", currentEpisodeMovieId)
-      .eq("Episode_number", currentNumber + 1)
-      .maybeSingle();
-
-
-  if (!nextEpisode) {
-    return;
-  }
-
-
-  await swapEpisodeNumbers(
-    episodeId,
-    currentNumber,
-    currentNumber + 1
-  );
-
-}
-
-
-// ==========================================
-// SWAP EPISODE NUMBERS
-// ==========================================
-
-async function swapEpisodeNumbers(
-  episodeId,
-  currentNumber,
-  targetNumber
-) {
-
-  const { data: targetEpisode, error: findError } =
-    await supabaseClient
-      .from("Episodes")
-      .select("id")
-      .eq("Movie_id", currentEpisodeMovieId)
-      .eq("Episode_number", targetNumber)
-      .maybeSingle();
-
-
-  if (findError) {
-
-    alert(findError.message);
-
-    return;
-  }
-
-
-  if (!targetEpisode) {
-    return;
-  }
-
-
-  // Temporary number prevents a duplicate-number conflict.
-  const temporaryNumber = -999999;
-
-
-  let result =
-    await supabaseClient
-      .from("Episodes")
-      .update({
-        Episode_number: temporaryNumber
-      })
-      .eq("id", episodeId)
-      .eq("Movie_id", currentEpisodeMovieId);
-
-
-  if (result.error) {
-
-    alert(result.error.message);
-
-    return;
-  }
-
-
-  result =
-    await supabaseClient
-      .from("Episodes")
-      .update({
-        Episode_number: currentNumber
-      })
-      .eq("id", targetEpisode.id)
-      .eq("Movie_id", currentEpisodeMovieId);
-
-
-  if (result.error) {
-
-    alert(result.error.message);
-
-    return;
-  }
-
-
-  result =
-    await supabaseClient
-      .from("Episodes")
-      .update({
-        Episode_number: targetNumber
-      })
-      .eq("id", episodeId)
-      .eq("Movie_id", currentEpisodeMovieId);
-
-
-  if (result.error) {
-
-    alert(result.error.message);
-
-    return;
-  }
-
-
-  await loadEpisodes();
-
-  }
-
-  // ==========================================
-// RUN WHEN PAGE LOADS
-// ==========================================
-
-checkSession();
-loadContentCounts();
-
-</script>
 </body>
-</html>
-
+  </html>
