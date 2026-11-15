@@ -832,7 +832,7 @@
     }  
   </style>  </head>  <body>    <!-- =========================  
        ADMIN LOGIN  
-  ========================== -->    <section id="loginPage">  <div class="login-box">  
+  ==,======================== -->    <section id="loginPage">  <div class="login-box">  
 
   <div class="logo">  
     SHOW <span>DRAMA</span>  
@@ -2199,8 +2199,14 @@
       placeholder="https://..."  
     >  
 
-  </div>  
-
+  </div>
+  
+<label>Upload Video (MP4)</label>
+<input
+  type="file"
+  id="episodeVideoFile"
+  accept="video/mp4"
+>
   <div class="input-group">  
 
     <label>  
@@ -2287,15 +2293,14 @@
         padding:10px 16px;  
         border-radius:8px;  
         cursor:pointer;  
-      "  
-    >  
+      "      > 
       Cancel  
     </button>  
 
     <button  
       class="management-button"  
       onclick="saveEpisode()"  
-    >  
+    >
       Save Episode  
     </button>  
 
@@ -2576,83 +2581,75 @@
     // LOGIN  
     // ==========================================  
   
-    async function login() {  
+    async function login() {
+    const email = document.getElementById("adminEmail").value.trim();
+    const password = document.getElementById("adminPassword").value;
+    const message = document.getElementById("loginMessage");
+
+    message.textContent = "";
+
+    if (!email || !password) {
+        message.textContent = "Please enter your email and password.";
+        return;
+    }
+
+    message.textContent = "Signing in...";
+
+    try {
+        // Sign in with Supabase
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            message.textContent = error.message;
+            return;
+        }
+
+        if (!data || !data.user) {
+            message.textContent = "Invalid email or password.";
+            return;
+        }
+
+        const user = data.user;
+
+        // Check if the user is an administrator
+        const { data: adminRecord, error: adminError } = await supabaseClient
+            .from("admin_users")
+            .select("user_id")
+            .eq("user_id", user.id)
+            .maybeSingle();
+
+        if (adminError) {
+            console.error("Admin verification error:", adminError);
+            await supabaseClient.auth.signOut();
+            message.textContent = "Unable to verify admin access: " + adminError.message;
+            return;
+        }
+
+        if (!adminRecord) {
+            await supabaseClient.auth.signOut();
+            message.textContent = "You do not have administrator access.";
+            return;
+        }
+
+        // Login successful
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("dashboardPage").style.display = "block";
+
+        // Load dashboard data after successful login
+        if (typeof loadContentCounts === "function") {
+            loadContentCounts();
+        }
+
+    } catch (err) {
+        console.error("Login error:", err);
+        message.textContent = "Login error: " + err.message;
+    }
+}  
   
-      const email =  
-        document.getElementById("adminEmail").value.trim();  
-  
-      const password =  
-        document.getElementById("adminPassword").value;  
-  
-      const message =  
-        document.getElementById("loginMessage");  
-  
-      message.textContent = "";  
-  
-      if (email === "" || password === "") {  
-  
-        message.textContent =  
-          "Please enter your email and password.";  
-  
-        return;  
-      }  
-  
-      message.textContent =  
-        "Signing in...";  
-  
-      const { data, error } =  
-        await supabaseClient.auth.signInWithPassword({  
-          email: email,  
-          password: password  
-        });  
-  
-      if (error) {  
-  
-        message.textContent =  
-          "Invalid email or password.";  
-  
-        return;  
-      }  
-  
-      const user =  
-        data.user;  
-  
-      const { data: adminRecord, error: adminError } =  
-        await supabaseClient  
-          .from("admin_users")  
-          .select("user_id")  
-          .eq("user_id", user.id)  
-          .maybeSingle();  
-  
-      if (adminError) {  
-  
-        await supabaseClient.auth.signOut();  
-  
-        message.textContent =  
-          "Unable to verify admin access.";  
-  
-        return;  
-      }  
-  
-      if (!adminRecord) {  
-  
-        await supabaseClient.auth.signOut();  
-  
-        message.textContent =  
-          "You do not have administrator access.";  
-  
-        return;  
-      }  
-  
-      message.textContent = "";  
-  
-      document.getElementById("loginPage").style.display =  
-        "none";  
-  
-      document.getElementById("dashboardPage").style.display =  
-        "block";  
-  
-    }  
+   
   
   
     // ==========================================  
@@ -4338,45 +4335,36 @@ function escapeJs(value) {
     // PUBLISH / UNPUBLISH MOVIE  
     // ==========================================  
   
-    async function toggleMoviePublished(movieId, currentStatus) {  
-  
-      const action =  
-        currentStatus  
-          ? "unpublish"  
-          : "publish";  
-  
-      const confirmed =  
-        confirm(  
-          `Are you sure you want to ${action} this movie?`  
-        );  
-  
-      if (!confirmed) {  
-        return;  
-      }  
-  
-      const { error } =  
-        await supabaseClient  
-          .from("Movie")  
-          .update({  
-            Published: !currentStatus  
-          })  
-          .eq("id", movieId);  
-  
-      if (error) {  
-  
-        alert(  
-          "Unable to change movie publication status: " +  
-          error.message  
-        );  
-  
-        return;  
-      }  
-  
-      await loadMovies();  
-  
-    }  
-  
-  
+    async function toggleMoviePublished(movieId, currentStatus) {
+  const action = currentStatus ? "unpublish" : "publish";
+
+  const confirmed = confirm(
+    `Are you sure you want to ${action} this movie?`
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  const { error } = await supabaseClient
+    .from("Movie")
+    .update({
+      Published: !currentStatus
+    })
+    .eq("id", movieId);
+
+  if (error) {
+    alert(
+      "Unable to change movie publication status: " +
+      error.message
+    );
+    return;
+  }
+
+  await loadMovies();
+
+}  
+          
     // ==========================================  
     // DELETE MOVIE  
     // ==========================================  
@@ -4939,7 +4927,35 @@ function escapeJs(value) {
         return;  
       }  
   
-      const episodeData = {  
+      const videoFile = document.getElementById("episodeVideoFile").files[0];
+message.textContent = "Uploading video... Please wait. Do not click Save Episode again.";
+if (videoFile) 		
+
+const submitButton = event.submitter;
+if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Uploading...";
+}
+  const fileName = `episodes/${Date.now()}_${videoFile.name}`;
+
+  const { error: uploadError } = await supabaseClient.storage
+    .from("Show-drama-private")
+    .upload(fileName, videoFile);
+
+  if (uploadError) {
+    console.error("Upload error:", uploadError);
+    message.textContent =
+        "Video upload failed: " +
+        uploadError.message +
+        " (Status: " +
+        (uploadError.statusCode || "unknown") +
+        ")";
+    return;
+}
+
+  privateVideoPath = fileName;
+}
+const episodeData = {  
   
         Movie_id:  
           currentEpisodeMovieId,  
@@ -4998,8 +5014,8 @@ function escapeJs(value) {
         return;  
       }  
   
-      message.textContent =  
-        "Episode saved successfully.";  
+      message.textContent =
+    "Video uploaded and episode saved successfully!";  
   
       await loadEpisodes();  
   
@@ -5056,14 +5072,14 @@ function escapeJs(value) {
         return;  
       }  
   
-      const { error } =  
-        await supabaseClient  
-          .from("Episodes")  
-          .update({  
-            Is_locked: true  
-          })  
-          .eq("Movie_id", currentEpisodeMovieId)  
-          .gte("Episode_number", startNumber);  
+      const { error } =
+    await supabaseClient
+        .from("Episodes")
+        .update({
+            Is_locked: true
+        })
+        .eq("Movie_id", currentEpisodeMovieId)
+        .gte("Episode_number", startNumber);  
   
       if (error) {  
   
@@ -5128,7 +5144,7 @@ function escapeJs(value) {
       const { error } =  
         await supabaseClient  
           .from("Episodes")  
-          .update({  
+       	.update({  
             Is_locked: false  
           })  
           .eq("Movie_id", currentEpisodeMovieId)  
@@ -6487,8 +6503,6 @@ async function saveSettings() {
     // ==========================================  
   
     checkSession();  
-  
-    loadContentCounts();  
   
   </script>  </body>  
   </html>
